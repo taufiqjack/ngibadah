@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.taufiqjack.monggo_sholat">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="monggo_sholat"
+        android:label="MonggoSholat"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -26,6 +27,7 @@
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
+              android:usesCleartextTraffic="true"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
