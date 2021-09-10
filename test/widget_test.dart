@@ -8,12 +8,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:monggo_sholat/main.dart';
+import 'package:monggo_sholat/pages/menu.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MenuHome());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
