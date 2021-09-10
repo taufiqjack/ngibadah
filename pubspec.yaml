@@ -29,8 +29,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   json_to_model:
-  flutter_statusbarcolor_ns:
   dio:
+  tanggal_indonesia:
+  hijri:
+  google_fonts:
+  geolocator:
+  intl:
 
 dev_dependencies:
   flutter_test:
