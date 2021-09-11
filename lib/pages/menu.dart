@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:monggo_sholat/pages/quran.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
@@ -100,9 +101,23 @@ class _MenuHomeState extends State<MenuHome> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.green.shade800,
+        leading: InkWell(
+          child: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+          onTap: () {},
+        ),
+        centerTitle: true,
         title: Row(
           children: [
-            Icon(Icons.location_on),
+            Icon(
+              Icons.location_on,
+              size: 18,
+            ),
+            SizedBox(
+              width: 5,
+            ),
             Center(
               child: Text(
                 '${location!['lokasi']}',
@@ -115,6 +130,7 @@ class _MenuHomeState extends State<MenuHome> {
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             Text(
               '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('MMMM dd yyyy')}',
@@ -252,6 +268,30 @@ class _MenuHomeState extends State<MenuHome> {
               'assets/images/kufitdc.png',
               height: 150,
               width: 150,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Quran()));
+              },
+              child: Text(
+                "AL-QUR'AN",
+              ),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8))),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                fixedSize: MaterialStateProperty.all(
+                  Size(
+                    5,
+                    1,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
