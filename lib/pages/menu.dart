@@ -127,10 +127,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   'Imsak : ${jadwal!['imsak']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -147,10 +147,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   'Shubuh : ${jadwal!['subuh']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -167,10 +167,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   'Dhuhur : ${jadwal!['dzuhur']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -187,10 +187,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   "'Ashar : ${jadwal!['ashar']}",
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -207,10 +207,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   'Magrib : ${jadwal!['maghrib']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -227,10 +227,10 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             Card(
               child: ListTile(
-                leading: Text(
+                title: Text(
                   'Isya : ${jadwal!['isya']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 trailing: GestureDetector(
                   child: Icon(
@@ -248,11 +248,11 @@ class _MenuHomeState extends State<MenuHome> {
             SizedBox(
               height: 20,
             ),
-            Image.network(
-              'https://yt3.ggpht.com/ytc/AKedOLSJ4hdZlT9DSTLf1jxvRX5zRr9NsoARgq1DsvZ4Mw=s900-c-k-c0x00ffffff-no-rj',
-              height: 200,
-              width: 200,
-            )
+            Image.asset(
+              'assets/images/kufitdc.png',
+              height: 150,
+              width: 150,
+            ),
           ],
         ),
       ),
