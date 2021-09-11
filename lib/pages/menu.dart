@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:monggo_sholat/services/api.dart';
-import 'package:tanggal_indonesia/tanggal_indonesia.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -20,6 +20,7 @@ class _MenuHomeState extends State<MenuHome> {
   Map<dynamic, dynamic>? times;
   Map<dynamic, dynamic>? location;
   Map<dynamic, dynamic>? date;
+  Map<dynamic, dynamic>? jadwal;
   bool nonactiveNotif = false;
   bool nonactiveNotif2 = false;
   bool nonactiveNotif3 = false;
@@ -27,38 +28,33 @@ class _MenuHomeState extends State<MenuHome> {
   bool nonactiveNotif5 = false;
   bool nonactiveNotif6 = false;
 
-  Future getTimes() async {
-    Response response = await Dio().get(BaseUrl.today);
+  Future getShollat() async {
+    Response response =
+        await Dio().get('${BaseUrl.shollu}/${formatTime.format(now)}');
     setState(() {
-      times = response.data['results']['datetime'][0]['times'];
+      jadwal = response.data['data']['jadwal'];
     });
-    debugPrint('cek: ${times.toString()}');
+    debugPrint('cek: ${jadwal.toString()}');
   }
 
   Future getLocation() async {
-    Response response = await Dio().get(BaseUrl.today);
+    Response response =
+        await Dio().get('${BaseUrl.shollu}/${formatTime.format(now)}');
     setState(() {
-      date = response.data['results']['datetime'][0]['date'];
-    });
-    debugPrint('cek: ${date.toString()}');
-  }
-
-  Future getTanggal() async {
-    Response response = await Dio().get(BaseUrl.today);
-    setState(() {
-      location = response.data['results']['location'];
+      location = response.data['data'];
     });
     debugPrint('cek: ${location.toString()}');
   }
 
   Map<dynamic, dynamic> time = {};
+  DateTime now = DateTime.now();
+  final formatTime = new DateFormat('yyyy/MM/dd');
 
   @override
   void initState() {
     super.initState();
-    getTimes();
     getLocation();
-    getTanggal();
+    getShollat();
   }
 
   void toggleNotif1() {
@@ -99,6 +95,7 @@ class _MenuHomeState extends State<MenuHome> {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('id_ID');
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -108,7 +105,7 @@ class _MenuHomeState extends State<MenuHome> {
             Icon(Icons.location_on),
             Center(
               child: Text(
-                '${location!['city']}',
+                '${location!['lokasi']}',
                 textAlign: TextAlign.center,
               ),
             ),
@@ -120,7 +117,7 @@ class _MenuHomeState extends State<MenuHome> {
         child: ListView(
           children: [
             Text(
-              '${DateFormat('EEEE, d MMMM yyyy').format(DateTime.parse(date!['gregorian']))} / ${HijriCalendar.fromDate(DateTime.parse(date!['gregorian'])).toFormat('MMMM dd yyyy')}',
+              '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('MMMM dd yyyy')}',
               textAlign: TextAlign.center,
               style: GoogleFonts.nunitoSans(
                   fontSize: 14, fontWeight: FontWeight.bold),
@@ -131,7 +128,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  'Imsak : ${times!['Imsak']}',
+                  'Imsak : ${jadwal!['imsak']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -151,7 +148,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  'Shubuh : ${times!['Fajr']}',
+                  'Shubuh : ${jadwal!['subuh']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -171,7 +168,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  'Dhuhur : ${times!['Dhuhr']}',
+                  'Dhuhur : ${jadwal!['dzuhur']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -191,7 +188,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  "'Ashar : ${times!['Asr']}",
+                  "'Ashar : ${jadwal!['ashar']}",
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -211,7 +208,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  'Magrib : ${times!['Maghrib']}',
+                  'Magrib : ${jadwal!['maghrib']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
@@ -231,7 +228,7 @@ class _MenuHomeState extends State<MenuHome> {
             Card(
               child: ListTile(
                 leading: Text(
-                  'Isya : ${times!['Isha']}',
+                  'Isya : ${jadwal!['isya']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
