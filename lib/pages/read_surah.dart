@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/services/api.dart';
+import 'package:arabic_numbers/arabic_numbers.dart';
 
 class ReadSurah extends StatefulWidget {
   final List surah;
@@ -16,6 +15,7 @@ class ReadSurah extends StatefulWidget {
 
 class _ReadSurahState extends State<ReadSurah> {
   List? quranList;
+  Map? surah;
 
   Future getQuranDetail() async {
     Response response =
@@ -26,10 +26,22 @@ class _ReadSurahState extends State<ReadSurah> {
     debugPrint('cek: ${quranList.toString()}');
   }
 
+  Future getSurah() async {
+    Response response =
+        await Dio().get('${BaseUrl.listQuran}/${widget.index + 1}');
+    setState(() {
+      surah = response.data;
+    });
+    debugPrint('cek: ${surah.toString()}');
+  }
+
   @override
   void initState() {
     super.initState();
-    getQuranDetail();
+    getQuranDetail().then((value) {
+      setState(() {});
+    });
+    getSurah();
   }
 
   @override
@@ -43,7 +55,7 @@ class _ReadSurahState extends State<ReadSurah> {
           children: [
             Center(
               child: Text(
-                "Al - Qur'an",
+                '${surah!['nama_latin']}',
                 textAlign: TextAlign.center,
               ),
             ),
@@ -61,7 +73,8 @@ class _ReadSurahState extends State<ReadSurah> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '${quran['ar']}' + ' (${quran['nomor']}),',
+                    '${quran['ar']}' +
+                        ' (${ArabicNumbers().convert(quran['nomor'])})',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 18,
