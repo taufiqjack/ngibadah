@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monggo_sholat/pages/read_surah.dart';
 import 'package:monggo_sholat/services/api.dart';
 
 class Quran extends StatefulWidget {
@@ -61,6 +62,15 @@ class _QuranState extends State<Quran> {
                 leading: Text('${x['nomor']}'),
                 title: Text('Surah : ${x['nama_latin']}'),
                 subtitle: Text('Jumlah Ayat : ${x['jumlah_ayat']}'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReadSurah(
+                                surah: [x],
+                                index: index,
+                              )));
+                },
               ));
             }),
       ),
