@@ -36,6 +36,7 @@ dependencies:
   geolocator:
   intl:
   arabic_numbers:
+  assets_audio_player:
 
 dev_dependencies:
   flutter_test:
