@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:monggo_sholat/pages/hadish.dart';
 import 'package:monggo_sholat/pages/quran.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:hijri/hijri_calendar.dart';
@@ -270,28 +271,60 @@ class _MenuHomeState extends State<MenuHome> {
               width: 150,
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Quran()));
-              },
-              child: Text(
-                "AL-QUR'AN",
-              ),
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8))),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                fixedSize: MaterialStateProperty.all(
-                  Size(
-                    5,
-                    1,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Quran()));
+                  },
+                  child: Text(
+                    "AL-QUR'AN",
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(
+                        100,
+                        20,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  width: 5,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HadishPage()));
+                  },
+                  child: Text(
+                    "AL-HADIST",
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.lightBlueAccent),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(
+                        100,
+                        1,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
