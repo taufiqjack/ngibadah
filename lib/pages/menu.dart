@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:monggo_sholat/pages/hadish.dart';
@@ -175,7 +176,9 @@ class _MenuHomeState extends State<MenuHome> {
                         ListTile(
                           leading: Icon(Icons.logout),
                           title: Text("Exit"),
-                          onTap: () {},
+                          onTap: () {
+                            SystemNavigator.pop();
+                          },
                         ),
                       ],
                     ),
@@ -192,7 +195,7 @@ class _MenuHomeState extends State<MenuHome> {
           physics: NeverScrollableScrollPhysics(),
           children: [
             Text(
-              '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('MMMM dd yyyy')}',
+              '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('dd MMMM yyyy')} H',
               textAlign: TextAlign.center,
               style: GoogleFonts.nunitoSans(
                   fontSize: 14, fontWeight: FontWeight.bold),
