@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_surah.dart';
 import 'package:monggo_sholat/services/api.dart';
 
@@ -57,6 +58,16 @@ class _QuranState extends State<Quran> {
               ),
             ),
           ],
+        ),
+        leading: InkWell(
+          child: Icon(
+            Icons.keyboard_backspace,
+            color: Colors.white,
+          ),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MenuHome()));
+          },
         ),
       ),
       body: Padding(

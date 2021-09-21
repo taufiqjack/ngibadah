@@ -102,13 +102,6 @@ class _MenuHomeState extends State<MenuHome> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.green.shade800,
-        leading: InkWell(
-          child: Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
-          onTap: () {},
-        ),
         centerTitle: true,
         title: Row(
           children: [
@@ -126,6 +119,71 @@ class _MenuHomeState extends State<MenuHome> {
               ),
             ),
           ],
+        ),
+      ),
+      drawer: SafeArea(
+        child: Drawer(
+          child: Column(
+            children: [
+              Flexible(
+                child: ListView(
+                  children: [
+                    SizedBox(
+                      height: 8,
+                    ),
+                    ListTile(
+                      leading: Image.asset(
+                        'assets/images/quran.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      title: Text("Al - Qur'an"),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Quran()));
+                      },
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    ListTile(
+                      leading: Image.asset(
+                        'assets/images/quran.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      title: Text("Al - Hadist"),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HadishPage()));
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Divider(
+                          thickness: 2,
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.logout),
+                          title: Text("Exit"),
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: Padding(
@@ -272,59 +330,6 @@ class _MenuHomeState extends State<MenuHome> {
             ),
             SizedBox(
               height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Quran()));
-                  },
-                  child: Text(
-                    "AL-QUR'AN",
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8))),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.redAccent),
-                    fixedSize: MaterialStateProperty.all(
-                      Size(
-                        100,
-                        20,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HadishPage()));
-                  },
-                  child: Text(
-                    "AL-HADIST",
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8))),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.lightBlueAccent),
-                    fixedSize: MaterialStateProperty.all(
-                      Size(
-                        100,
-                        1,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),
