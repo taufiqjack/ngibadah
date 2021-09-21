@@ -1,6 +1,7 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/services/api.dart';
 
 class DetailHadis extends StatefulWidget {
@@ -75,15 +76,15 @@ class _DetailHadisState extends State<DetailHadis> {
                       '${hadis['arab']}' +
                           ' (${ArabicNumbers().convert(hadis['number'])})',
                       textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 18,
+                      style: GoogleFonts.nunitoSans(
+                        fontSize: 15,
                       ),
                     ),
                     Text(
-                      '${hadis['id']}',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 12,
+                      '${hadis['number']}. ' + '${hadis['id']}',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.nunitoSans(
+                        fontSize: 14,
                       ),
                     ),
                     SizedBox(

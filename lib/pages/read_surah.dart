@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
 
@@ -76,15 +77,15 @@ class _ReadSurahState extends State<ReadSurah> {
                     '${quran['ar']}' +
                         ' (${ArabicNumbers().convert(quran['nomor'])})',
                     textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: GoogleFonts.nunitoSans(
+                      fontSize: 16,
                     ),
                   ),
                   Text(
-                    '${quran['idn']}',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontSize: 12,
+                    '${quran['nomor']}. ' + '${quran['idn']}',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.nunitoSans(
+                      fontSize: 14,
                     ),
                   ),
                   SizedBox(

@@ -75,7 +75,10 @@ class _HadishPageState extends State<HadishPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    leading: Text('${index + 1}'),
+                    leading: Text(
+                      '${index + 1}',
+                      style: GoogleFonts.nunitoSans(),
+                    ),
                     title: Text(
                       '${x['name']}',
                       style: GoogleFonts.nunitoSans(
