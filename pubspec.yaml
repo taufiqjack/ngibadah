@@ -37,6 +37,8 @@ dependencies:
   intl:
   arabic_numbers:
   assets_audio_player:
+  flutter_switch:
+  list_tile_switch:
 
 dev_dependencies:
   flutter_test:
