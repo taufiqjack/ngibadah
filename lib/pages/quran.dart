@@ -36,10 +36,14 @@ class _QuranState extends State<Quran> {
     final assetsAudioPlayer = AssetsAudioPlayer();
 
     void togglePlayPause(x) {
-      setState(() async {
+      setState(() {
         playPause = !playPause;
+      });
+      setState(() async {
         try {
-          await assetsAudioPlayer.open(Audio.liveStream('${x['audio']}'));
+          playPause
+              ? await assetsAudioPlayer.open(Audio.liveStream('${x['audio']}'))
+              : await assetsAudioPlayer.stop();
         } catch (e) {}
       });
     }
