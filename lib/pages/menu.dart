@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class _MenuHomeState extends State<MenuHome> {
   Map? data;
   List? result;
   List? dateTime;
+  List? barang;
   Map<dynamic, dynamic>? times;
   Map<dynamic, dynamic>? location;
   Map<dynamic, dynamic>? date;
@@ -53,6 +56,14 @@ class _MenuHomeState extends State<MenuHome> {
     debugPrint('cek: ${location.toString()}');
   }
 
+  Future getBarang() async {
+    Response response = await Dio().get('${BaseUrl.item}');
+    setState(() {
+      barang = json.decode(response.data);
+    });
+    debugPrint('barang = ${barang.toString()}');
+  }
+
   Map<dynamic, dynamic> time = {};
   DateTime now = DateTime.now();
   final formatTime = new DateFormat('yyyy/MM/dd');
@@ -60,6 +71,7 @@ class _MenuHomeState extends State<MenuHome> {
   @override
   void initState() {
     super.initState();
+    getBarang();
     getLocation();
     getShollat();
   }

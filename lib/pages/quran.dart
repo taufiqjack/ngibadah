@@ -15,6 +15,7 @@ class Quran extends StatefulWidget {
 
 class _QuranState extends State<Quran> {
   List? quranList;
+  List? barang;
   bool playPause = false;
 
   Future getListQuran() async {
@@ -22,13 +23,22 @@ class _QuranState extends State<Quran> {
     setState(() {
       quranList = response.data;
     });
-    // debugPrint('cek: ${quranList.toString()}');
+    debugPrint('cek: ${quranList.toString()}');
+  }
+
+  Future getBarang() async {
+    Response response = await Dio().get('${BaseUrl.barang}');
+    setState(() {
+      barang = response.data;
+    });
+    debugPrint('barang = ${barang.toString()}');
   }
 
   @override
   void initState() {
     super.initState();
     getListQuran();
+    getBarang();
   }
 
   @override
