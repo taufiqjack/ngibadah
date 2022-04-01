@@ -71,7 +71,6 @@ class _MenuHomeState extends State<MenuHome> {
   @override
   void initState() {
     super.initState();
-    getBarang();
     getLocation();
     getShollat();
   }
@@ -130,10 +129,12 @@ class _MenuHomeState extends State<MenuHome> {
               width: 5,
             ),
             Center(
-              child: Text(
-                '${location!['lokasi']}',
-                textAlign: TextAlign.center,
-              ),
+              child: location == null
+                  ? null
+                  : Text(
+                      '${location!['lokasi']}',
+                      textAlign: TextAlign.center,
+                    ),
             ),
           ],
         ),
@@ -205,249 +206,253 @@ class _MenuHomeState extends State<MenuHome> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            Container(
-              height: 150,
-              child: Card(
-                color: Colors.blue.shade500,
-                semanticContainer: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.notifications_none_outlined,
-                        color: Colors.white),
-                    Text(
-                      '${jadwal!['maghrib']}',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+      body: jadwal == null || location == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: ListView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  Container(
+                    height: 150,
+                    child: Card(
+                      color: Colors.blue.shade500,
+                      semanticContainer: true,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.notifications_none_outlined,
+                              color: Colors.white),
+                          Text(
+                            '${jadwal!['maghrib']}',
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            'Maghrib',
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 14, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('dd MMMM yyyy')} H',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 14, color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      'Maghrib',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 14, color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    elevation: 2,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Icon(
+                                Icons.featured_play_list,
+                                color: Colors.grey,
+                              ),
+                              Icon(
+                                Icons.access_time,
+                                color: Colors.grey,
+                              ),
+                              Icon(
+                                Icons.alarm_on,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListTile(
+                            title: Text(
+                              '${jadwal!['imsak']}',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              'Imsak',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[0],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[0] = value;
+                                  });
+                                },
+                                activeColor: Colors.purple,
+                                thumbColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              '${jadwal!['subuh']}',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              'Shubuh',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[1],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[1] = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              '${jadwal!['dzuhur']}',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              'Dhuhur',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[2],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[2] = value;
+                                  });
+                                },
+                                activeColor: Colors.purple,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              "${jadwal!['ashar']}",
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              "'Ashar",
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[3],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[3] = value;
+                                  });
+                                },
+                                activeColor: Colors.purple,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              '${jadwal!['maghrib']}',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              'Magrib',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[4],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[4] = value;
+                                  });
+                                },
+                                activeColor: Colors.purple,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              '${jadwal!['isya']}',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            minLeadingWidth: 120,
+                            leading: Text(
+                              'Isya',
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            trailing: Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                value: switchValues[5],
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValues[5] = value;
+                                  });
+                                },
+                                activeColor: Colors.purple,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('dd MMMM yyyy')} H',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 14, color: Colors.white),
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Image.asset(
+                    'assets/images/kufitdc.png',
+                    height: 100,
+                    width: 100,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Card(
-              elevation: 2,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Icon(
-                          Icons.featured_play_list,
-                          color: Colors.grey,
-                        ),
-                        Icon(
-                          Icons.access_time,
-                          color: Colors.grey,
-                        ),
-                        Icon(
-                          Icons.alarm_on,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ListTile(
-                      title: Text(
-                        '${jadwal!['imsak']}',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        'Imsak',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[0],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[0] = value;
-                            });
-                          },
-                          activeColor: Colors.purple,
-                          thumbColor: Colors.white,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        '${jadwal!['subuh']}',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        'Shubuh',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[1],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[1] = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        '${jadwal!['dzuhur']}',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        'Dhuhur',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[2],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[2] = value;
-                            });
-                          },
-                          activeColor: Colors.purple,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        "${jadwal!['ashar']}",
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        "'Ashar",
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[3],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[3] = value;
-                            });
-                          },
-                          activeColor: Colors.purple,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        '${jadwal!['maghrib']}',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        'Magrib',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[4],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[4] = value;
-                            });
-                          },
-                          activeColor: Colors.purple,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        '${jadwal!['isya']}',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      minLeadingWidth: 120,
-                      leading: Text(
-                        'Isya',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: switchValues[5],
-                          onChanged: (value) {
-                            setState(() {
-                              switchValues[5] = value;
-                            });
-                          },
-                          activeColor: Colors.purple,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Image.asset(
-              'assets/images/kufitdc.png',
-              height: 150,
-              width: 150,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -54,45 +54,51 @@ class _DetailHadisState extends State<DetailHadis> {
           title: Row(
             children: [
               Center(
-                child: Text(
-                  '${riwayat!['name']}',
-                  textAlign: TextAlign.center,
-                ),
+                child: riwayat == null
+                    ? null
+                    : Text(
+                        '${riwayat!['name']}',
+                        textAlign: TextAlign.center,
+                      ),
               ),
             ],
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: ListView.builder(
-              itemCount: hadisDetail!.length,
-              itemBuilder: (BuildContext context, int i) {
-                final hadis = hadisDetail![i];
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${hadis['arab']}' +
-                          ' (${ArabicNumbers().convert(hadis['number'])})',
-                      textAlign: TextAlign.right,
-                      style: GoogleFonts.nunitoSans(
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      '${hadis['number']}. ' + '${hadis['id']}',
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.nunitoSans(
-                        fontSize: 14,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                  ],
-                );
-              }),
-        ));
+        body: hadisDetail == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                child: ListView.builder(
+                    itemCount: hadisDetail!.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      final hadis = hadisDetail![i];
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${hadis['arab']}' +
+                                ' (${ArabicNumbers().convert(hadis['number'])})',
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            '${hadis['number']}. ' + '${hadis['id']}',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                        ],
+                      );
+                    }),
+              ));
   }
 }

@@ -14,7 +14,7 @@ class HadishPage extends StatefulWidget {
 }
 
 class _HadishPageState extends State<HadishPage> {
-  late List hadisList;
+  List? hadisList;
 
   Future getHadist() async {
     Response response = await Dio().get('${BaseUrl.hadis}');
@@ -58,46 +58,50 @@ class _HadishPageState extends State<HadishPage> {
           },
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-        child: ListView.builder(
-          itemCount: hadisList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final x = hadisList[index];
-            return Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    trailing: Text(
-                      'tersedia : \n${x['available']}',
-                      style: GoogleFonts.nunitoSans(
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
+      body: hadisList == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: ListView.builder(
+                itemCount: hadisList!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final x = hadisList![index];
+                  return Card(
+                    child: Column(
+                      children: [
+                        ListTile(
+                          trailing: Text(
+                            'tersedia : \n${x['available']}',
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          leading: Text(
+                            '${index + 1}',
+                            style: GoogleFonts.nunitoSans(),
+                          ),
+                          title: Text(
+                            '${x['name']}',
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailHadis(hadis: [x], i: x['id'])));
+                          },
+                        ),
+                      ],
                     ),
-                    leading: Text(
-                      '${index + 1}',
-                      style: GoogleFonts.nunitoSans(),
-                    ),
-                    title: Text(
-                      '${x['name']}',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailHadis(hadis: [x], i: x['id'])));
-                    },
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }
