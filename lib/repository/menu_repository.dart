@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
+import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
 
 class MenuRepo extends ChangeNotifier {
@@ -19,6 +21,29 @@ class MenuRepo extends ChangeNotifier {
       final data = PrayerScheduleModel.fromJson(parsed);
       print('respon : $parsed');
       print(formatTime.format(now));
+      return data;
+    } catch (e) {}
+  }
+
+  Future<List<SurahModel>?> getSurah(BuildContext context) async {
+    try {
+      response = await dio.get('${BaseUrl.listQuran}');
+      notifyListeners();
+      Iterable data = response!.data;
+      List<SurahModel> listdata =
+          data.map((map) => SurahModel.fromJson(map)).toList();
+      print(' respon surah : $listdata');
+      return listdata;
+    } catch (e) {}
+  }
+
+  Future<HadisModel?> getHadis(BuildContext context) async {
+    try {
+      response = await dio.get('${BaseUrl.hadis}');
+      notifyListeners();
+      final parsed = response!.data;
+      final data = HadisModel.fromJson(parsed);
+      print('hadis : $parsed');
       return data;
     } catch (e) {}
   }
