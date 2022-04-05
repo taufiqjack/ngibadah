@@ -2,10 +2,12 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/services/api.dart';
 
 class DetailHadis extends StatefulWidget {
-  final List hadis;
+  final String hadis;
   final String i;
   DetailHadis({required this.hadis, required this.i});
 
@@ -14,91 +16,64 @@ class DetailHadis extends StatefulWidget {
 }
 
 class _DetailHadisState extends State<DetailHadis> {
-  List? hadisDetail;
-  Map? riwayat;
-
-  Future getHadisDetail() async {
-    Response response =
-        await Dio().get('${BaseUrl.hadis}/${widget.i}?range=1-100');
-    setState(() {
-      hadisDetail = response.data['data']['hadiths'];
-    });
-    debugPrint('cek: ${hadisDetail.toString()}');
-  }
-
-  Future getHadis() async {
-    Response response =
-        await Dio().get('${BaseUrl.hadis}/${widget.i}?range=1-100');
-    setState(() {
-      riwayat = response.data['data'];
-    });
-    debugPrint('cek: ${riwayat.toString()}');
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getHadisDetail().then((value) {
-      setState(() {});
-    });
-    getHadis();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[100],
-        appBar: AppBar(
-          backgroundColor: Colors.green.shade800,
-          centerTitle: true,
-          title: Row(
-            children: [
-              Center(
-                child: riwayat == null
-                    ? null
-                    : Text(
-                        '${riwayat!['name']}',
-                        textAlign: TextAlign.center,
-                      ),
-              ),
-            ],
+    return BaseView<HomeViewModel>(
+      onModelReady: (data) {
+        data.getHadisDetail(context, widget.i);
+      },
+      builder: (context, data, child) => Scaffold(
+          backgroundColor: Colors.grey[100],
+          appBar: AppBar(
+            backgroundColor: Colors.green.shade800,
+            centerTitle: true,
+            title: Row(
+              children: [
+                Center(
+                  child: Text(
+                    '${widget.hadis}',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        body: hadisDetail == null
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: ListView.builder(
-                    itemCount: hadisDetail!.length,
-                    itemBuilder: (BuildContext context, int i) {
-                      final hadis = hadisDetail![i];
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            '${hadis['arab']}' +
-                                ' (${ArabicNumbers().convert(hadis['number'])})',
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 15,
+          body: data.hadisDetail == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: ListView.builder(
+                      itemCount: data.hadisDetail!.data!.hadiths!.length,
+                      itemBuilder: (BuildContext context, int i) {
+                        final hadis = data.hadisDetail!.data!.hadiths![i];
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${hadis.arab}' +
+                                  ' (${ArabicNumbers().convert(hadis.number)})',
+                              textAlign: TextAlign.right,
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          Text(
-                            '${hadis['number']}. ' + '${hadis['id']}',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 14,
+                            Text(
+                              '${hadis.number}. ' + '${hadis.id}',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                        ],
-                      );
-                    }),
-              ));
+                            SizedBox(
+                              height: 8,
+                            ),
+                          ],
+                        );
+                      }),
+                )),
+    );
   }
 }
