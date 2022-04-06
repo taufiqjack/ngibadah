@@ -64,4 +64,25 @@ class MenuRepo extends ChangeNotifier {
       return data;
     } catch (e) {}
   }
+
+  Future<bool?> getCity(BuildContext context, String city) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    try {
+      response = await dio.get('${BaseUrl.searchCity}/$city');
+      notifyListeners();
+      print('data ${response!.data}');
+      if (response!.data.containsKey('error')) {
+        prefs.setString('error', response!.data['message']);
+        prefs.setString('status', response!.data['status'].toString());
+        return false;
+      } else {
+        Map<String, dynamic> map = response!.data['data'];
+        print('data ${response!.data}');
+        prefs.setString('id', map['id']);
+        prefs.setString('lokasi', map['lokasi']);
+        return true;
+      }
+    } catch (e) {}
+  }
 }

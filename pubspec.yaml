@@ -42,6 +42,10 @@ dependencies:
   get_it: ^7.2.0
   flutter_countdown_timer: ^4.1.0
   shared_preferences: ^2.0.13
+  location: ^4.3.0
+  flutter_geocoder: ^0.2.2-nullsafety
+  rflutter_alert: ^2.0.4
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,10 +8,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:flutter_geocoder/geocoder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:location/location.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/models/index.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/hadish.dart';
@@ -34,10 +38,7 @@ class _MenuHomeState extends State<MenuHome> {
   List? result;
   List? dateTime;
   List? barang;
-  Map<dynamic, dynamic>? times;
-  Map<dynamic, dynamic>? location;
-  Map<dynamic, dynamic>? date;
-  Map<dynamic, dynamic>? jadwal;
+
   bool nonactiveNotif = false;
   bool nonactiveNotif2 = false;
   bool nonactiveNotif3 = false;
@@ -151,7 +152,14 @@ class _MenuHomeState extends State<MenuHome> {
     initializeDateFormatting('id_ID');
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
+          // SharedPreferences prefs = await SharedPreferences.getInstance();
+          // String city = '${prefs.getString('city')}';
+
           data.getDashboard(context);
+
+          // Future.delayed(Duration(seconds: 5), () {
+          //   data.getLocation(context, city);
+          // });
         },
         builder: (context, data, child) => Scaffold(
             backgroundColor: Colors.grey[100],
@@ -177,6 +185,19 @@ class _MenuHomeState extends State<MenuHome> {
                   ),
                 ],
               ),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        getLocation();
+                      });
+                    },
+                    child: Icon(Icons.location_on),
+                  ),
+                ),
+              ],
             ),
             drawer: SafeArea(
               child: Drawer(
@@ -718,6 +739,7 @@ class _MenuHomeState extends State<MenuHome> {
     //                             },
     //                             activeColor: Colors.purple,
     //                           ),
+    //                           ),
     //                         ),
     //                       ),
     //                       ListTile(
@@ -797,4 +819,36 @@ class _MenuHomeState extends State<MenuHome> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('maghrib');
   }
+
+  getLocation() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LocationData? myLocation;
+    String? error;
+
+    Location location = Location();
+    try {
+      myLocation = await location.getLocation();
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Silahkan mengizinkan akses';
+        print(error);
+      }
+      if (e.code == 'PERMISSION_DENIED_MEVER_ASK') {
+        error = 'izin ditolak, silahkan cek pengaturan lokasi anda';
+        print(error);
+      }
+      myLocation = null;
+    }
+    final coordinat = Coordinates(myLocation!.latitude, myLocation.longitude);
+    var addressess =
+        await Geocoder.local.findAddressesFromCoordinates(coordinat);
+    var data = addressess.first;
+    prefs.setString('city', '${data.subLocality}');
+    print('lokasi ${data.subAdminArea} ${data.subLocality}');
+    Fluttertoast.showToast(
+        msg: '${data.addressLine}',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_LONG);
+  }
+  // var address = Geocoder.local.findAddressesFromCoordinates();
 }
