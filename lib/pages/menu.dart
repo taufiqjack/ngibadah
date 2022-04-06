@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -5,8 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_countdown_timer/countdown_controller.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
@@ -40,42 +45,56 @@ class _MenuHomeState extends State<MenuHome> {
   bool nonactiveNotif6 = false;
   bool switchValue = false;
   List<bool> switchValues = List.generate(6, (_) => false);
-
-  Future getShollat() async {
-    Response response =
-        await Dio().get('${BaseUrl.shollu}/${formatTime.format(now)}');
-    setState(() {
-      jadwal = response.data['data']['jadwal'];
-    });
-    debugPrint('cek: ${jadwal.toString()}');
-  }
-
-  Future getLocation() async {
-    Response response =
-        await Dio().get('${BaseUrl.shollu}/${formatTime.format(now)}');
-    setState(() {
-      location = response.data['data'];
-    });
-    debugPrint('cek: ${location.toString()}');
-  }
-
-  Future getBarang() async {
-    Response response = await Dio().get('${BaseUrl.item}');
-    setState(() {
-      barang = json.decode(response.data);
-    });
-    debugPrint('barang = ${barang.toString()}');
-  }
+  String? _timeString;
 
   Map<dynamic, dynamic> time = {};
   DateTime now = DateTime.now();
   final formatTime = new DateFormat('yyyy/MM/dd');
 
+  CountdownTimerController? controller;
+
+  int? seconds;
+  int? endtime;
+  String? magrib;
+  int? detik;
+
   @override
   void initState() {
     super.initState();
-    getLocation();
-    getShollat();
+    _timeString = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+
+    String jam = _timeString!;
+    var parts = jam.split(':');
+    var d = Duration(
+        hours: int.parse(parts[0].trim()),
+        minutes: int.parse(parts[1].trim()),
+        seconds: int.parse(parts[2].trim()));
+    seconds = d.abs().inSeconds;
+
+    magrib = '17:44';
+    var part = magrib!.split(':');
+    var c = Duration(
+      hours: int.parse(part[0].trim()),
+      minutes: int.parse(part[1].trim()),
+    );
+    detik = c.abs().inSeconds;
+
+    int waktu = detik! - seconds!;
+    // controller = CountdownTimerController(endTime: endtime!);
+    endtime = (DateTime.now().millisecondsSinceEpoch + 1000 * waktu);
+  }
+
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+    setState(() {
+      _timeString = formattedDateTime;
+    });
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('hh:mm:ss').format(dateTime);
   }
 
   void toggleNotif1() {
@@ -120,6 +139,7 @@ class _MenuHomeState extends State<MenuHome> {
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
           data.getDashboard(context);
+          magrib = data.prayerSchedule!.data!.jadwal!.maghrib;
         },
         builder: (context, data, child) => Scaffold(
             backgroundColor: Colors.grey[100],
@@ -232,6 +252,16 @@ class _MenuHomeState extends State<MenuHome> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                Text(
+                                  _timeString! + ' WIB',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Icon(Icons.notifications_none_outlined,
                                     color: Colors.white),
                                 Text(
@@ -240,6 +270,24 @@ class _MenuHomeState extends State<MenuHome> {
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '- ',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    CountdownTimer(
+                                        textStyle:
+                                            TextStyle(color: Colors.white),
+                                        endTime: endtime,
+                                        controller: controller),
+                                    Text(
+                                      ' Lagi',
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  ],
                                 ),
                                 Text(
                                   'Maghrib',
