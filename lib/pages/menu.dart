@@ -20,6 +20,7 @@ import 'package:monggo_sholat/pages/quran.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuHome extends StatefulWidget {
   MenuHome({Key? key}) : super(key: key);
@@ -55,7 +56,6 @@ class _MenuHomeState extends State<MenuHome> {
 
   int? seconds;
   int? endtime;
-  String? magrib;
   int? detik;
 
   @override
@@ -71,9 +71,22 @@ class _MenuHomeState extends State<MenuHome> {
         minutes: int.parse(parts[1].trim()),
         seconds: int.parse(parts[2].trim()));
     seconds = d.abs().inSeconds;
+    Future.delayed(Duration(seconds: 5), () {
+      getSession();
+    });
+  }
 
-    magrib = '17:44';
-    var part = magrib!.split(':');
+  @override
+  void dispose() {
+    super.dispose();
+    clearSession();
+  }
+
+  getSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var maghrib = '${prefs.getString('maghrib')}';
+
+    var part = maghrib.split(':');
     var c = Duration(
       hours: int.parse(part[0].trim()),
       minutes: int.parse(part[1].trim()),
@@ -94,7 +107,7 @@ class _MenuHomeState extends State<MenuHome> {
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return DateFormat('hh:mm:ss').format(dateTime);
+    return DateFormat('HH:mm:ss').format(dateTime);
   }
 
   void toggleNotif1() {
@@ -139,7 +152,6 @@ class _MenuHomeState extends State<MenuHome> {
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
           data.getDashboard(context);
-          magrib = data.prayerSchedule!.data!.jadwal!.maghrib;
         },
         builder: (context, data, child) => Scaffold(
             backgroundColor: Colors.grey[100],
@@ -222,7 +234,10 @@ class _MenuHomeState extends State<MenuHome> {
                               ListTile(
                                 leading: Icon(Icons.logout),
                                 title: Text("Exit"),
-                                onTap: () {
+                                onTap: () async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.remove('maghrib');
                                   SystemNavigator.pop();
                                 },
                               ),
@@ -252,13 +267,15 @@ class _MenuHomeState extends State<MenuHome> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  _timeString! + ' WIB',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                                endtime == null
+                                    ? SizedBox()
+                                    : Text(
+                                        _timeString! + ' WIB',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -278,11 +295,13 @@ class _MenuHomeState extends State<MenuHome> {
                                       '- ',
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    CountdownTimer(
-                                        textStyle:
-                                            TextStyle(color: Colors.white),
-                                        endTime: endtime,
-                                        controller: controller),
+                                    endtime == null
+                                        ? SizedBox()
+                                        : CountdownTimer(
+                                            textStyle:
+                                                TextStyle(color: Colors.white),
+                                            endTime: endtime,
+                                            controller: controller),
                                     Text(
                                       ' Lagi',
                                       style: TextStyle(color: Colors.white),
@@ -772,5 +791,10 @@ class _MenuHomeState extends State<MenuHome> {
     //           ),
     //         ),
     // );
+  }
+
+  clearSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('maghrib');
   }
 }

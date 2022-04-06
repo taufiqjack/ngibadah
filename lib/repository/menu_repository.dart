@@ -6,6 +6,7 @@ import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuRepo extends ChangeNotifier {
   Response? response;
@@ -21,6 +22,9 @@ class MenuRepo extends ChangeNotifier {
       final parsed = response!.data;
       final data = PrayerScheduleModel.fromJson(parsed);
       print('respon : $parsed');
+      var magrib = '${data.data!.jadwal!.maghrib}';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('maghrib', magrib);
       print(formatTime.format(now));
       return data;
     } catch (e) {}
