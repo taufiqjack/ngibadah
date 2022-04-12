@@ -21,6 +21,8 @@ class _QuranState extends State<Quran> {
   List? barang;
   bool playPause = false;
 
+  List<bool> playpause = [];
+
   Future getListQuran() async {
     Response response = await Dio().get('${BaseUrl.listQuran}');
     setState(() {
@@ -48,13 +50,13 @@ class _QuranState extends State<Quran> {
   Widget build(BuildContext context) {
     final assetsAudioPlayer = AssetsAudioPlayer();
 
-    void togglePlayPause(x) {
+    void togglePlayPause(x, i) {
       setState(() {
-        playPause = !playPause;
+        playpause[i] = !playpause[i];
       });
       setState(() {
         try {
-          playPause
+          playpause[i]
               ? assetsAudioPlayer.open(Audio.liveStream('$x'))
               : assetsAudioPlayer.stop();
         } catch (e) {}
@@ -64,6 +66,7 @@ class _QuranState extends State<Quran> {
     return BaseView<HomeViewModel>(
       onModelReady: (data) {
         data.getSurah(context);
+        playpause = List.generate(144, (_) => false);
       },
       builder: (context, data, child) => Scaffold(
         backgroundColor: Colors.grey[100],
@@ -131,7 +134,7 @@ class _QuranState extends State<Quran> {
                                     width: 10,
                                   ),
                                   GestureDetector(
-                                    child: playPause
+                                    child: playpause[index]
                                         ? Icon(
                                             Icons.stop_circle_outlined,
                                             color: Colors.pink,
@@ -141,7 +144,7 @@ class _QuranState extends State<Quran> {
                                             color: Colors.pink,
                                           ),
                                     onTap: () async {
-                                      togglePlayPause(x.audio);
+                                      togglePlayPause(x.audio, index);
                                     },
                                   )
                                 ]),
