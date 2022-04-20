@@ -7,6 +7,7 @@ import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
+import 'package:monggo_sholat/models/surah_detail_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/pages/read_hadis.dart';
 import 'package:monggo_sholat/repository/menu_repository.dart';
@@ -17,6 +18,7 @@ class HomeViewModel extends BaseViewModel {
   MenuRepo menuRepo = locator<MenuRepo>();
   PrayerScheduleModel? prayerSchedule;
   List<SurahModel>? surah;
+  SurahDetailModel? surahDetail;
   HadisModel? hadis;
   HadisDetailModel? hadisDetail;
   DoaModel? doa;
@@ -31,6 +33,13 @@ class HomeViewModel extends BaseViewModel {
   Future getSurah(BuildContext context) async {
     setState(ViewState.busy);
     surah = await menuRepo.getSurah(context);
+    notifyListeners();
+    setState(ViewState.idle);
+  }
+
+  Future getDetailSurah(int id, BuildContext context) async {
+    setState(ViewState.busy);
+    surahDetail = await menuRepo.getDetailSurah(id, context);
     notifyListeners();
     setState(ViewState.idle);
   }
