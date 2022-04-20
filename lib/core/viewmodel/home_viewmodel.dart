@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/view_state.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/locator.dart';
+import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
@@ -18,6 +19,7 @@ class HomeViewModel extends BaseViewModel {
   List<SurahModel>? surah;
   HadisModel? hadis;
   HadisDetailModel? hadisDetail;
+  DoaModel? doa;
 
   Future getDashboard(BuildContext context) async {
     setState(ViewState.busy);
@@ -43,6 +45,13 @@ class HomeViewModel extends BaseViewModel {
   Future getHadisDetail(BuildContext context, String id) async {
     setState(ViewState.busy);
     hadisDetail = await menuRepo.getHadisDetail(context, id);
+    notifyListeners();
+    setState(ViewState.idle);
+  }
+
+  Future getDoa(BuildContext context) async {
+    setState(ViewState.busy);
+    doa = await menuRepo.getDoa(context);
     notifyListeners();
     setState(ViewState.idle);
   }

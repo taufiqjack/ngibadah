@@ -27,7 +27,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  json_to_model:
   dio:
   tanggal_indonesia:
   hijri:
@@ -46,6 +45,8 @@ dependencies:
   flutter_geocoder: ^0.2.2-nullsafety
   rflutter_alert: ^2.0.4
   fluttertoast: ^8.0.9
+  json_to_model: ^3.1.4
+  quiver: ^3.0.1+1
 
 dev_dependencies:
   flutter_test:

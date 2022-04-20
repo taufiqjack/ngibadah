@@ -16,9 +16,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
-import 'package:monggo_sholat/models/index.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
+import 'package:monggo_sholat/pages/doa_view.dart';
 import 'package:monggo_sholat/pages/hadish.dart';
 import 'package:monggo_sholat/pages/quran.dart';
 import 'package:monggo_sholat/services/api.dart';
@@ -27,7 +27,11 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuHome extends StatefulWidget {
-  MenuHome({Key? key}) : super(key: key);
+  String? texttime;
+  MenuHome({
+    Key? key,
+    this.texttime,
+  }) : super(key: key);
 
   @override
   _MenuHomeState createState() => _MenuHomeState();
@@ -58,6 +62,8 @@ class _MenuHomeState extends State<MenuHome> {
   int? seconds;
   int? endtime;
   int? detik;
+  int? magrib;
+  int? thistime;
 
   @override
   void initState() {
@@ -72,7 +78,7 @@ class _MenuHomeState extends State<MenuHome> {
         minutes: int.parse(parts[1].trim()),
         seconds: int.parse(parts[2].trim()));
     seconds = d.abs().inSeconds;
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 2), () {
       getSession();
     });
   }
@@ -80,7 +86,6 @@ class _MenuHomeState extends State<MenuHome> {
   @override
   void dispose() {
     super.dispose();
-    clearSession();
   }
 
   getSession() async {
@@ -97,6 +102,11 @@ class _MenuHomeState extends State<MenuHome> {
     int waktu = detik! - seconds!;
     // controller = CountdownTimerController(endTime: endtime!);
     endtime = (DateTime.now().millisecondsSinceEpoch + 1000 * waktu);
+    magrib = (DateTime.now().millisecondsSinceEpoch + 1000 * detik!);
+    thistime = DateTime.now().millisecondsSinceEpoch + 1000 * seconds!;
+
+    print('magrib : $endtime');
+    print('thistime : $thistime');
   }
 
   void _getTime() {
@@ -240,6 +250,20 @@ class _MenuHomeState extends State<MenuHome> {
                                       builder: (context) => HadishPage()));
                             },
                           ),
+                          ListTile(
+                            leading: Image.asset(
+                              'assets/images/praying.png',
+                              height: 50,
+                            ),
+                            title: Text('Doa Sehari - hari'),
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DoaView(),
+                                  ));
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -271,7 +295,9 @@ class _MenuHomeState extends State<MenuHome> {
                 ),
               ),
             ),
-            body: data.prayerSchedule == null
+            body: data.prayerSchedule == null ||
+                    thistime == null ||
+                    endtime == null
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
@@ -316,13 +342,13 @@ class _MenuHomeState extends State<MenuHome> {
                                       '- ',
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    endtime == null
-                                        ? SizedBox()
-                                        : CountdownTimer(
+                                    thistime! >= endtime!
+                                        ? CountdownTimer(
                                             textStyle:
                                                 TextStyle(color: Colors.white),
                                             endTime: endtime,
-                                            controller: controller),
+                                            controller: controller)
+                                        : SizedBox(),
                                     Text(
                                       ' Lagi',
                                       style: TextStyle(color: Colors.white),
@@ -844,7 +870,9 @@ class _MenuHomeState extends State<MenuHome> {
         await Geocoder.local.findAddressesFromCoordinates(coordinat);
     var data = addressess.first;
     prefs.setString('city', '${data.subLocality}');
-    print('lokasi ${data.subAdminArea} ${data.subLocality}');
+    var str = data.subAdminArea;
+    print('split ${str!.substring(10)}');
+    print('lokasi ${data.subAdminArea}');
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,

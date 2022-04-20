@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
@@ -83,6 +86,17 @@ class MenuRepo extends ChangeNotifier {
         prefs.setString('lokasi', map['lokasi']);
         return true;
       }
+    } catch (e) {}
+  }
+
+  Future<DoaModel?> getDoa(BuildContext context) async {
+    try {
+      response = await dio.get('${BaseUrl.doa}' + '/all');
+      notifyListeners();
+      final parsed = response!.data;
+      final data = DoaModel.fromJson(parsed);
+      print('doa : $parsed');
+      return data;
     } catch (e) {}
   }
 }
