@@ -1,13 +1,14 @@
+import 'dart:async';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_surah.dart';
-import 'package:monggo_sholat/services/api.dart';
+import 'package:perfect_volume_control/perfect_volume_control.dart';
 
 class Quran extends StatefulWidget {
   Quran({Key? key}) : super(key: key);
@@ -22,28 +23,12 @@ class _QuranState extends State<Quran> {
   bool playPause = false;
 
   List<bool> playpause = [];
-
-  Future getListQuran() async {
-    Response response = await Dio().get('${BaseUrl.listQuran}');
-    setState(() {
-      quranList = response.data;
-    });
-    debugPrint('cek: ${quranList.toString()}');
-  }
-
-  Future getBarang() async {
-    Response response = await Dio().get('${BaseUrl.barang}');
-    setState(() {
-      barang = response.data;
-    });
-    debugPrint('barang = ${barang.toString()}');
-  }
+  double _val = 0.5;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    getListQuran();
-    getBarang();
   }
 
   @override
@@ -129,24 +114,71 @@ class _QuranState extends State<Quran> {
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Putar Murrotal'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  GestureDetector(
-                                    child: playpause[index]
-                                        ? Icon(
-                                            Icons.stop_circle_outlined,
-                                            color: Colors.pink,
-                                          )
-                                        : Icon(
-                                            Icons.play_circle_outline,
-                                            color: Colors.pink,
-                                          ),
+                                  InkWell(
+                                    child: Icon(
+                                      FontAwesomeIcons.play,
+                                      size: 20,
+                                      color: Colors.pink,
+                                    ),
+                                    // child: playpause[index]
+                                    //     ? Icon(
+                                    //         Icons.stop_circle_outlined,
+                                    //         color: Colors.pink,
+                                    //       )
+                                    //     : Icon(
+                                    //         Icons.play_circle_outline,
+                                    //         color: Colors.pink,
+                                    //       ),
                                     onTap: () async {
-                                      togglePlayPause(x.audio, index);
+                                      // togglePlayPause(x.audio, index);
+                                      assetsAudioPlayer
+                                          .open(Audio.liveStream('${x.audio}'));
                                     },
-                                  )
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      assetsAudioPlayer.pause();
+                                    },
+                                    child: Icon(
+                                      FontAwesomeIcons.pause,
+                                      size: 20,
+                                      color: Colors.red.shade800,
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      assetsAudioPlayer.stop();
+                                    },
+                                    child: Icon(
+                                      FontAwesomeIcons.stop,
+                                      size: 20,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  // Slider(
+                                  //     value: _val,
+                                  //     min: 0,
+                                  //     max: 1,
+                                  //     divisions: 100,
+                                  //     onChanged: (vol) {
+                                  //       _val = vol;
+                                  //       setState(() {
+                                  //         PerfectVolumeControl.setVolume(vol);
+                                  //         setState(() {});
+                                  //         // if (_timer != null) {
+                                  //         //   _timer!.cancel();
+                                  //         // }
+
+                                  //         // _timer = Timer(
+                                  //         //     Duration(milliseconds: 200), () {
+                                  //         //   VolumeControl.volume.asStream();
+                                  //         print('volume : $vol');
+                                  //         // });
+                                  //       });
+                                  //     })
                                 ]),
                             SizedBox(
                               height: 5,
