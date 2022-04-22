@@ -69,7 +69,7 @@ class _MenuHomeState extends State<MenuHome> {
   void initState() {
     super.initState();
     _timeString = _formatDateTime(DateTime.now());
-    _getTime();
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
 
     String jam = _timeString!;
     var parts = jam.split(':');

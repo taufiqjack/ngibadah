@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/view_state.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
@@ -9,7 +8,6 @@ import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/surah_detail_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
-import 'package:monggo_sholat/pages/read_hadis.dart';
 import 'package:monggo_sholat/repository/menu_repository.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class SurahDetailModel {
   bool? status;
   int? nomor;

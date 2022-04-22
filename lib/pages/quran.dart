@@ -8,7 +8,6 @@ import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_surah.dart';
-import 'package:perfect_volume_control/perfect_volume_control.dart';
 
 class Quran extends StatefulWidget {
   Quran({Key? key}) : super(key: key);
@@ -98,15 +97,31 @@ class _QuranState extends State<Quran> {
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
-                              leading: Text('${x.nomor}'),
-                              title: Text('Surah : ${x.namaLatin}'),
-                              subtitle: Text('Jumlah Ayat : ${x.jumlahAyat}'),
+                              leading: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image.asset('assets/images/icon_islamic.png',
+                                      height: 35),
+                                  Text(
+                                    '${x.nomor}',
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                              title: Text('${x.namaLatin}'),
+                              subtitle: Text(
+                                '${x.arti} - ${x.jumlahAyat} ayat',
+                                style: TextStyle(fontSize: 12),
+                              ),
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ReadSurah(
-                                              surah: [x],
+                                              arti: x.arti!,
                                               index: index,
                                             )));
                               },
