@@ -200,6 +200,18 @@ class _ReadSurahState extends State<ReadSurah> {
                               ),
                               Align(
                                 alignment: Alignment.topLeft,
+                                child: HtmlWidget(
+                                  '${quran.tr}',
+                                  textStyle: TextStyle(
+                                      color: Colors.black45,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
                                 child: Text(
                                   '${quran.idn}',
                                   style: GoogleFonts.nunitoSans(

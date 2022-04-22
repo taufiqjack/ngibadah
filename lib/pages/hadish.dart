@@ -80,7 +80,10 @@ class _HadishPageState extends State<HadishPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DetailHadis(
-                                          hadis: '${x.name}', i: '${x.id}')));
+                                            hadis: '${x.name}',
+                                            i: '${x.id}',
+                                            id: '${index + 1}',
+                                          )));
                             },
                           ),
                         ],
