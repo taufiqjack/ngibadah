@@ -97,7 +97,7 @@ class _DetailHadisState extends State<DetailHadis> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 120, 20, 20),
+                    padding: EdgeInsets.fromLTRB(20, 100, 20, 0),
                     child: ListView.builder(
                         itemCount: data.hadisDetail!.data!.hadiths!.length,
                         itemBuilder: (BuildContext context, int i) {
