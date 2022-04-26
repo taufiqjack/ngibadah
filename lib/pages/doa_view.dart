@@ -1,6 +1,8 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
+import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/details_doa_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
@@ -13,6 +15,32 @@ class DoaView extends StatefulWidget {
 }
 
 class _DoaViewState extends State<DoaView> {
+  @override
+  void initState() {
+    super.initState();
+    getDoaLocal();
+  }
+
+  List<DoaListModel> doaList = [];
+
+  getDoaLocal() async {
+    LocalDb.sql.getDoa().then((value) {
+      setState(() {
+        for (var data in value!) {
+          doaList.add(DoaListModel(
+            idDoa: data.idDoa,
+            nama: data.nama,
+            lafal: data.lafal,
+            transliterasi: data.transliterasi,
+            arti: data.arti,
+            riwayat: data.riwayat,
+            keterangan: data.keterangan,
+          ));
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
@@ -35,7 +63,7 @@ class _DoaViewState extends State<DoaView> {
               title: Text(
                 'Doa Sehari -hari',
               )),
-          body: data.doa == null
+          body: doaList.isEmpty
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -44,9 +72,9 @@ class _DoaViewState extends State<DoaView> {
                   child: Container(
                       child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: data.doa!.data!.length,
+                    itemCount: doaList.length,
                     itemBuilder: (context, i) {
-                      var doa = data.doa!.data![i];
+                      var doa = doaList[i];
                       return Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: InkWell(

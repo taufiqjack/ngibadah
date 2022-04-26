@@ -14,9 +14,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
+import 'package:monggo_sholat/core/local/db.dart';
+import 'package:monggo_sholat/core/local/sync_local.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
+import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/doa_view.dart';
 import 'package:monggo_sholat/pages/hadish.dart';
@@ -166,6 +169,8 @@ class _MenuHomeState extends State<MenuHome> {
           // String city = '${prefs.getString('city')}';
 
           data.getDashboard(context);
+          SyncLocal().getSurahLocal();
+          SyncLocal().getDoa();
 
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);

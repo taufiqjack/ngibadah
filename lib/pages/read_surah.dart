@@ -9,10 +9,10 @@ import 'package:monggo_sholat/services/api.dart';
 import 'package:arabic_numbers/arabic_numbers.dart';
 
 class ReadSurah extends StatefulWidget {
-  final String arti;
+  final String? arti;
   final int index;
 
-  ReadSurah({required this.arti, required this.index});
+  ReadSurah({this.arti, required this.index});
 
   @override
   _ReadSurahState createState() => _ReadSurahState();

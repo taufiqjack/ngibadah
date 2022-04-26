@@ -4,7 +4,9 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_surah.dart';
@@ -28,6 +30,28 @@ class _QuranState extends State<Quran> {
   @override
   void initState() {
     super.initState();
+    getSurahLocal();
+  }
+
+  List<SurahModel> listSurah = [];
+
+  getSurahLocal() async {
+    LocalDb.sql.getSurah().then((value) {
+      setState(() {
+        for (var data in value!) {
+          listSurah.add(SurahModel(
+            nomor: data.nomor,
+            nama: data.nama,
+            namaLatin: data.namaLatin,
+            jumlahAyat: data.jumlahAyat,
+            tempatTurun: data.tempatTurun,
+            arti: data.arti,
+            deskripsi: data.deskripsi,
+            audio: data.audio,
+          ));
+        }
+      });
+    });
   }
 
   @override
@@ -85,9 +109,9 @@ class _QuranState extends State<Quran> {
             : Padding(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: ListView.builder(
-                    itemCount: data.surah!.length,
+                    itemCount: listSurah.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final x = data.surah![index];
+                      final x = listSurah[index];
                       return Card(
                         child: Column(
                           children: [
@@ -121,7 +145,7 @@ class _QuranState extends State<Quran> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ReadSurah(
-                                              arti: x.arti!,
+                                              arti: x.arti,
                                               index: index,
                                             )));
                               },
