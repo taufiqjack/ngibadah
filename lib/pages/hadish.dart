@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/models/list_hadis_model.dart';
+import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_hadis.dart';
@@ -13,6 +16,28 @@ class HadishPage extends StatefulWidget {
 }
 
 class _HadishPageState extends State<HadishPage> {
+  List<HadisLocalModel> hadis = [];
+
+  getHadisLocal() async {
+    LocalDb.sql.getHadisLocal().then((value) {
+      setState(() {
+        for (var item in value!) {
+          hadis.add(HadisLocalModel(
+            name: item.name,
+            id: item.id,
+            available: item.available,
+          ));
+        }
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getHadisLocal();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
@@ -45,16 +70,16 @@ class _HadishPageState extends State<HadishPage> {
             },
           ),
         ),
-        body: data.hadis == null
+        body: hadis.isEmpty
             ? Center(
                 child: CircularProgressIndicator(),
               )
             : Padding(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: ListView.builder(
-                  itemCount: data.hadis!.data!.length,
+                  itemCount: hadis.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final x = data.hadis!.data![index];
+                    final x = hadis[index];
                     return Card(
                       child: Column(
                         children: [

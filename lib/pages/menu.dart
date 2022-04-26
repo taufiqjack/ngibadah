@@ -169,6 +169,7 @@ class _MenuHomeState extends State<MenuHome> {
           // String city = '${prefs.getString('city')}';
 
           data.getDashboard(context);
+          SyncLocal().getHadis();
           SyncLocal().getSurahLocal();
           SyncLocal().getDoa();
 

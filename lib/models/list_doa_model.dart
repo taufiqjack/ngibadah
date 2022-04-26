@@ -20,7 +20,7 @@ class DoaListModel {
   DoaListModel.fromJson(Map<String, dynamic> json) {
     idDoa = json['id_doa'];
     nama = json['nama'];
-    lafal = json['lafa'];
+    lafal = json['lafal'];
     transliterasi = json['transliterasi'];
     arti = json['arti'];
     riwayat = json['riwayat'];
