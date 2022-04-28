@@ -172,6 +172,8 @@ class _MenuHomeState extends State<MenuHome> {
           SyncLocal().getHadis();
           SyncLocal().getSurahLocal();
           SyncLocal().getDoa();
+          SyncLocal().getJadwal();
+          SyncLocal().getLoc();
 
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);

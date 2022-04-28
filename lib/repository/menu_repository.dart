@@ -26,6 +26,7 @@ class MenuRepo extends ChangeNotifier {
       final parsed = response!.data;
       final data = PrayerScheduleModel.fromJson(parsed);
       print('respon : $parsed');
+      print('jadwal ${parsed['data']['jadwal']}');
       var magrib = '${data.data!.jadwal!.maghrib}';
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('maghrib', magrib);

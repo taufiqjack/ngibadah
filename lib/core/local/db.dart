@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:monggo_sholat/models/data_sholat_model.dart';
+import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
@@ -29,6 +31,10 @@ class LocalDb {
           .execute('create table Hadis(name TEXT, id TEXT, available INTEGER)');
       await db.execute(
           'create table Doa(id_doa TEXT, nama TEXT, lafal TEXT, transliterasi TEXT, arti TEXT, riwayat TEXT, keterangan TEXT, kata_kunci TEXT)');
+      await db.execute(
+          'create table Jadwal(tanggal TEXT, imsak TEXT, subuh TEXT, terbit TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT,date TEXT)');
+      await db
+          .execute('create table Lokasi(id TEXT, lokasi TEXT, daerah TEXT)');
     });
   }
 
@@ -118,6 +124,36 @@ class LocalDb {
         : [];
 
     return list;
+  }
+
+  insertJadwal(JadwalSholatModel model) async {
+    var data = {
+      'tanggal': model.tanggal,
+      'imsak': model.imsak,
+      'subuh': model.subuh,
+      'terbit': model.terbit,
+      'dhuha': model.dhuha,
+      'dzuhur ': model.dzuhur,
+      'ashar': model.ashar,
+      'maghrib': model.maghrib,
+      'isya': model.isya,
+      'date': model.date,
+    };
+
+    final db = await database;
+    final create = await db!.insert('Jadwal', data);
+    return create;
+  }
+
+  insertGetLoc(DataSholatModel model) async {
+    var data = {
+      'id': model.id,
+      'lokasi': model.lokasi,
+      'daerah': model.daerah,
+    };
+    final db = await database;
+    final create = await db!.insert('Lokasi', data);
+    return create;
   }
 
   // Future<HadisModel?> getHadis() async {
