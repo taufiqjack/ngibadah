@@ -18,6 +18,7 @@ import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/local/sync_local.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
@@ -84,6 +85,7 @@ class _MenuHomeState extends State<MenuHome> {
     Future.delayed(Duration(seconds: 2), () {
       getSession();
     });
+    getLoc();
   }
 
   @override
@@ -160,6 +162,21 @@ class _MenuHomeState extends State<MenuHome> {
     });
   }
 
+  List<DataSholatModel> loc = [];
+  getLoc() async {
+    LocalDb.sql.getLocation().then((value) {
+      setState(() {
+        for (var item in value!) {
+          loc.add(DataSholatModel(
+            id: item.id,
+            lokasi: item.lokasi,
+            daerah: item.daerah,
+          ));
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('id_ID');
@@ -169,11 +186,6 @@ class _MenuHomeState extends State<MenuHome> {
           // String city = '${prefs.getString('city')}';
 
           data.getDashboard(context);
-          SyncLocal().getHadis();
-          SyncLocal().getSurahLocal();
-          SyncLocal().getDoa();
-          SyncLocal().getJadwal();
-          SyncLocal().getLoc();
 
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);
@@ -194,13 +206,18 @@ class _MenuHomeState extends State<MenuHome> {
                     width: 5,
                   ),
                   Center(
-                    child: data.prayerSchedule == null
-                        ? null
-                        : Text(
-                            '${data.prayerSchedule!.data!.lokasi}',
-                            textAlign: TextAlign.center,
-                          ),
-                  ),
+                      child: loc.isEmpty
+                          ? null
+                          : Text(
+                              '${loc.first.lokasi}',
+                            )
+                      // data.prayerSchedule == null
+                      //     ? null
+                      //     : Text(
+                      //         '${data.prayerSchedule!.data!.lokasi}',
+                      //         textAlign: TextAlign.center,
+                      //       ),
+                      ),
                 ],
               ),
               actions: [

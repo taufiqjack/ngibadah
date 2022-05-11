@@ -156,6 +156,16 @@ class LocalDb {
     return create;
   }
 
+  Future<List<DataSholatModel>?> getLocation() async {
+    Database? db = await database;
+
+    var lokasi = await db!.rawQuery('SELECT * FROM Lokasi');
+    List<DataSholatModel> list = lokasi.isNotEmpty
+        ? lokasi.map((e) => DataSholatModel.fromJson(e)).toList()
+        : [];
+    return list;
+  }
+
   // Future<HadisModel?> getHadis() async {
   //   Database? db = await database;
 

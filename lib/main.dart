@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/locator.dart';
 import 'package:monggo_sholat/pages/menu.dart';
+import 'package:monggo_sholat/pages/splash_view.dart';
 
 void main() {
   setupLocator();
@@ -11,7 +12,7 @@ void main() {
     theme: ThemeData(fontFamily: GoogleFonts.montserrat().fontFamily),
     home: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: MenuHome(),
+      child: SplashScreenView(),
     ),
   ));
 }
