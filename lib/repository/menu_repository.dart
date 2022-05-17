@@ -49,7 +49,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<SurahDetailModel?> getDetailSurah(int id, BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.listQuran}/ $id');
+      response = await dio.get('${BaseUrl.listQuran}' + '/$id');
       notifyListeners();
       final parser = response!.data;
       final data = SurahDetailModel.fromJson(parser);

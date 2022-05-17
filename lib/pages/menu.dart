@@ -90,13 +90,17 @@ class _MenuHomeState extends State<MenuHome> {
 
   @override
   void dispose() {
+    controller!.dispose();
     super.dispose();
   }
 
   getSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var maghrib = '${prefs.getString('maghrib')}';
-
+    var split = prefs.getInt('split');
+    controller = CountdownTimerController(
+      endTime: split!,
+    );
     var part = maghrib.split(':');
     var c = Duration(
       hours: int.parse(part[0].trim()),
@@ -372,7 +376,8 @@ class _MenuHomeState extends State<MenuHome> {
                                             textStyle:
                                                 TextStyle(color: Colors.white),
                                             endTime: endtime,
-                                            controller: controller)
+                                            // controller: controller,
+                                          )
                                         : SizedBox(),
                                     Text(
                                       ' Lagi',
@@ -389,7 +394,7 @@ class _MenuHomeState extends State<MenuHome> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${HijriCalendar.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString())).toFormat('dd MMMM yyyy')} H',
+                                  '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${HijriCalendar.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()).toLocal()).toFormat("dd MMMM yyyy")} H',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 14, color: Colors.white),

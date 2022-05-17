@@ -20,10 +20,16 @@ class ReadSurah extends StatefulWidget {
 
 class _ReadSurahState extends State<ReadSurah> {
   @override
+  void initState() {
+    print('${widget.index}');
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
       onModelReady: (data) {
-        data.getDetailSurah(widget.index + 1, context);
+        data.getDetailSurah(widget.index, context);
       },
       builder: (context, data, child) => Scaffold(
         backgroundColor: Colors.grey[100],

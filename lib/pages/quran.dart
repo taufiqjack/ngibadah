@@ -141,6 +141,7 @@ class _QuranState extends State<Quran> {
                                 style: TextStyle(fontSize: 12),
                               ),
                               onTap: () {
+                                print('cek index : $index');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
