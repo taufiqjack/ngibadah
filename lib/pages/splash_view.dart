@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/local/sync_local.dart';
 import 'package:monggo_sholat/pages/menu.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenView extends StatefulWidget {
   SplashScreenView({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
     SyncLocal().getJadwal();
     SyncLocal().getLoc();
     Future.delayed(Duration(seconds: 3), () {
+      getPref();
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -39,5 +41,11 @@ class _SplashScreenViewState extends State<SplashScreenView> {
         ),
       ),
     );
+  }
+
+  getPref() async {
+    int splittime = DateTime.now().millisecondsSinceEpoch + 1000 * 900;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('split', splittime);
   }
 }
