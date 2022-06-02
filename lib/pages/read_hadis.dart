@@ -1,11 +1,8 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
-import 'package:monggo_sholat/services/api.dart';
 
 class DetailHadis extends StatefulWidget {
   final String hadis;

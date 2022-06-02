@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -33,6 +31,7 @@ class MenuRepo extends ChangeNotifier {
       print(formatTime.format(now));
       return data;
     } catch (e) {}
+    return null;
   }
 
   Future<List<SurahModel>?> getSurah(BuildContext context) async {
@@ -45,6 +44,7 @@ class MenuRepo extends ChangeNotifier {
       print(' respon surah : $listdata');
       return listdata;
     } catch (e) {}
+    return null;
   }
 
   Future<SurahDetailModel?> getDetailSurah(int id, BuildContext context) async {
@@ -56,6 +56,7 @@ class MenuRepo extends ChangeNotifier {
       print('quranDetail : $parser');
       return data;
     } catch (e) {}
+    return null;
   }
 
   Future<HadisModel?> getHadis(BuildContext context) async {
@@ -67,6 +68,7 @@ class MenuRepo extends ChangeNotifier {
       print('hadis : $parsed');
       return data;
     } catch (e) {}
+    return null;
   }
 
   Future<HadisDetailModel?> getHadisDetail(
@@ -79,6 +81,7 @@ class MenuRepo extends ChangeNotifier {
       print('detail hadis : $parsed');
       return data;
     } catch (e) {}
+    return null;
   }
 
   Future<bool?> getCity(BuildContext context, String city) async {
@@ -100,6 +103,7 @@ class MenuRepo extends ChangeNotifier {
         return true;
       }
     } catch (e) {}
+    return null;
   }
 
   Future<DoaModel?> getDoa(BuildContext context) async {
@@ -111,5 +115,6 @@ class MenuRepo extends ChangeNotifier {
       print('doa : $parsed');
       return data;
     } catch (e) {}
+    return null;
   }
 }

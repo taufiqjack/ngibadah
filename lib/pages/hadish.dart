@@ -4,7 +4,6 @@ import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
-import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_hadis.dart';
 
