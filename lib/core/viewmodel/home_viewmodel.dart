@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/view_state.dart';
 import 'package:monggo_sholat/core/viewmodel/base_viewmodel.dart';
 import 'package:monggo_sholat/locator.dart';
+import 'package:monggo_sholat/models/adhan_time_model.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
@@ -20,6 +21,7 @@ class HomeViewModel extends BaseViewModel {
   HadisModel? hadis;
   HadisDetailModel? hadisDetail;
   DoaModel? doa;
+  AdhanTime? adhan;
 
   Future getDashboard(BuildContext context) async {
     setState(ViewState.busy);
@@ -100,5 +102,19 @@ class HomeViewModel extends BaseViewModel {
       setState(ViewState.idle);
       return false;
     }
+  }
+
+  Future getAdhan(
+      String latitude, String longitude, BuildContext context) async {
+    setState(ViewState.busy);
+    adhan = await menuRepo.getAdhan(latitude, longitude, context);
+    notifyListeners();
+    setState(ViewState.idle);
+  }
+
+  Future<bool?> getTimestamp(BuildContext context) async {
+    setState(ViewState.busy);
+    await menuRepo.getTimestamp(context);
+    setState(ViewState.idle);
   }
 }

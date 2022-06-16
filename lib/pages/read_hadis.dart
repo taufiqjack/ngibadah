@@ -5,8 +5,8 @@ import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 
 class DetailHadis extends StatefulWidget {
-  final String hadis;
-  final String i;
+  String hadis;
+  String i;
   String id;
   DetailHadis({
     required this.hadis,

@@ -51,6 +51,9 @@ dependencies:
   flutter_widget_from_html: ^0.8.5
   sqflite: ^2.0.2+1
   path_provider: ^2.0.9
+  flutter_alarm_clock: ^0.0.2
+  flutter_ringtone_player: ^3.2.0
+  flutter_svg: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/sounds/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -160,6 +160,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_alarm_clock:
+    dependency: "direct main"
+    description:
+      name: flutter_alarm_clock
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -188,13 +195,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2-nullsafety"
+  flutter_ringtone_player:
+    dependency: "direct main"
+    description:
+      name: flutter_ringtone_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   flutter_svg:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.0"
   flutter_switch:
     dependency: "direct main"
     description:
@@ -958,7 +972,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.4.1"
+    version: "6.1.0"
   yaml:
     dependency: transitive
     description:

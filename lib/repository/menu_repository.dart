@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:monggo_sholat/models/adhan_time_model.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
@@ -16,6 +18,36 @@ class MenuRepo extends ChangeNotifier {
   DateTime now = DateTime.now();
   final formatTime = new DateFormat('yyyy/MM/dd');
 
+  Future<bool?> getTimestamp(BuildContext context) async {
+    try {
+      response = await dio.get(BaseUrl.timestramp);
+      notifyListeners();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('timestamp', response!.data['data']);
+      print('timestamp : ${response!.data['data']}');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<AdhanTime?> getAdhan(
+      String latitude, String longitude, BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String timestamp = prefs.getString('timestamp') ?? '';
+    try {
+      response = await dio.get('${BaseUrl.jadwalLongitude}' +
+          '/$timestamp?latitude=$latitude&longitude=$longitude');
+      notifyListeners();
+      final parser = response!.data;
+      final data = AdhanTime.fromJson(parser);
+      print('jadwal latitude : ' + parser);
+      return data;
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'Error');
+    }
+    return null;
+  }
+
   Future<PrayerScheduleModel?> getDashboard(BuildContext context) async {
     try {
       response =
@@ -26,8 +58,10 @@ class MenuRepo extends ChangeNotifier {
       print('respon : $parsed');
       print('jadwal ${parsed['data']['jadwal']}');
       var magrib = '${data.data!.jadwal!.maghrib}';
+      var dhuhur = '${data.data!.jadwal!.dzuhur}';
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('maghrib', magrib);
+      prefs.setString('dzuhur', dhuhur);
       print(formatTime.format(now));
       return data;
     } catch (e) {}

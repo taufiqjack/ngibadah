@@ -9,4 +9,7 @@ class BaseUrl {
       'https://alimanboga.000webhostapp.com/rencanggunung/products.php';
   static String item =
       "https://alimanboga.000webhostapp.com/aliman/showDataFood.php";
+  static String timestramp =
+      'http://api.aladhan.com/v1/currentTimestamp?zone=Asia/Jakarta';
+  static String jadwalLongitude = 'http://api.aladhan.com/v1/timings/';
 }

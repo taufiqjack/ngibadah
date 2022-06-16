@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_geocoder/geocoder.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -59,6 +60,7 @@ class _MenuHomeState extends State<MenuHome> {
   int? detik;
   int? magrib;
   int? thistime;
+  String location = 'Jakarta';
 
   @override
   void initState() {
@@ -82,11 +84,13 @@ class _MenuHomeState extends State<MenuHome> {
   @override
   void dispose() {
     controller!.dispose();
+    FlutterRingtonePlayer.stop();
     super.dispose();
   }
 
   getSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    location = '${prefs.getString('city')}';
     var maghrib = '${prefs.getString('maghrib')}';
     var split = prefs.getInt('split');
     controller = CountdownTimerController(
@@ -201,10 +205,10 @@ class _MenuHomeState extends State<MenuHome> {
                     width: 5,
                   ),
                   Center(
-                      child: loc.isEmpty
-                          ? null
+                      child: location.isEmpty
+                          ? Text('Jakarta')
                           : Text(
-                              '${loc.first.lokasi}',
+                              '$location',
                             )
                       // data.prayerSchedule == null
                       //     ? null
@@ -221,7 +225,8 @@ class _MenuHomeState extends State<MenuHome> {
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        getLocation();
+                        getLocation(data);
+                        // data.getAdhan('-7.7970947', '110.3250246', context);
                       });
                     },
                     child: Icon(Icons.location_on),
@@ -367,6 +372,7 @@ class _MenuHomeState extends State<MenuHome> {
                                             textStyle:
                                                 TextStyle(color: Colors.white),
                                             endTime: endtime,
+                                            onEnd: () => adzanTime(),
                                             // controller: controller,
                                           )
                                         : SizedBox(),
@@ -377,7 +383,7 @@ class _MenuHomeState extends State<MenuHome> {
                                   ],
                                 ),
                                 Text(
-                                  'Maghrib',
+                                  'Dzuhur',
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 14, color: Colors.white),
                                 ),
@@ -862,12 +868,21 @@ class _MenuHomeState extends State<MenuHome> {
     // );
   }
 
+  Future<void> adzanTime() async {
+    FlutterRingtonePlayer.playAlarm(
+      looping: false,
+    );
+    Future.delayed(Duration(seconds: 5), () {
+      FlutterRingtonePlayer.stop();
+    });
+  }
+
   clearSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('maghrib');
   }
 
-  getLocation() async {
+  getLocation(HomeViewModel dataModel) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LocationData? myLocation;
     String? error;
@@ -887,6 +902,10 @@ class _MenuHomeState extends State<MenuHome> {
       myLocation = null;
     }
     final coordinat = Coordinates(myLocation!.latitude, myLocation.longitude);
+    print('latitude :' + '${myLocation.latitude}');
+    print('longitude :' + '${myLocation.longitude}');
+    dataModel.getTimestamp(context);
+
     var addressess =
         await Geocoder.local.findAddressesFromCoordinates(coordinat);
     var data = addressess.first;
@@ -894,10 +913,14 @@ class _MenuHomeState extends State<MenuHome> {
     var str = data.subAdminArea;
     print('split ${str!.substring(10)}');
     print('lokasi ${data.subAdminArea}');
+    print('lokasi ${data.locality}');
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_LONG);
+    dataModel.getAdhan(myLocation.latitude.toString(),
+        myLocation.longitude.toString(), context);
   }
+
   // var address = Geocoder.local.findAddressesFromCoordinates();
 }
