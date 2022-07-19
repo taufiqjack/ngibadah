@@ -5,6 +5,7 @@ import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
+import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -26,7 +27,7 @@ class LocalDb {
     return await openDatabase(path, version: 1, onOpen: (sql) {},
         onCreate: (Database db, int version) async {
       await db.execute(
-          'create table Surah(nomor INTEGER PRIMARY KEY,nama TEXT, nama_latin TEXT, jumlah_ayat INTEGER, tempat_turun TEXT, arti TEXT, deskripsi TEXT, audio TEXT)');
+          'create table Surah(arti TEXT,asma TEXT, ayat INTEGER, nama TEXT, type TEXT, urut TEXT, audio TEXT, nomor TEXT, rukuk TEXT, keterangan TEXT)');
       await db
           .execute('create table Hadis(name TEXT, id TEXT, available INTEGER)');
       await db.execute(
@@ -38,28 +39,30 @@ class LocalDb {
     });
   }
 
-  insertSurah(SurahModel model) async {
+  insertSurah(SurahModelNova model) async {
     var row = {
-      'nomor': model.nomor,
-      'nama': model.nama,
-      'nama_latin': model.namaLatin,
-      'jumlah_ayat': model.jumlahAyat,
-      'tempat_turun': model.tempatTurun,
       'arti': model.arti,
-      'deskripsi': model.deskripsi,
+      'asma': model.asma,
+      'ayat': model.ayat,
+      'nama': model.nama,
+      'type': model.type,
+      'urut': model.urut,
       'audio': model.audio,
+      'nomor': model.nomor,
+      'rukuk': model.rukuk,
+      'keterangan': model.keterangan,
     };
     final db = await database;
     final create = await db!.insert('Surah', row);
     return create;
   }
 
-  Future<List<SurahModel>?> getSurah() async {
+  Future<List<SurahModelNova>?> getSurah() async {
     Database? db = await database;
 
     var allData = await db!.rawQuery('SELECT * FROM Surah');
-    List<SurahModel> list = allData.isNotEmpty
-        ? allData.map((e) => SurahModel.fromJson(e)).toList()
+    List<SurahModelNova> list = allData.isNotEmpty
+        ? allData.map((e) => SurahModelNova.fromJson(e)).toList()
         : [];
 
     return list;

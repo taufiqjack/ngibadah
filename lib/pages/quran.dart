@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
+import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';
 import 'package:monggo_sholat/pages/read_surah.dart';
@@ -33,21 +34,23 @@ class _QuranState extends State<Quran> {
     getSurahLocal();
   }
 
-  List<SurahModel> listSurah = [];
+  List<SurahModelNova> listSurah = [];
 
   getSurahLocal() async {
     LocalDb.sql.getSurah().then((value) {
       setState(() {
         for (var data in value!) {
-          listSurah.add(SurahModel(
-            nomor: data.nomor,
+          listSurah.add(SurahModelNova(
+            arti: data.nomor,
+            asma: data.nama,
+            ayat: data.ayat,
             nama: data.nama,
-            namaLatin: data.namaLatin,
-            jumlahAyat: data.jumlahAyat,
-            tempatTurun: data.tempatTurun,
-            arti: data.arti,
-            deskripsi: data.deskripsi,
+            type: data.type,
+            urut: data.arti,
             audio: data.audio,
+            nomor: data.nomor,
+            rukuk: data.rukuk,
+            keterangan: data.keterangan,
           ));
         }
       });
@@ -122,9 +125,9 @@ class _QuranState extends State<Quran> {
                                   ),
                                 ],
                               ),
-                              title: Text('${x.namaLatin}'),
+                              title: Text('${x.asma}'),
                               subtitle: Text(
-                                '${x.arti} - ${x.jumlahAyat} ayat',
+                                '${x.arti} - ${x.ayat} ayat',
                                 style: TextStyle(fontSize: 12),
                               ),
                               onTap: () {

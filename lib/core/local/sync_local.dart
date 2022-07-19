@@ -5,7 +5,7 @@ import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
-import 'package:monggo_sholat/models/surah_model.dart';
+import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/services/api.dart';
 
 class SyncLocal {
@@ -15,11 +15,11 @@ class SyncLocal {
   final formatTime = new DateFormat('yyyy/MM/dd');
 
   Future getSurahLocal() async {
-    response = await dio.get(BaseUrl.listQuran);
+    response = await dio.get(BaseUrl.surah);
     return response!.data.map((surah) {
       print('add $surah');
 
-      LocalDb.sql.insertSurah(SurahModel.fromJson(surah));
+      LocalDb.sql.insertSurah(SurahModelNova.fromJson(surah));
     }).toList();
   }
 
