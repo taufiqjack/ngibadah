@@ -58,19 +58,6 @@ class _QuranState extends State<Quran> {
   Widget build(BuildContext context) {
     final assetsAudioPlayer = AssetsAudioPlayer();
 
-    void togglePlayPause(x, i) {
-      setState(() {
-        playpause[i] = !playpause[i];
-      });
-      setState(() {
-        try {
-          playpause[i]
-              ? assetsAudioPlayer.open(Audio.liveStream('$x'))
-              : assetsAudioPlayer.stop();
-        } catch (e) {}
-      });
-    }
-
     return BaseView<HomeViewModel>(
       onModelReady: (data) {
         data.getSurah(context);

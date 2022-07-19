@@ -17,10 +17,10 @@ class DetailDoaView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailDoaView> createState() => _DetailDoaViewState();
+  State<DetailDoaView> createState() => DetailDoaViewState();
 }
 
-class _DetailDoaViewState extends State<DetailDoaView> {
+class DetailDoaViewState extends State<DetailDoaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -15,10 +15,10 @@ class DetailHadis extends StatefulWidget {
   });
 
   @override
-  _DetailHadisState createState() => _DetailHadisState();
+  DetailHadisState createState() => DetailHadisState();
 }
 
-class _DetailHadisState extends State<DetailHadis> {
+class DetailHadisState extends State<DetailHadis> {
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
