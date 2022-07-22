@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
-import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/menu.dart';

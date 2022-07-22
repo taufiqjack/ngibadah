@@ -477,6 +477,8 @@ class _MenuHomeState extends State<MenuHome> {
                                           switchValues[1] = value;
                                         });
                                       },
+                                      activeColor: Colors.purple,
+                                      thumbColor: Colors.white,
                                     ),
                                   ),
                                 ),
