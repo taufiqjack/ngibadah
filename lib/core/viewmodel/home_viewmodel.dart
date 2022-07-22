@@ -7,7 +7,6 @@ import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
-import 'package:monggo_sholat/models/surah_detail_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/repository/menu_repository.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
