@@ -5,6 +5,7 @@ import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
+import 'package:monggo_sholat/models/read_surah_model.dart';
 import 'package:monggo_sholat/models/surah_detail_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
@@ -47,12 +48,12 @@ class MenuRepo extends ChangeNotifier {
     return null;
   }
 
-  Future<SurahDetailModel?> getDetailSurah(int id, BuildContext context) async {
+  Future<ReadSurahModel?> getDetailSurah(int id, BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.listQuran}' + '/$id');
+      response = await dio.get('${BaseUrl.readQuran}' + '/$id');
       notifyListeners();
       final parser = response!.data;
-      final data = SurahDetailModel.fromJson(parser);
+      final data = ReadSurahModel.fromJson(parser);
       print('quranDetail : $parser');
       return data;
     } catch (e) {}

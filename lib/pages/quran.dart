@@ -41,12 +41,12 @@ class _QuranState extends State<Quran> {
       setState(() {
         for (var data in value!) {
           listSurah.add(SurahModelNova(
-            arti: data.nomor,
-            asma: data.nama,
+            arti: data.arti,
+            asma: data.asma,
             ayat: data.ayat,
             nama: data.nama,
             type: data.type,
-            urut: data.arti,
+            urut: data.urut,
             audio: data.audio,
             nomor: data.nomor,
             rukuk: data.rukuk,
@@ -107,9 +107,9 @@ class _QuranState extends State<Quran> {
                           children: [
                             ListTile(
                               trailing: Text(
-                                '${x.nama}',
+                                '${x.asma}',
                                 style: GoogleFonts.nunitoSans(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               leading: Stack(
                                 alignment: Alignment.center,
@@ -125,9 +125,9 @@ class _QuranState extends State<Quran> {
                                   ),
                                 ],
                               ),
-                              title: Text('${x.asma}'),
+                              title: Text('${x.nama}'),
                               subtitle: Text(
-                                '${x.arti} - ${x.ayat} ayat',
+                                '${x.type} - ${x.ayat} ayat',
                                 style: TextStyle(fontSize: 12),
                               ),
                               onTap: () {
@@ -137,7 +137,7 @@ class _QuranState extends State<Quran> {
                                     MaterialPageRoute(
                                         builder: (context) => ReadSurah(
                                               arti: x.arti,
-                                              index: index,
+                                              index: index + 1,
                                             )));
                               },
                             ),

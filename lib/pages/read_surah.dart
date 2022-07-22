@@ -37,7 +37,7 @@ class _ReadSurahState extends State<ReadSurah> {
           title: data.surahDetail == null
               ? null
               : Text(
-                  '${data.surahDetail!.namaLatin}',
+                  '${data.surahDetail!.name}',
                   style: TextStyle(color: Colors.black45),
                   textAlign: TextAlign.center,
                 ),
@@ -73,7 +73,7 @@ class _ReadSurahState extends State<ReadSurah> {
                                   height: 40,
                                 ),
                                 Text(
-                                  '${data.surahDetail!.nomor}',
+                                  '${data.surahDetail!.number}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700,
@@ -85,7 +85,7 @@ class _ReadSurahState extends State<ReadSurah> {
                               height: 5,
                             ),
                             Text(
-                              '${data.surahDetail!.namaLatin}',
+                              '${data.surahDetail!.name}',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -103,14 +103,14 @@ class _ReadSurahState extends State<ReadSurah> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${data.surahDetail!.tempatTurun} -',
+                                  '${data.surahDetail!.revelation} -',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 SizedBox(
                                   width: 5,
                                 ),
                                 Text(
-                                  ' ${data.surahDetail!.jumlahAyat} ayat',
+                                  ' ${data.surahDetail!.numberOfAyahs} ayat',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.white),
                                 ),
@@ -132,9 +132,9 @@ class _ReadSurahState extends State<ReadSurah> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 160, 20, 20),
                     child: ListView.builder(
-                        itemCount: data.surahDetail!.ayat!.length,
+                        itemCount: data.surahDetail!.ayahs!.length,
                         itemBuilder: (BuildContext context, int i) {
-                          final quran = data.surahDetail!.ayat![i];
+                          final quran = data.surahDetail!.ayahs![i];
                           return Column(
                             children: [
                               SizedBox(
@@ -160,7 +160,7 @@ class _ReadSurahState extends State<ReadSurah> {
                                             color: Colors.blueGrey),
                                         child: Center(
                                           child: Text(
-                                            '${quran.nomor}',
+                                            '${quran.number!.inSurah}',
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -190,25 +190,22 @@ class _ReadSurahState extends State<ReadSurah> {
                               ),
                               Align(
                                 alignment: Alignment.topRight,
-                                child: Text(
-                                  '${quran.ar}',
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 16,
-                                      color: Color.fromARGB(255, 0, 32, 4)),
+                                child: Image.network(
+                                  '${quran.image!.primary}',
                                 ),
                               ),
+                              // Align(
+                              //   alignment: Alignment.topRight,
+                              //   child: Text(
+                              //     '${quran.arab}',
+                              //     textAlign: TextAlign.right,
+                              //     style: GoogleFonts.nunitoSans(
+                              //         fontSize: 14,
+                              //         color: Color.fromARGB(255, 0, 32, 4)),
+                              //   ),
+                              // ),
                               SizedBox(
                                 height: 5,
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: HtmlWidget(
-                                  '${quran.tr}',
-                                  textStyle: TextStyle(
-                                      color: Colors.black45,
-                                      fontStyle: FontStyle.italic),
-                                ),
                               ),
                               SizedBox(
                                 height: 5,
@@ -216,7 +213,7 @@ class _ReadSurahState extends State<ReadSurah> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  '${quran.idn}',
+                                  '${quran.translation}',
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 14, color: Colors.black45),
                                 ),
