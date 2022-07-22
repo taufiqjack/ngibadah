@@ -4,7 +4,6 @@ import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
-import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
