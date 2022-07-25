@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
+import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
@@ -113,6 +114,40 @@ class MenuRepo extends ChangeNotifier {
       final parsed = response!.data;
       final data = DoaModel.fromJson(parsed);
       print('doa : $parsed');
+      return data;
+    } catch (e) {}
+    return null;
+  }
+
+  Future getTimestamp(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      response = await dio.get(BaseUrl.timestamp);
+      notifyListeners();
+      final parser = response!.data;
+      print('timestamp : $parser');
+      if (response!.data.containsKey('error')) {
+        prefs.setString('error', response!.data['data']);
+        prefs.setString('status', response!.data['status'].toString());
+      } else {
+        prefs.setString('timings', response!.data['data']);
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  Future<PrayerTimeModel?> getPrayerTime(
+      BuildContext context, String latitude, String longitude) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String timings = prefs.getString('timings') ?? '';
+
+    try {
+      response = await dio.get(
+          '${BaseUrl.praytoday}$timings?latitude=$latitude&longitude=$longitude');
+      notifyListeners();
+      final parser = response!.data;
+      final data = PrayerTimeModel.fromJson(parser);
+      // print('data : $parser');
       return data;
     } catch (e) {}
     return null;

@@ -5,6 +5,7 @@ import 'package:monggo_sholat/locator.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
+import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
@@ -20,6 +21,7 @@ class HomeViewModel extends BaseViewModel {
   HadisModel? hadis;
   HadisDetailModel? hadisDetail;
   DoaModel? doa;
+  PrayerTimeModel? prayertime;
 
   Future getDashboard(BuildContext context) async {
     setState(ViewState.busy);
@@ -100,5 +102,20 @@ class HomeViewModel extends BaseViewModel {
       setState(ViewState.idle);
       return false;
     }
+  }
+
+  Future getTimestamp(BuildContext context) async {
+    setState(ViewState.busy);
+    await menuRepo.getTimestamp(context);
+    notifyListeners();
+    setState(ViewState.idle);
+  }
+
+  Future getPrayerTime(
+      String latitude, String longitude, BuildContext context) async {
+    setState(ViewState.busy);
+    prayertime = await menuRepo.getPrayerTime(context, latitude, longitude);
+    notifyListeners();
+    setState(ViewState.idle);
   }
 }

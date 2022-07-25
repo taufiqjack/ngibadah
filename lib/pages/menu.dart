@@ -172,16 +172,21 @@ class _MenuHomeState extends State<MenuHome> {
     });
   }
 
+  String city = '';
+  String? latitude;
+  String? longitude;
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('id_ID');
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
-          // SharedPreferences prefs = await SharedPreferences.getInstance();
-          // String city = '${prefs.getString('city')}';
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          city = '${prefs.getString('city')}';
+          latitude = '${prefs.getString('latitude')}';
+          longitude = '${prefs.getString('longitude')}';
 
           data.getDashboard(context);
-
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);
           // });
@@ -201,11 +206,11 @@ class _MenuHomeState extends State<MenuHome> {
                     width: 5,
                   ),
                   Center(
-                      child: loc.isEmpty
-                          ? null
-                          : Text(
+                      child: city.isEmpty
+                          ? Text(
                               '${loc.first.lokasi}',
                             )
+                          : Text('$city')
                       // data.prayerSchedule == null
                       //     ? null
                       //     : Text(
@@ -219,10 +224,12 @@ class _MenuHomeState extends State<MenuHome> {
                 Padding(
                   padding: EdgeInsets.only(right: 10),
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      clearCity();
                       setState(() {
-                        getLocation();
+                        getLocation(data);
                       });
+                      data.getTimestamp(context);
                     },
                     child: Icon(Icons.location_on),
                   ),
@@ -512,7 +519,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    "${data.prayerSchedule!.data!.jadwal!.ashar}",
+                                    data.prayertime == null
+                                        ? "${data.prayerSchedule!.data!.jadwal!.ashar}"
+                                        : "${data.prayertime!.data!.timings!.asr}",
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -540,7 +549,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    '${data.prayerSchedule!.data!.jadwal!.maghrib}',
+                                    data.prayertime == null
+                                        ? "${data.prayerSchedule!.data!.jadwal!.maghrib}"
+                                        : "${data.prayertime!.data!.timings!.maghrib}",
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -869,7 +880,12 @@ class _MenuHomeState extends State<MenuHome> {
     prefs.remove('maghrib');
   }
 
-  getLocation() async {
+  clearCity() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('city');
+  }
+
+  getLocation(HomeViewModel get) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LocationData? myLocation;
     String? error;
@@ -889,13 +905,17 @@ class _MenuHomeState extends State<MenuHome> {
       myLocation = null;
     }
     final coordinat = Coordinates(myLocation!.latitude, myLocation.longitude);
+    prefs.setString('latitude', myLocation.latitude.toString());
+    prefs.setString('longitude', myLocation.longitude.toString());
     var addressess =
         await Geocoder.local.findAddressesFromCoordinates(coordinat);
     var data = addressess.first;
-    prefs.setString('city', '${data.subLocality}');
+    prefs.setString('city', '${data.subAdminArea}');
     var str = data.subAdminArea;
+    get.getPrayerTime(latitude!, longitude!, context);
     print('split ${str!.substring(10)}');
     print('lokasi ${data.subAdminArea}');
+
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,
