@@ -4,12 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
+import 'package:monggo_sholat/models/prayer_time.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
 import 'package:monggo_sholat/models/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../core/local/db.dart';
+import '../models/data_sholat_model.dart';
 
 class MenuRepo extends ChangeNotifier {
   Response? response;
@@ -146,9 +150,13 @@ class MenuRepo extends ChangeNotifier {
           '${BaseUrl.praytoday}$timings?latitude=$latitude&longitude=$longitude');
       notifyListeners();
       final parser = response!.data;
-      final data = PrayerTimeModel.fromJson(parser);
-      // print('data : $parser');
-      return data;
+      final parsing = response!.data['data']['timings'];
+      print('timi : $parsing ');
+      LocalDb.sql.insertPrayer(PrayerModel.fromJson(parsing));
+      // final data = PrayerTimeModel.fromJson(parser);
+
+      // print('prayertime : $parser');
+      // return data;
     } catch (e) {}
     return null;
   }

@@ -4,6 +4,8 @@ import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
+import 'package:monggo_sholat/models/prayer_time.dart';
+import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -35,6 +37,8 @@ class LocalDb {
           'create table Jadwal(tanggal TEXT, imsak TEXT, subuh TEXT, terbit TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT,date TEXT)');
       await db
           .execute('create table Lokasi(id TEXT, lokasi TEXT, daerah TEXT)');
+      await db.execute(
+          'create table Sholat(imsak TEXT, subuh TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT)');
     });
   }
 
@@ -177,4 +181,20 @@ class LocalDb {
 
   //   return parse;
   // }
+
+  insertPrayer(PrayerModel model) async {
+    var data = {
+      'imsak': model.imsak,
+      'subuh': model.fajr,
+      'dhuha': model.sunrise,
+      'dzuhur ': model.dhuhr,
+      'ashar': model.asr,
+      'maghrib': model.maghrib,
+      'isya': model.isha,
+    };
+
+    final db = await database;
+    final create = await db!.insert('Sholat', data);
+    return create;
+  }
 }

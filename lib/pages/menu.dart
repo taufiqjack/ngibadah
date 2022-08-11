@@ -187,6 +187,9 @@ class _MenuHomeState extends State<MenuHome> {
           longitude = '${prefs.getString('longitude')}';
 
           data.getDashboard(context);
+          if (latitude != null) {
+            data.getPrayerTime(latitude!, longitude!, context);
+          }
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);
           // });
@@ -206,11 +209,11 @@ class _MenuHomeState extends State<MenuHome> {
                     width: 5,
                   ),
                   Center(
-                      child: city.isEmpty
-                          ? Text(
-                              '${loc.first.lokasi}',
+                      child: city.isNotEmpty
+                          ? Text('$city')
+                          : Text(
+                              'Jakarta',
                             )
-                          : Text('$city')
                       // data.prayerSchedule == null
                       //     ? null
                       //     : Text(
@@ -230,6 +233,9 @@ class _MenuHomeState extends State<MenuHome> {
                         getLocation(data);
                       });
                       data.getTimestamp(context);
+                      // Future.delayed(Duration(seconds: 2), () {
+                      //   data.getPrayerTime(latitude, longitude, context)
+                      // });
                     },
                     child: Icon(Icons.location_on),
                   ),
@@ -433,7 +439,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    '${data.prayerSchedule!.data!.jadwal!.imsak}',
+                                    data.prayertime == null
+                                        ? '${data.prayerSchedule!.data!.jadwal!.imsak}'
+                                        : '${data.prayertime!.data!.timings!.imsak}',
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -462,7 +470,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    '${data.prayerSchedule!.data!.jadwal!.subuh}',
+                                    data.prayertime == null
+                                        ? '${data.prayerSchedule!.data!.jadwal!.subuh}'
+                                        : '${data.prayertime!.data!.timings!.fajr}',
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -491,7 +501,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    '${data.prayerSchedule!.data!.jadwal!.dzuhur}',
+                                    data.prayertime == null
+                                        ? '${data.prayerSchedule!.data!.jadwal!.dzuhur}'
+                                        : '${data.prayertime!.data!.timings!.dhuhr}',
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -579,7 +591,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    '${data.prayerSchedule!.data!.jadwal!.isya}',
+                                    data.prayertime == null
+                                        ? '${data.prayerSchedule!.data!.jadwal!.isya}'
+                                        : '${data.prayertime!.data!.timings!.isha}',
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
