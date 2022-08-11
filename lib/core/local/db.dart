@@ -38,7 +38,7 @@ class LocalDb {
       await db
           .execute('create table Lokasi(id TEXT, lokasi TEXT, daerah TEXT)');
       await db.execute(
-          'create table Sholat(imsak TEXT, subuh TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT)');
+          'create table Sholat(imsak TEXT, subuh TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT, tanggal TEXT)');
     });
   }
 
@@ -182,16 +182,28 @@ class LocalDb {
   //   return parse;
   // }
 
-  insertPrayer(PrayerModel model) async {
+  insertPrayer(PrayerTimeModel model) async {
     var data = {
-      'imsak': model.imsak,
-      'subuh': model.fajr,
-      'dhuha': model.sunrise,
-      'dzuhur ': model.dhuhr,
-      'ashar': model.asr,
-      'maghrib': model.maghrib,
-      'isya': model.isha,
+      'imsak': model.data!.timings!.imsak,
+      'subuh': model.data!.timings!.fajr,
+      'dhuha': model.data!.timings!.sunrise,
+      'dzuhur ': model.data!.timings!.dhuhr,
+      'ashar': model.data!.timings!.asr,
+      'maghrib': model.data!.timings!.maghrib,
+      'isya': model.data!.timings!.isha,
+      'tanggal': model.data!.date!.gregorian!.date,
     };
+    // / insertPrayer(PrayerModel model) async {
+    //   var data = {
+    //     'imsak': model.imsak,
+    //     'subuh': model.fajr,
+    //     'dhuha': model.sunrise,
+    //     'dzuhur ': model.dhuhr,
+    //     'ashar': model.asr,
+    //     'maghrib': model.maghrib,
+    //     'isya': model.isha,
+    //     // 'tanggal':model.ta
+    //   };
 
     final db = await database;
     final create = await db!.insert('Sholat', data);

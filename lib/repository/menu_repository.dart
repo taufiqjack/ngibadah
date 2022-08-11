@@ -150,13 +150,14 @@ class MenuRepo extends ChangeNotifier {
           '${BaseUrl.praytoday}$timings?latitude=$latitude&longitude=$longitude');
       notifyListeners();
       final parser = response!.data;
-      final parsing = response!.data['data']['timings'];
-      print('timi : $parsing ');
-      LocalDb.sql.insertPrayer(PrayerModel.fromJson(parsing));
-      // final data = PrayerTimeModel.fromJson(parser);
+      final map = response!.data;
+      // print('timi : $parsing ');
+      // LocalDb.sql.insertPrayer(PrayerModel.fromJson(parsing));
+      LocalDb.sql.insertPrayer(PrayerTimeModel.fromJson(map));
+      final data = PrayerTimeModel.fromJson(parser);
 
       // print('prayertime : $parser');
-      // return data;
+      return data;
     } catch (e) {}
     return null;
   }
