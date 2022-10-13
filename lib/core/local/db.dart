@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:monggo_sholat/models/data_sholat_model.dart';
+import 'package:monggo_sholat/models/detail_hadis_local_model.dart';
+import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
@@ -39,6 +41,8 @@ class LocalDb {
           .execute('create table Lokasi(id TEXT, lokasi TEXT, daerah TEXT)');
       await db.execute(
           'create table Sholat(imsak TEXT, subuh TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT, tanggal TEXT)');
+      await db.execute(
+          'create table HadisDetail(number INTEGER, arab TEXT, id TEXT)');
     });
   }
 
@@ -94,6 +98,29 @@ class LocalDb {
     return list;
   }
 
+  insertHadisDetail(HadisDetailsModel model) async {
+    var row = {
+      'number': model.number,
+      'arab': model.arab,
+      'id': model.id,
+    };
+
+    final db = await database;
+    final create = await db!.insert('HadisDetail', row);
+    return create;
+  }
+
+  Future<List<HadisDetailsModel>?> getHadisDetail() async {
+    Database? db = await database;
+
+    var hadisData = await db!.rawQuery('SELECT * FROM HadisDetail');
+    List<HadisDetailsModel> list = hadisData.isNotEmpty
+        ? hadisData.map((e) => HadisDetailsModel.fromJson(e)).toList()
+        : [];
+
+    return list;
+  }
+
   insertDoa(DoaListModel model) async {
     var data = {
       'id_doa': model.idDoa,
@@ -121,16 +148,16 @@ class LocalDb {
     return list;
   }
 
-  Future<List<HadisLocalModel>?> getHadisDetail() async {
-    Database? db = await database;
+  // Future<List<HadisLocalModel>?> getHadisDetail() async {
+  //   Database? db = await database;
 
-    var hadisDetail = await db!.rawQuery('SELECT * FROM HadisDetail');
-    List<HadisLocalModel> list = hadisDetail.isNotEmpty
-        ? hadisDetail.map((e) => HadisLocalModel.fromJson(e)).toList()
-        : [];
+  //   var hadisDetail = await db!.rawQuery('SELECT * FROM HadisDetail');
+  //   List<HadisLocalModel> list = hadisDetail.isNotEmpty
+  //       ? hadisDetail.map((e) => HadisLocalModel.fromJson(e)).toList()
+  //       : [];
 
-    return list;
-  }
+  //   return list;
+  // }
 
   insertJadwal(JadwalSholatModel model) async {
     var data = {

@@ -82,6 +82,7 @@ class MenuRepo extends ChangeNotifier {
       response = await dio.get('${BaseUrl.hadis}$id?range=1-100');
       notifyListeners();
       final parsed = response!.data;
+      // print('details : ${parsed['data']['hadiths']}');
       final data = HadisDetailModel.fromJson(parsed);
       print('detail hadis : $parsed');
       return data;

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
+import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
@@ -47,6 +48,15 @@ class SyncLocal {
       print('hadis $hadis');
 
       LocalDb.sql.insertHadis(HadisLocalModel.fromJson(hadis));
+    }).toList();
+  }
+
+  Future getHadisBukhari() async {
+    response = await dio.get('${BaseUrl.hadis}/bukhari?range=1-100');
+    return response!.data['data']['hadiths'].map((hadisdetail) {
+      print('hadis detail : $hadisdetail');
+
+      LocalDb.sql.insertHadisDetail(HadisDetailsModel.fromJson(hadisdetail));
     }).toList();
   }
 

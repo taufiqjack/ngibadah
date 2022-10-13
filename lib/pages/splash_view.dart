@@ -14,6 +14,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
     super.initState();
+    SyncLocal().getHadisBukhari();
     SyncLocal().getHadis();
     SyncLocal().getSurahLocal();
     SyncLocal().getDoa();
