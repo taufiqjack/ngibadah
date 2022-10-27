@@ -14,11 +14,12 @@ import 'package:location/location.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
-import 'package:monggo_sholat/pages/base_view.dart';
-import 'package:monggo_sholat/pages/doa_view.dart';
-import 'package:monggo_sholat/pages/hadish.dart';
-import 'package:monggo_sholat/pages/quran.dart';
+import 'package:monggo_sholat/views/base_view.dart';
+import 'package:monggo_sholat/views/doa_view.dart';
+import 'package:monggo_sholat/views/hadish.dart';
+import 'package:monggo_sholat/views/quran.dart';
 import 'package:intl/intl.dart';
+import 'package:monggo_sholat/widgets/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuHome extends StatefulWidget {
@@ -365,10 +366,7 @@ class _MenuHomeState extends State<MenuHome> {
                                     ? SizedBox()
                                     : Text(
                                         _timeString! + ' WIB',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
+                                        style: TextStyles.timeToday,
                                       ),
                                 SizedBox(
                                   height: 5,
@@ -377,10 +375,7 @@ class _MenuHomeState extends State<MenuHome> {
                                     color: Colors.white),
                                 Text(
                                   '${data.prayerSchedule!.data!.jadwal!.maghrib}',
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                  style: TextStyles.prayerIncoming,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

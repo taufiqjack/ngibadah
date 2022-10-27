@@ -3,7 +3,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
-import 'package:monggo_sholat/pages/base_view.dart';
+import 'package:monggo_sholat/views/base_view.dart';
 
 class ReadSurah extends StatefulWidget {
   final String? arti;

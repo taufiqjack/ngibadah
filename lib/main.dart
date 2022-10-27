@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/locator.dart';
-import 'package:monggo_sholat/pages/splash_view.dart';
+import 'package:monggo_sholat/views/splash_view.dart';
 
 void main() {
   setupLocator();

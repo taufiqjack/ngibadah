@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monggo_sholat/pages/doa_view.dart';
+import 'package:monggo_sholat/views/doa_view.dart';
 
 class DetailDoaView extends StatefulWidget {
   final String? nama;

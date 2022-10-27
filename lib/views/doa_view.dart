@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
-import 'package:monggo_sholat/pages/base_view.dart';
-import 'package:monggo_sholat/pages/details_doa_view.dart';
-import 'package:monggo_sholat/pages/menu.dart';
+import 'package:monggo_sholat/views/base_view.dart';
+import 'package:monggo_sholat/views/details_doa_view.dart';
+import 'package:monggo_sholat/views/menu.dart';
 
 class DoaView extends StatefulWidget {
   DoaView({Key? key}) : super(key: key);

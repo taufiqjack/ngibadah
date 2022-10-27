@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/local/sync_local.dart';
-import 'package:monggo_sholat/pages/menu.dart';
+import 'package:monggo_sholat/views/menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenView extends StatefulWidget {

@@ -29,8 +29,16 @@ class MenuRepo extends ChangeNotifier {
       print('respon : $parsed');
       print('jadwal ${parsed['data']['jadwal']}');
       var magrib = '${data.data!.jadwal!.maghrib}';
+      var dzuhur = '${data.data!.jadwal!.dzuhur}';
+      var asar = '${data.data!.jadwal!.ashar}';
+      var isya = '${data.data!.jadwal!.isya}';
+      var subuh = '${data.data!.jadwal!.subuh}';
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('dubuh', subuh);
       prefs.setString('maghrib', magrib);
+      prefs.setString('isya', isya);
+      prefs.setString('dzuhur', dzuhur);
+      prefs.setString('asar', asar);
       print(formatTime.format(now));
       return data;
     } catch (e) {}

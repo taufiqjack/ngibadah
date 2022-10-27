@@ -7,9 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
-import 'package:monggo_sholat/pages/base_view.dart';
-import 'package:monggo_sholat/pages/menu.dart';
-import 'package:monggo_sholat/pages/read_surah.dart';
+import 'package:monggo_sholat/views/base_view.dart';
+import 'package:monggo_sholat/views/menu.dart';
+import 'package:monggo_sholat/views/read_surah.dart';
 
 class Quran extends StatefulWidget {
   Quran({Key? key}) : super(key: key);
