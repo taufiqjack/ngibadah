@@ -29,7 +29,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio:
   tanggal_indonesia:
-  hijri:
   google_fonts:
   geolocator:
   intl:
@@ -52,6 +51,12 @@ dependencies:
   sqflite: ^2.0.2+1
   path_provider: ^2.0.9
   change_app_package_name: ^1.1.0
+  freezed: ^2.2.1
+  freezed_annotation: ^2.2.0
+  build_runner: ^2.3.2
+  json_serializable: ^6.5.4
+  json_annotation: ^4.7.0
+  hijriyah_indonesia: ^0.1.2
 
 dev_dependencies:
   flutter_test:

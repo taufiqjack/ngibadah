@@ -8,6 +8,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_geocoder/geocoder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hijriyah_indonesia/hijriyah_indonesia.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
 import 'package:monggo_sholat/core/local/db.dart';
@@ -17,7 +18,6 @@ import 'package:monggo_sholat/pages/base_view.dart';
 import 'package:monggo_sholat/pages/doa_view.dart';
 import 'package:monggo_sholat/pages/hadish.dart';
 import 'package:monggo_sholat/pages/quran.dart';
-import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -59,6 +59,8 @@ class _MenuHomeState extends State<MenuHome> {
   int? detik;
   int? magrib;
   int? thistime;
+  int? subuhtime;
+  int? dzuhurtime;
 
   @override
   void initState() {
@@ -87,11 +89,23 @@ class _MenuHomeState extends State<MenuHome> {
 
   getSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    var subuh = '${prefs.getString('subuh')}';
     var maghrib = '${prefs.getString('maghrib')}';
+    var dzuhur = '${prefs.getString('dzuhur')}';
+    var asar = '${prefs.getString('asar')}';
+    var isya = '${prefs.getString('isya')}';
     var split = prefs.getInt('split');
     controller = CountdownTimerController(
       endTime: split!,
     );
+
+    // var partSubuh = subuh.split(':');
+    // var s = Duration(
+    //   hours: int.parse(partSubuh[0].trim()),
+    //   minutes: int.parse(partSubuh[1].trim()),
+    // );
+    // subuhtime = s.abs().inSeconds;
+
     var part = maghrib.split(':');
     var c = Duration(
       hours: int.parse(part[0].trim()),
@@ -398,7 +412,7 @@ class _MenuHomeState extends State<MenuHome> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${HijriCalendar.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()).toLocal()).toFormat("dd MMMM yyyy")} H',
+                                  '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${Hijriyah.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()).toLocal()).toFormat("dd MMMM yyyy")} H',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 14, color: Colors.white),
