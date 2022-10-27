@@ -33,10 +33,10 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(255, 19, 196, 134),
       child: Center(
         child: Image.asset(
-          'assets/images/logo.png',
+          'assets/images/ngibadah_logo.png',
           height: 200,
           width: 200,
         ),
