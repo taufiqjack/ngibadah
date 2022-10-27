@@ -1,4 +1,4 @@
-## Monggo Sholat App
+## Nginadah App
 
 Aplikasi Waktu Sholat berdasarkan Geolocation
 terddapat juga fitur :
