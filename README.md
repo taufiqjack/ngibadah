@@ -1,16 +1,24 @@
-# monggo_sholat
+## Monggo Sholat App
 
-A new Flutter project.
+Aplikasi Waktu Sholat berdasarkan Geolocation
+terddapat juga fitur :
 
-## Getting Started
+- Al Qur'an & Terjemah
+- Hadis Shahih dan Terjemah
+- Doa Sehari - hari
 
-This project is a starting point for a Flutter application.
+# Screenshoot
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src='assets/screenshoot/home.png' width='300'>
+#
+<img src='assets/screenshoot/quran.png' width='300'>
+#
+<img src='assets/screenshoot/quran_detail.png'width='300'>
+#
+<img src='assets/screenshoot/hadis.png' width='300'>
+#
+<img src='assets/screenshoot/hadis_detail.png' width='300'>
+#
+<img src='assets/screenshoot/doa.png' width='300'>
+#
+<img src='assets/screenshoot/doa_detail.png' width='300'>

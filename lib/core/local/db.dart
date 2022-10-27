@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:monggo_sholat/models/data_sholat_model.dart';
-import 'package:monggo_sholat/models/detail_hadis_local_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
-import 'package:monggo_sholat/models/prayer_time.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:path/path.dart';
