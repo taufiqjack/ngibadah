@@ -1,7 +1,7 @@
-## Nginadah App
+## Ngibadah App
 
 Aplikasi Waktu Sholat berdasarkan Geolocation
-terddapat juga fitur :
+terdapat juga fitur :
 
 - Al Qur'an & Terjemah
 - Hadis Shahih dan Terjemah
