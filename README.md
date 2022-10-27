@@ -17,7 +17,7 @@ terddapat juga fitur :
 
 #
 
-<img src='assets/screenshoot/quran_detail.png'width='200'>
+<img src='assets/screenshoot/quran_detail.png' width='200'>
 
 #
 
