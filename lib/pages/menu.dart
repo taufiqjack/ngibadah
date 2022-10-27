@@ -22,7 +22,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuHome extends StatefulWidget {
-  String? texttime;
+  final String? texttime;
   MenuHome({
     Key? key,
     this.texttime,

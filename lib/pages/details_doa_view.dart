@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:monggo_sholat/pages/doa_view.dart';
 
 class DetailDoaView extends StatefulWidget {
-  String? nama;
-  String? lafal;
-  String? latin;
-  String? arti;
-  String? riwayat;
+  final String? nama;
+  final String? lafal;
+  final String? latin;
+  final String? arti;
+  final String? riwayat;
   DetailDoaView({
     Key? key,
     this.nama,

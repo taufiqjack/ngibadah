@@ -7,7 +7,7 @@ import 'package:monggo_sholat/pages/base_view.dart';
 class DetailHadis extends StatefulWidget {
   final String hadis;
   final String i;
-  String id;
+  final String id;
   DetailHadis({
     required this.hadis,
     required this.i,
