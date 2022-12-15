@@ -8,12 +8,10 @@ terdapat juga fitur :
 - Doa Sehari - hari
 
 # Screenshoot
+| Home      | Qur'an Page     |
+|-----------|-----------|
+| <img src='assets/screenshoot/home.png' width='200'>  | <img src='assets/screenshoot/quran.png' width='200'>  |
 
-<img src='assets/screenshoot/home.png' width='200'>
-
-#
-
-<img src='assets/screenshoot/quran.png' width='200'>
 
 #
 
