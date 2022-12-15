@@ -8,18 +8,10 @@ terdapat juga fitur :
 - Doa Sehari - hari
 
 # Screenshoot
-| Home      | Qur'an Page     |
-|-----------|-----------|
-| <img src='assets/screenshoot/home.png' width='200'>  | <img src='assets/screenshoot/quran.png' width='200'>  |
+| Home      | Qur'an Page     | Hadis Page | Doa Page | 
+|-----------|-----------|--------|--------|
+| <img src='assets/screenshoot/home.png' width='200'> | <img src='assets/screenshoot/quran.png' width='200'> | <img src='assets/screenshoot/hadis.png' width='200'> | <img src='assets/screenshoot/doa.png' width='200'> |
 
-
-#
-
-<img src='assets/screenshoot/quran_detail.png' width='200'>
-
-#
-
-<img src='assets/screenshoot/hadis.png' width='200'>
 
 #
 
@@ -27,7 +19,7 @@ terdapat juga fitur :
 
 #
 
-<img src='assets/screenshoot/doa.png' width='200'>
+<img src='assets/screenshoot/quran_detail.png' width='200'>
 
 #
 
