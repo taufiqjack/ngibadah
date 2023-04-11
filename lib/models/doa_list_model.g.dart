@@ -1,12 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'doa_model.dart';
+// ignore_for_file: non_constant_identifier_names
+
+part of 'doa_list_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DoaModel _$$_DoaModelFromJson(Map<String, dynamic> json) => _$_DoaModel(
+_$_ListDoaModel _$$_ListDoaModelFromJson(Map<String, dynamic> json) =>
+    _$_ListDoaModel(
       id: json['id'] as String?,
       doa: json['doa'] as String?,
       ayat: json['ayat'] as String?,
@@ -14,7 +17,7 @@ _$_DoaModel _$$_DoaModelFromJson(Map<String, dynamic> json) => _$_DoaModel(
       artinya: json['artinya'] as String?,
     );
 
-Map<String, dynamic> _$$_DoaModelToJson(_$_DoaModel instance) =>
+Map<String, dynamic> _$$_ListDoaModelToJson(_$_ListDoaModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'doa': instance.doa,

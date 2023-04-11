@@ -6,14 +6,12 @@ class DetailDoaView extends StatefulWidget {
   final String? lafal;
   final String? latin;
   final String? arti;
-  final String? riwayat;
   DetailDoaView({
     Key? key,
     this.nama,
     this.latin,
     this.lafal,
     this.arti,
-    this.riwayat,
   }) : super(key: key);
 
   @override
@@ -73,10 +71,6 @@ class DetailDoaViewState extends State<DetailDoaView> {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        '(${widget.riwayat})',
-                        style: TextStyle(fontSize: 12),
-                      )
                     ]),
               )),
             ),

@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:monggo_sholat/core/local/db.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
+import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
-import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/services/api.dart';
@@ -34,11 +34,11 @@ class SyncLocal {
   // }
 
   Future getDoa() async {
-    response = await dio.get('${BaseUrl.doa}/all');
-    return response!.data['data'].map((doa) {
+    response = await dio.get('${BaseUrl.doa}');
+    return response!.data.map((doa) {
       print('doa $doa');
 
-      LocalDb.sql.insertDoa(DoaListModel.fromJson(doa));
+      LocalDb.sql.insertDoa(ListDoaModel.fromJson(doa));
     }).toList();
   }
 

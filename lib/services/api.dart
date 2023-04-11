@@ -4,7 +4,7 @@ class BaseUrl {
   static String listQuran = 'https://equran.id/api/surat/';
   static String readQuran = 'https://quran-api-id.vercel.app/surahs/';
   static String surah = 'https://api.npoint.io/99c279bb173a6e28359c/data/';
-  static String doa = 'https://tanyadoa-api.herokuapp.com/';
+  static String doa = 'https://doa-doa-api-ahmadramadhan.fly.dev/api/';
   // static String hadis = 'https://api.hadith.sutanlab.id/books/';
   static String hadis = 'https://api.hadith.gading.dev/books/';
   static String searchCity = 'https://api.myquran.com/v1/sholat/kota/cari';

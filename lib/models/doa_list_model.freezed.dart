@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'doa_model.dart';
+part of 'doa_list_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-DoaModel _$DoaModelFromJson(Map<String, dynamic> json) {
-  return _DoaModel.fromJson(json);
+ListDoaModel _$ListDoaModelFromJson(Map<String, dynamic> json) {
+  return _ListDoaModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$DoaModel {
+mixin _$ListDoaModel {
   String? get id => throw _privateConstructorUsedError;
   String? get doa => throw _privateConstructorUsedError;
   String? get ayat => throw _privateConstructorUsedError;
@@ -28,23 +28,24 @@ mixin _$DoaModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DoaModelCopyWith<DoaModel> get copyWith =>
+  $ListDoaModelCopyWith<ListDoaModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DoaModelCopyWith<$Res> {
-  factory $DoaModelCopyWith(DoaModel value, $Res Function(DoaModel) then) =
-      _$DoaModelCopyWithImpl<$Res, DoaModel>;
+abstract class $ListDoaModelCopyWith<$Res> {
+  factory $ListDoaModelCopyWith(
+          ListDoaModel value, $Res Function(ListDoaModel) then) =
+      _$ListDoaModelCopyWithImpl<$Res, ListDoaModel>;
   @useResult
   $Res call(
       {String? id, String? doa, String? ayat, String? latin, String? artinya});
 }
 
 /// @nodoc
-class _$DoaModelCopyWithImpl<$Res, $Val extends DoaModel>
-    implements $DoaModelCopyWith<$Res> {
-  _$DoaModelCopyWithImpl(this._value, this._then);
+class _$ListDoaModelCopyWithImpl<$Res, $Val extends ListDoaModel>
+    implements $ListDoaModelCopyWith<$Res> {
+  _$ListDoaModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -86,10 +87,11 @@ class _$DoaModelCopyWithImpl<$Res, $Val extends DoaModel>
 }
 
 /// @nodoc
-abstract class _$$_DoaModelCopyWith<$Res> implements $DoaModelCopyWith<$Res> {
-  factory _$$_DoaModelCopyWith(
-          _$_DoaModel value, $Res Function(_$_DoaModel) then) =
-      __$$_DoaModelCopyWithImpl<$Res>;
+abstract class _$$_ListDoaModelCopyWith<$Res>
+    implements $ListDoaModelCopyWith<$Res> {
+  factory _$$_ListDoaModelCopyWith(
+          _$_ListDoaModel value, $Res Function(_$_ListDoaModel) then) =
+      __$$_ListDoaModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -97,11 +99,11 @@ abstract class _$$_DoaModelCopyWith<$Res> implements $DoaModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DoaModelCopyWithImpl<$Res>
-    extends _$DoaModelCopyWithImpl<$Res, _$_DoaModel>
-    implements _$$_DoaModelCopyWith<$Res> {
-  __$$_DoaModelCopyWithImpl(
-      _$_DoaModel _value, $Res Function(_$_DoaModel) _then)
+class __$$_ListDoaModelCopyWithImpl<$Res>
+    extends _$ListDoaModelCopyWithImpl<$Res, _$_ListDoaModel>
+    implements _$$_ListDoaModelCopyWith<$Res> {
+  __$$_ListDoaModelCopyWithImpl(
+      _$_ListDoaModel _value, $Res Function(_$_ListDoaModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -113,7 +115,7 @@ class __$$_DoaModelCopyWithImpl<$Res>
     Object? latin = freezed,
     Object? artinya = freezed,
   }) {
-    return _then(_$_DoaModel(
+    return _then(_$_ListDoaModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -140,11 +142,12 @@ class __$$_DoaModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DoaModel implements _DoaModel {
-  const _$_DoaModel({this.id, this.doa, this.ayat, this.latin, this.artinya});
+class _$_ListDoaModel implements _ListDoaModel {
+  const _$_ListDoaModel(
+      {this.id, this.doa, this.ayat, this.latin, this.artinya});
 
-  factory _$_DoaModel.fromJson(Map<String, dynamic> json) =>
-      _$$_DoaModelFromJson(json);
+  factory _$_ListDoaModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ListDoaModelFromJson(json);
 
   @override
   final String? id;
@@ -159,14 +162,14 @@ class _$_DoaModel implements _DoaModel {
 
   @override
   String toString() {
-    return 'DoaModel(id: $id, doa: $doa, ayat: $ayat, latin: $latin, artinya: $artinya)';
+    return 'ListDoaModel(id: $id, doa: $doa, ayat: $ayat, latin: $latin, artinya: $artinya)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DoaModel &&
+            other is _$_ListDoaModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.doa, doa) || other.doa == doa) &&
             (identical(other.ayat, ayat) || other.ayat == ayat) &&
@@ -181,26 +184,27 @@ class _$_DoaModel implements _DoaModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DoaModelCopyWith<_$_DoaModel> get copyWith =>
-      __$$_DoaModelCopyWithImpl<_$_DoaModel>(this, _$identity);
+  _$$_ListDoaModelCopyWith<_$_ListDoaModel> get copyWith =>
+      __$$_ListDoaModelCopyWithImpl<_$_ListDoaModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DoaModelToJson(
+    return _$$_ListDoaModelToJson(
       this,
     );
   }
 }
 
-abstract class _DoaModel implements DoaModel {
-  const factory _DoaModel(
+abstract class _ListDoaModel implements ListDoaModel {
+  const factory _ListDoaModel(
       {final String? id,
       final String? doa,
       final String? ayat,
       final String? latin,
-      final String? artinya}) = _$_DoaModel;
+      final String? artinya}) = _$_ListDoaModel;
 
-  factory _DoaModel.fromJson(Map<String, dynamic> json) = _$_DoaModel.fromJson;
+  factory _ListDoaModel.fromJson(Map<String, dynamic> json) =
+      _$_ListDoaModel.fromJson;
 
   @override
   String? get id;
@@ -214,6 +218,6 @@ abstract class _DoaModel implements DoaModel {
   String? get artinya;
   @override
   @JsonKey(ignore: true)
-  _$$_DoaModelCopyWith<_$_DoaModel> get copyWith =>
+  _$$_ListDoaModelCopyWith<_$_ListDoaModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

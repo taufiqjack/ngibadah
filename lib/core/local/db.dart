@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:monggo_sholat/models/data_sholat_model.dart';
+import 'package:monggo_sholat/models/doa_list_model.dart';
+import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
-import 'package:monggo_sholat/models/list_doa_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
@@ -32,7 +33,7 @@ class LocalDb {
       await db
           .execute('create table Hadis(name TEXT, id TEXT, available INTEGER)');
       await db.execute(
-          'create table Doa(id_doa TEXT, nama TEXT, lafal TEXT, transliterasi TEXT, arti TEXT, riwayat TEXT, keterangan TEXT, kata_kunci TEXT)');
+          'create table Doa(id TEXT, doa TEXT, ayat TEXT, latin TEXT, artinya TEXT)');
       await db.execute(
           'create table Jadwal(tanggal TEXT, imsak TEXT, subuh TEXT, terbit TEXT, dhuha TEXT, dzuhur TEXT, ashar TEXT, maghrib TEXT, isya TEXT,date TEXT)');
       await db
@@ -119,15 +120,13 @@ class LocalDb {
     return list;
   }
 
-  insertDoa(DoaListModel model) async {
+  insertDoa(ListDoaModel model) async {
     var data = {
-      'id_doa': model.idDoa,
-      'nama': model.nama,
-      'lafal': model.lafal,
-      'transliterasi': model.transliterasi,
-      'arti': model.arti,
-      'riwayat': model.riwayat,
-      'keterangan': model.keterangan,
+      'id': model.id,
+      'doa': model.doa,
+      'ayat': model.ayat,
+      'latin': model.latin,
+      'artinya': model.artinya,
     };
 
     final db = await database;
@@ -135,12 +134,12 @@ class LocalDb {
     return create;
   }
 
-  Future<List<DoaListModel>?> getDoa() async {
+  Future<List<ListDoaModel>?> getDoa() async {
     Database? db = await database;
 
     var doaList = await db!.rawQuery('SELECT * FROM Doa');
-    List<DoaListModel> list = doaList.isNotEmpty
-        ? doaList.map((e) => DoaListModel.fromJson(e)).toList()
+    List<ListDoaModel> list = doaList.isNotEmpty
+        ? doaList.map((e) => ListDoaModel.fromJson(e)).toList()
         : [];
 
     return list;

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/local/db.dart';
-import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
-import 'package:monggo_sholat/models/list_doa_model.dart';
-import 'package:monggo_sholat/views/base_view.dart';
+import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/views/details_doa_view.dart';
 import 'package:monggo_sholat/views/menu.dart';
 
@@ -20,20 +18,18 @@ class _DoaViewState extends State<DoaView> {
     getDoaLocal();
   }
 
-  List<DoaListModel> doaList = [];
+  List<ListDoaModel> doaList = [];
 
   getDoaLocal() async {
     LocalDb.sql.getDoa().then((value) {
       setState(() {
         for (var data in value!) {
-          doaList.add(DoaListModel(
-            idDoa: data.idDoa,
-            nama: data.nama,
-            lafal: data.lafal,
-            transliterasi: data.transliterasi,
-            arti: data.arti,
-            riwayat: data.riwayat,
-            keterangan: data.keterangan,
+          doaList.add(ListDoaModel(
+            id: data.id,
+            doa: data.doa,
+            ayat: data.ayat,
+            latin: data.latin,
+            artinya: data.artinya,
           ));
         }
       });
@@ -78,11 +74,10 @@ class _DoaViewState extends State<DoaView> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailDoaView(
-                                        nama: doa.nama,
-                                        lafal: doa.lafal,
-                                        latin: doa.transliterasi,
-                                        arti: doa.arti,
-                                        riwayat: doa.riwayat,
+                                        nama: doa.doa,
+                                        lafal: doa.ayat,
+                                        latin: doa.latin,
+                                        arti: doa.artinya,
                                       )));
                         },
                         child: Container(
@@ -97,13 +92,13 @@ class _DoaViewState extends State<DoaView> {
                                 ]),
                             child: Row(
                               children: [
-                                Text('${doa.idDoa}. '),
+                                Text('${doa.id}. '),
                                 SizedBox(
                                   width: 3,
                                 ),
                                 Flexible(
                                   child: Text(
-                                    '${doa.nama}',
+                                    '${doa.doa}',
                                     textAlign: TextAlign.start,
                                   ),
                                 ),
