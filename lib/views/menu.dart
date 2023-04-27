@@ -14,6 +14,7 @@ import 'package:location/location.dart';
 import 'package:monggo_sholat/core/constants/constants.dart';
 import 'package:monggo_sholat/core/database/db.dart';
 import 'package:monggo_sholat/core/database/main_storage.dart';
+import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';
@@ -278,10 +279,11 @@ class _MenuHomeState extends State<MenuHome> {
                             ),
                             title: Text("Al - Qur'an"),
                             onTap: () {
-                              Navigator.push(
+                              /* Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Quran()));
+                                      builder: (context) => Quran())); */
+                              Go.to(Quran());
                             },
                           ),
                           SizedBox(
@@ -295,10 +297,11 @@ class _MenuHomeState extends State<MenuHome> {
                             ),
                             title: Text("Al - Hadist"),
                             onTap: () {
-                              Navigator.push(
+                              /* Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HadishPage()));
+                                      builder: (context) => HadishPage())); */
+                              Go.to(HadishPage());
                             },
                           ),
                           ListTile(
@@ -308,11 +311,12 @@ class _MenuHomeState extends State<MenuHome> {
                             ),
                             title: Text('Doa Sehari - hari'),
                             onTap: () {
-                              Navigator.pushReplacement(
+                              /*   Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => DoaView(),
-                                  ));
+                                  )); */
+                              Go.to(DoaView());
                             },
                           ),
                         ],

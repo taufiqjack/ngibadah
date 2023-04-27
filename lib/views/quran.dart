@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/views/base_view.dart';
@@ -86,8 +87,8 @@ class _QuranState extends State<Quran> {
               color: Colors.white,
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MenuHome()));
+              Go.back();
+              Go.back();
             },
           ),
         ),
@@ -131,13 +132,18 @@ class _QuranState extends State<Quran> {
                               ),
                               onTap: () {
                                 print('cek index : $index');
-                                Navigator.push(
+                                /*  Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ReadSurah(
                                               arti: x.arti,
                                               index: index + 1,
-                                            )));
+                                            ))); */
+
+                                Go.to(ReadSurah(
+                                  index: index + 1,
+                                  arti: x.arti,
+                                ));
                               },
                             ),
                             Row(

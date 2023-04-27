@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/views/details_doa_view.dart';
 import 'package:monggo_sholat/views/menu.dart';
@@ -43,8 +44,10 @@ class _DoaViewState extends State<DoaView> {
             backgroundColor: Colors.green.shade800,
             leading: InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MenuHome()));
+                /*   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MenuHome())); */
+                Go.back();
+                Go.back();
               },
               child: Icon(
                 Icons.arrow_back,
@@ -70,7 +73,7 @@ class _DoaViewState extends State<DoaView> {
                       padding: EdgeInsets.only(top: 10),
                       child: InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(
+                          /*  Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailDoaView(
@@ -78,7 +81,14 @@ class _DoaViewState extends State<DoaView> {
                                         lafal: doa.ayat,
                                         latin: doa.latin,
                                         arti: doa.artinya,
-                                      )));
+                                      ))); */
+
+                          Go.to(DetailDoaView(
+                            nama: doa.doa,
+                            lafal: doa.ayat,
+                            latin: doa.latin,
+                            arti: doa.artinya,
+                          ));
                         },
                         child: Container(
                             height: 50,

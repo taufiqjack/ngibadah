@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';
@@ -64,8 +65,10 @@ class _HadishPageState extends State<HadishPage> {
               color: Colors.white,
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MenuHome()));
+              /*  Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MenuHome())); */
+              Go.back();
+              Go.back();
             },
           ),
         ),
@@ -100,14 +103,18 @@ class _HadishPageState extends State<HadishPage> {
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
-                              Navigator.push(
+                              /*  Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DetailHadis(
                                             hadis: '${x.name}',
                                             i: '${x.id}',
                                             id: '${index + 1}',
-                                          )));
+                                          ))); */
+                              Go.to(DetailHadis(
+                                  hadis: '${x.name}',
+                                  i: '${x.id}',
+                                  id: '${index + 1}'));
                             },
                           ),
                         ],
