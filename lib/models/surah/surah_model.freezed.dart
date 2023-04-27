@@ -20,16 +20,24 @@ SurahModel _$SurahModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SurahModel {
+  @HiveField(0)
   int? get nomor => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get nama => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'nama_latin')
   String? get namaLatin => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'jumlah_ayat')
   int? get jumlahAyat => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'tempat_turun')
   String? get tempatTurun => throw _privateConstructorUsedError;
+  @HiveField(5)
   String? get arti => throw _privateConstructorUsedError;
+  @HiveField(6)
   String? get deskripsi => throw _privateConstructorUsedError;
+  @HiveField(7)
   String? get audio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,14 +53,14 @@ abstract class $SurahModelCopyWith<$Res> {
       _$SurahModelCopyWithImpl<$Res, SurahModel>;
   @useResult
   $Res call(
-      {int? nomor,
-      String? nama,
-      @JsonKey(name: 'nama_latin') String? namaLatin,
-      @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
-      @JsonKey(name: 'tempat_turun') String? tempatTurun,
-      String? arti,
-      String? deskripsi,
-      String? audio});
+      {@HiveField(0) int? nomor,
+      @HiveField(1) String? nama,
+      @HiveField(2) @JsonKey(name: 'nama_latin') String? namaLatin,
+      @HiveField(3) @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
+      @HiveField(4) @JsonKey(name: 'tempat_turun') String? tempatTurun,
+      @HiveField(5) String? arti,
+      @HiveField(6) String? deskripsi,
+      @HiveField(7) String? audio});
 }
 
 /// @nodoc
@@ -123,14 +131,14 @@ abstract class _$$_SurahModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? nomor,
-      String? nama,
-      @JsonKey(name: 'nama_latin') String? namaLatin,
-      @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
-      @JsonKey(name: 'tempat_turun') String? tempatTurun,
-      String? arti,
-      String? deskripsi,
-      String? audio});
+      {@HiveField(0) int? nomor,
+      @HiveField(1) String? nama,
+      @HiveField(2) @JsonKey(name: 'nama_latin') String? namaLatin,
+      @HiveField(3) @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
+      @HiveField(4) @JsonKey(name: 'tempat_turun') String? tempatTurun,
+      @HiveField(5) String? arti,
+      @HiveField(6) String? deskripsi,
+      @HiveField(7) String? audio});
 }
 
 /// @nodoc
@@ -194,36 +202,44 @@ class __$$_SurahModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SurahModel implements _SurahModel {
   const _$_SurahModel(
-      {this.nomor,
-      this.nama,
-      @JsonKey(name: 'nama_latin') this.namaLatin,
-      @JsonKey(name: 'jumlah_ayat') this.jumlahAyat,
-      @JsonKey(name: 'tempat_turun') this.tempatTurun,
-      this.arti,
-      this.deskripsi,
-      this.audio});
+      {@HiveField(0) this.nomor,
+      @HiveField(1) this.nama,
+      @HiveField(2) @JsonKey(name: 'nama_latin') this.namaLatin,
+      @HiveField(3) @JsonKey(name: 'jumlah_ayat') this.jumlahAyat,
+      @HiveField(4) @JsonKey(name: 'tempat_turun') this.tempatTurun,
+      @HiveField(5) this.arti,
+      @HiveField(6) this.deskripsi,
+      @HiveField(7) this.audio});
 
   factory _$_SurahModel.fromJson(Map<String, dynamic> json) =>
       _$$_SurahModelFromJson(json);
 
   @override
+  @HiveField(0)
   final int? nomor;
   @override
+  @HiveField(1)
   final String? nama;
   @override
+  @HiveField(2)
   @JsonKey(name: 'nama_latin')
   final String? namaLatin;
   @override
+  @HiveField(3)
   @JsonKey(name: 'jumlah_ayat')
   final int? jumlahAyat;
   @override
+  @HiveField(4)
   @JsonKey(name: 'tempat_turun')
   final String? tempatTurun;
   @override
+  @HiveField(5)
   final String? arti;
   @override
+  @HiveField(6)
   final String? deskripsi;
   @override
+  @HiveField(7)
   final String? audio;
 
   @override
@@ -271,36 +287,44 @@ class _$_SurahModel implements _SurahModel {
 
 abstract class _SurahModel implements SurahModel {
   const factory _SurahModel(
-      {final int? nomor,
-      final String? nama,
-      @JsonKey(name: 'nama_latin') final String? namaLatin,
-      @JsonKey(name: 'jumlah_ayat') final int? jumlahAyat,
-      @JsonKey(name: 'tempat_turun') final String? tempatTurun,
-      final String? arti,
-      final String? deskripsi,
-      final String? audio}) = _$_SurahModel;
+      {@HiveField(0) final int? nomor,
+      @HiveField(1) final String? nama,
+      @HiveField(2) @JsonKey(name: 'nama_latin') final String? namaLatin,
+      @HiveField(3) @JsonKey(name: 'jumlah_ayat') final int? jumlahAyat,
+      @HiveField(4) @JsonKey(name: 'tempat_turun') final String? tempatTurun,
+      @HiveField(5) final String? arti,
+      @HiveField(6) final String? deskripsi,
+      @HiveField(7) final String? audio}) = _$_SurahModel;
 
   factory _SurahModel.fromJson(Map<String, dynamic> json) =
       _$_SurahModel.fromJson;
 
   @override
+  @HiveField(0)
   int? get nomor;
   @override
+  @HiveField(1)
   String? get nama;
   @override
+  @HiveField(2)
   @JsonKey(name: 'nama_latin')
   String? get namaLatin;
   @override
+  @HiveField(3)
   @JsonKey(name: 'jumlah_ayat')
   int? get jumlahAyat;
   @override
+  @HiveField(4)
   @JsonKey(name: 'tempat_turun')
   String? get tempatTurun;
   @override
+  @HiveField(5)
   String? get arti;
   @override
+  @HiveField(6)
   String? get deskripsi;
   @override
+  @HiveField(7)
   String? get audio;
   @override
   @JsonKey(ignore: true)

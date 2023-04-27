@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
-import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
 import 'package:monggo_sholat/models/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';

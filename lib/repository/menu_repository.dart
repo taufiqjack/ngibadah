@@ -7,11 +7,11 @@ import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
-import 'package:monggo_sholat/models/surah_model.dart';
+import 'package:monggo_sholat/models/surah/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/local/db.dart';
+import '../core/database/db.dart';
 
 class MenuRepo extends ChangeNotifier {
   Response? response;

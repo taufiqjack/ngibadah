@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 part 'hadis_model.freezed.dart';
 part 'hadis_model.g.dart';
 
-@Freezed()
+@freezed
 class HadisModel with _$HadisModel {
   const factory HadisModel({
     int? code,
@@ -15,7 +16,7 @@ class HadisModel with _$HadisModel {
       _$HadisModelFromJson(json);
 }
 
-@Freezed()
+@freezed
 class Data with _$Data {
   const factory Data({
     String? name,

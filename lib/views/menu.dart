@@ -11,7 +11,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hijriyah_indonesia/hijriyah_indonesia.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
-import 'package:monggo_sholat/core/local/db.dart';
+import 'package:monggo_sholat/core/constants/constants.dart';
+import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/core/database/main_storage.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';
@@ -244,6 +246,7 @@ class _MenuHomeState extends State<MenuHome> {
                   child: InkWell(
                     onTap: () async {
                       clearCity();
+                      print('cek ${surahDataBox.get(QURAN)}');
                       setState(() {
                         getLocation(data);
                       });

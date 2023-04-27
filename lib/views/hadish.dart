@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:monggo_sholat/core/local/db.dart';
+import 'package:monggo_sholat/core/database/db.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';

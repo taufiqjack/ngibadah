@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:monggo_sholat/core/local/db.dart';
+import 'package:monggo_sholat/core/constants/constants.dart';
+import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/core/database/main_storage.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
@@ -17,9 +19,9 @@ class SyncLocal {
 
   Future getSurahLocal() async {
     response = await dio.get(BaseUrl.surah);
+    // surahDataBox.put(QURAN, response!.data);
     return response!.data.map((surah) {
       print('add $surah');
-
       LocalDb.sql.insertSurah(SurahModelNova.fromJson(surah));
     }).toList();
   }

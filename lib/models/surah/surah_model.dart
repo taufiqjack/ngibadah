@@ -1,20 +1,20 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 part 'surah_model.freezed.dart';
 part 'surah_model.g.dart';
 
-@Freezed()
+@freezed
+@HiveType(typeId: 4, adapterName: 'SurahModelAdapter')
 class SurahModel with _$SurahModel {
   const factory SurahModel({
-    int? nomor,
-    String? nama,
-    @JsonKey(name: 'nama_latin') String? namaLatin,
-    @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
-    @JsonKey(name: 'tempat_turun') String? tempatTurun,
-    String? arti,
-    String? deskripsi,
-    String? audio,
+    @HiveField(0) int? nomor,
+    @HiveField(1) String? nama,
+    @HiveField(2) @JsonKey(name: 'nama_latin') String? namaLatin,
+    @HiveField(3) @JsonKey(name: 'jumlah_ayat') int? jumlahAyat,
+    @HiveField(4) @JsonKey(name: 'tempat_turun') String? tempatTurun,
+    @HiveField(5) String? arti,
+    @HiveField(6) String? deskripsi,
+    @HiveField(7) String? audio,
   }) = _SurahModel;
 
   factory SurahModel.fromJson(Map<String, dynamic> json) =>

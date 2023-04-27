@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monggo_sholat/core/local/db.dart';
+import 'package:monggo_sholat/core/database/db.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/views/details_doa_view.dart';
 import 'package:monggo_sholat/views/menu.dart';
