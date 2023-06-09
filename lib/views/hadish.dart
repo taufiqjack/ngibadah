@@ -5,7 +5,6 @@ import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/list_hadis_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';
-import 'package:monggo_sholat/views/menu.dart';
 import 'package:monggo_sholat/views/read_hadis.dart';
 
 class HadishPage extends StatefulWidget {

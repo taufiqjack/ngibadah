@@ -23,7 +23,8 @@ class MainApp extends StatelessWidget {
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: GoogleFonts.montserrat().fontFamily),
+      theme: ThemeData(
+          fontFamily: GoogleFonts.montserrat(fontSize: 14).fontFamily),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: SplashScreenView(),

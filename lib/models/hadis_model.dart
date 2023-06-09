@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 part 'hadis_model.freezed.dart';
 part 'hadis_model.g.dart';
 

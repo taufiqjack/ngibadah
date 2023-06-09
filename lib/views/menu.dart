@@ -217,30 +217,43 @@ class _MenuHomeState extends State<MenuHome> {
             appBar: AppBar(
               backgroundColor: Colors.green.shade800,
               centerTitle: true,
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    size: 18,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Center(
-                      child: city.isNotEmpty
-                          ? Text('$city')
-                          : Text(
-                              'Jakarta',
-                            )
-                      // data.prayerSchedule == null
-                      //     ? null
-                      //     : Text(
-                      //         '${data.prayerSchedule!.data!.lokasi}',
-                      //         textAlign: TextAlign.center,
-                      //       ),
-                      ),
-                ],
-              ),
+              title: data.prayerSchedule == null
+                  ? Text('Loading...')
+                  : Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: 18,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Center(
+                            child: data.prayertime == null
+                                ? Text(
+                                    '${data.prayerSchedule!.data!.daerah}',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700),
+                                  )
+                                : Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      '$city',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  )
+                            // data.prayerSchedule == null
+                            //     ? null
+                            //     : Text(
+                            //         '${data.prayerSchedule!.data!.lokasi}',
+                            //         textAlign: TextAlign.center,
+                            //       ),
+                            ),
+                      ],
+                    ),
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 10),
@@ -252,9 +265,6 @@ class _MenuHomeState extends State<MenuHome> {
                         getLocation(data);
                       });
                       data.getTimestamp(context);
-                      // Future.delayed(Duration(seconds: 2), () {
-                      //   data.getPrayerTime(latitude, longitude, context)
-                      // });
                     },
                     child: Icon(Icons.location_on),
                   ),
@@ -381,7 +391,9 @@ class _MenuHomeState extends State<MenuHome> {
                                 Icon(Icons.notifications_none_outlined,
                                     color: Colors.white),
                                 Text(
-                                  '${data.prayerSchedule!.data!.jadwal!.maghrib}',
+                                  data.prayertime == null
+                                      ? "${data.prayerSchedule!.data!.jadwal!.maghrib}"
+                                      : "${data.prayertime!.data!.timings!.maghrib}",
                                   style: TextStyles.prayerIncoming,
                                 ),
                                 Row(
@@ -616,7 +628,7 @@ class _MenuHomeState extends State<MenuHome> {
                                   ),
                                   minLeadingWidth: 120,
                                   leading: Text(
-                                    'Isya',
+                                    "Isya'",
                                     style: GoogleFonts.nunitoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -653,256 +665,6 @@ class _MenuHomeState extends State<MenuHome> {
                       ],
                     ),
                   )));
-
-    //   body: jadwal == null || location == null
-    //       ? Center(
-    //           child: CircularProgressIndicator(),
-    //         )
-    //       : Padding(
-    //           padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-    //           child: ListView(
-    //             physics: NeverScrollableScrollPhysics(),
-    //             children: [
-    //               Container(
-    //                 height: 150,
-    //                 child: Card(
-    //                   color: Colors.blue.shade500,
-    //                   semanticContainer: true,
-    //                   child: Column(
-    //                     mainAxisAlignment: MainAxisAlignment.center,
-    //                     children: [
-    //                       Icon(Icons.notifications_none_outlined,
-    //                           color: Colors.white),
-    //                       Text(
-    //                         '${jadwal!['maghrib']}',
-    //                         style: GoogleFonts.nunitoSans(
-    //                             fontSize: 24,
-    //                             fontWeight: FontWeight.bold,
-    //                             color: Colors.white),
-    //                       ),
-    //                       Text(
-    //                         'Maghrib',
-    //                         style: GoogleFonts.nunitoSans(
-    //                             fontSize: 14, color: Colors.white),
-    //                       ),
-    //                       SizedBox(
-    //                         height: 5,
-    //                       ),
-    //                       Text(
-    //                         '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(jadwal!['date']))} / ${HijriCalendar.fromDate(DateTime.parse(jadwal!['date'])).toFormat('dd MMMM yyyy')} H',
-    //                         textAlign: TextAlign.center,
-    //                         style: GoogleFonts.nunitoSans(
-    //                             fontSize: 14, color: Colors.white),
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ),
-    //               SizedBox(
-    //                 height: 10,
-    //               ),
-    //               Card(
-    //                 elevation: 2,
-    //                 child: Padding(
-    //                   padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
-    //                   child: Column(
-    //                     children: [
-    //                       Row(
-    //                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //                         children: [
-    //                           Icon(
-    //                             Icons.featured_play_list,
-    //                             color: Colors.grey,
-    //                           ),
-    //                           Icon(
-    //                             Icons.access_time,
-    //                             color: Colors.grey,
-    //                           ),
-    //                           Icon(
-    //                             Icons.alarm_on,
-    //                             color: Colors.grey,
-    //                           ),
-    //                         ],
-    //                       ),
-    //                       SizedBox(
-    //                         height: 10,
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           '${jadwal!['imsak']}',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           'Imsak',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[0],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[0] = value;
-    //                               });
-    //                             },
-    //                             activeColor: Colors.purple,
-    //                             thumbColor: Colors.white,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           '${jadwal!['subuh']}',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           'Shubuh',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[1],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[1] = value;
-    //                               });
-    //                             },
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           '${jadwal!['dzuhur']}',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           'Dhuhur',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[2],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[2] = value;
-    //                               });
-    //                             },
-    //                             activeColor: Colors.purple,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           "${jadwal!['ashar']}",
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           "'Ashar",
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[3],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[3] = value;
-    //                               });
-    //                             },
-    //                             activeColor: Colors.purple,
-    //                           ),
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           '${jadwal!['maghrib']}',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           'Magrib',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[4],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[4] = value;
-    //                               });
-    //                             },
-    //                             activeColor: Colors.purple,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       ListTile(
-    //                         title: Text(
-    //                           '${jadwal!['isya']}',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                         ),
-    //                         minLeadingWidth: 120,
-    //                         leading: Text(
-    //                           'Isya',
-    //                           style: GoogleFonts.nunitoSans(
-    //                               fontSize: 16, fontWeight: FontWeight.bold),
-    //                           textAlign: TextAlign.center,
-    //                         ),
-    //                         trailing: Transform.scale(
-    //                           scale: 0.8,
-    //                           child: CupertinoSwitch(
-    //                             value: switchValues[5],
-    //                             onChanged: (value) {
-    //                               setState(() {
-    //                                 switchValues[5] = value;
-    //                               });
-    //                             },
-    //                             activeColor: Colors.purple,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ),
-    //               SizedBox(
-    //                 height: 20,
-    //               ),
-    //               Image.asset(
-    //                 'assets/images/kufitdc.png',
-    //                 height: 100,
-    //                 width: 100,
-    //               ),
-    //               SizedBox(
-    //                 height: 10,
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    // );
   }
 
   clearSession() async {
@@ -945,11 +707,17 @@ class _MenuHomeState extends State<MenuHome> {
     get.getPrayerTime(latitude!, longitude!, context);
     print('split ${str!.substring(10)}');
     print('lokasi ${data.subAdminArea}');
-
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_LONG);
+    Future.delayed(
+      Duration(seconds: 1),
+      () => Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => MenuHome()),
+          (Route<dynamic> route) => false),
+    );
   }
   // var address = Geocoder.local.findAddressesFromCoordinates();
 }

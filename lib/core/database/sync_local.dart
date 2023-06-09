@@ -17,7 +17,6 @@ class SyncLocal {
 
   Future getSurahLocal() async {
     response = await dio.get(BaseUrl.surah);
-    // surahDataBox.put(QURAN, response!.data);
     return response!.data.map((surah) {
       print('add $surah');
       LocalDb.sql.insertSurah(SurahModelNova.fromJson(surah));

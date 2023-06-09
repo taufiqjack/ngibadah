@@ -3,7 +3,6 @@ import 'package:monggo_sholat/core/database/db.dart';
 import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/views/details_doa_view.dart';
-import 'package:monggo_sholat/views/menu.dart';
 
 class DoaView extends StatefulWidget {
   DoaView({Key? key}) : super(key: key);

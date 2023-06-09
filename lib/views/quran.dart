@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +7,6 @@ import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/models/surah_model_new.dart';
 import 'package:monggo_sholat/views/base_view.dart';
-import 'package:monggo_sholat/views/menu.dart';
 import 'package:monggo_sholat/views/read_surah.dart';
 
 class Quran extends StatefulWidget {
@@ -25,8 +22,6 @@ class _QuranState extends State<Quran> {
   bool playPause = false;
 
   List<bool> playpause = [];
-  double _val = 0.5;
-  Timer? _timer;
 
   @override
   void initState() {
