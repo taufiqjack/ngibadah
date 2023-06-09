@@ -223,7 +223,7 @@ class _MenuHomeState extends State<MenuHome> {
                       children: [
                         Icon(
                           Icons.location_on,
-                          size: 18,
+                          size: 16,
                         ),
                         SizedBox(
                           width: 5,
@@ -241,7 +241,7 @@ class _MenuHomeState extends State<MenuHome> {
                                     child: Text(
                                       '$city',
                                       style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   )
@@ -382,7 +382,7 @@ class _MenuHomeState extends State<MenuHome> {
                                 endtime == null
                                     ? SizedBox()
                                     : Text(
-                                        _timeString! + ' WIB',
+                                        _timeString!,
                                         style: TextStyles.timeToday,
                                       ),
                                 SizedBox(
@@ -702,11 +702,10 @@ class _MenuHomeState extends State<MenuHome> {
     var addressess =
         await Geocoder.local.findAddressesFromCoordinates(coordinat);
     var data = addressess.first;
-    prefs.setString('city', '${data.subAdminArea}');
-    var str = data.subAdminArea;
+    prefs.setString('city', '${data.locality}');
     get.getPrayerTime(latitude!, longitude!, context);
-    print('split ${str!.substring(10)}');
     print('lokasi ${data.subAdminArea}');
+    print('kecamatan ${data.locality}');
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,
