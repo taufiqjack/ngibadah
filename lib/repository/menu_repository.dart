@@ -28,17 +28,6 @@ class MenuRepo extends ChangeNotifier {
       final data = PrayerScheduleModel.fromJson(parsed);
       print('respon : $parsed');
       print('jadwal ${parsed['data']['jadwal']}');
-      var magrib = '${data.data!.jadwal!.maghrib}';
-      var dzuhur = '${data.data!.jadwal!.dzuhur}';
-      var asar = '${data.data!.jadwal!.ashar}';
-      var isya = '${data.data!.jadwal!.isya}';
-      var subuh = '${data.data!.jadwal!.subuh}';
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('dubuh', subuh);
-      prefs.setString('maghrib', magrib);
-      prefs.setString('isya', isya);
-      prefs.setString('dzuhur', dzuhur);
-      prefs.setString('asar', asar);
       print(formatTime.format(now));
       return data;
     } catch (e) {}
@@ -162,6 +151,17 @@ class MenuRepo extends ChangeNotifier {
       // LocalDb.sql.insertPrayer(PrayerModel.fromJson(parsing));
       LocalDb.sql.insertPrayer(PrayerTimeModel.fromJson(map));
       final data = PrayerTimeModel.fromJson(parser);
+      var magrib = '${data.data!.timings!.maghrib}';
+      var dzuhur = '${data.data!.timings!.dhuhr}';
+      var asar = '${data.data!.timings!.asr}';
+      var isya = '${data.data!.timings!.isha}';
+      var subuh = '${data.data!.timings!.fajr}';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('dubuh', subuh);
+      prefs.setString('maghrib', magrib);
+      prefs.setString('isya', isya);
+      prefs.setString('dzuhur', dzuhur);
+      prefs.setString('asar', asar);
 
       // print('prayertime : $parser');
       return data;

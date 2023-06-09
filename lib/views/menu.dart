@@ -61,10 +61,16 @@ class _MenuHomeState extends State<MenuHome> {
   int? seconds;
   int? endtime;
   int? detik;
+  int? secondDzuhur;
+  int? secondIsya;
+  int? secondSubuh;
+  int? secondAshar;
   int? magrib;
   int? thistime;
   int? subuhtime;
   int? dzuhurtime;
+  int? isyatime;
+  int? ashartime;
 
   @override
   void initState() {
@@ -79,15 +85,12 @@ class _MenuHomeState extends State<MenuHome> {
         minutes: int.parse(parts[1].trim()),
         seconds: int.parse(parts[2].trim()));
     seconds = d.abs().inSeconds;
-    Future.delayed(Duration(seconds: 2), () {
-      getSession();
-    });
+    thistime = DateTime.now().millisecondsSinceEpoch + 1000 * seconds!;
     getLoc();
   }
 
   @override
   void dispose() {
-    controller!.dispose();
     super.dispose();
   }
 
@@ -99,9 +102,6 @@ class _MenuHomeState extends State<MenuHome> {
     var asar = '${prefs.getString('asar')}';
     var isya = '${prefs.getString('isya')}';
     var split = prefs.getInt('split');
-    controller = CountdownTimerController(
-      endTime: split!,
-    );
 
     // var partSubuh = subuh.split(':');
     // var s = Duration(
@@ -111,17 +111,55 @@ class _MenuHomeState extends State<MenuHome> {
     // subuhtime = s.abs().inSeconds;
 
     var part = maghrib.split(':');
-    var c = Duration(
+    var dzuhurSplit = dzuhur.split(':');
+    var isyaSplit = isya.split(':');
+    var subuhSplit = subuh.split(':');
+    var asharSplit = asar.split(':');
+
+    /** MAGHRIB */
+    var m = Duration(
       hours: int.parse(part[0].trim()),
       minutes: int.parse(part[1].trim()),
     );
-    detik = c.abs().inSeconds;
+    detik = m.abs().inSeconds;
+
+    /** Dzuhur */
+    var dz = Duration(
+      hours: int.parse(dzuhurSplit[0].trim()),
+      minutes: int.parse(dzuhurSplit[1].trim()),
+    );
+    secondDzuhur = dz.abs().inSeconds;
+    /** ISYA' */
+    var isy = Duration(
+      hours: int.parse(isyaSplit[0].trim()),
+      minutes: int.parse(isyaSplit[1].trim()),
+    );
+    secondIsya = isy.abs().inSeconds;
+
+    /** Subuh */
+    var su = Duration(
+      hours: int.parse(isyaSplit[0].trim()),
+      minutes: int.parse(isyaSplit[1].trim()),
+    );
+    secondSubuh = su.abs().inSeconds;
+
+    /** Ashar */
+    var ash = Duration(
+      hours: int.parse(asharSplit[0].trim()),
+      minutes: int.parse(asharSplit[1].trim()),
+    );
+    secondAshar = ash.abs().inSeconds;
 
     int waktu = detik! - seconds!;
     // controller = CountdownTimerController(endTime: endtime!);
     endtime = (DateTime.now().millisecondsSinceEpoch + 1000 * waktu);
+    dzuhurtime = (DateTime.now().millisecondsSinceEpoch +
+        1000 * (secondDzuhur! - seconds!));
     magrib = (DateTime.now().millisecondsSinceEpoch + 1000 * detik!);
-    thistime = DateTime.now().millisecondsSinceEpoch + 1000 * seconds!;
+    isyatime = (DateTime.now().millisecondsSinceEpoch +
+        1000 * (secondIsya! - seconds!));
+    subuhtime = (DateTime.now().millisecondsSinceEpoch +
+        1000 * (secondSubuh! - seconds!));
 
     print('magrib : $endtime');
     print('thistime : $thistime');
@@ -207,6 +245,7 @@ class _MenuHomeState extends State<MenuHome> {
           data.getDashboard(context);
           if (latitude != null) {
             data.getPrayerTime(latitude!, longitude!, context);
+            getSession();
           }
           // Future.delayed(Duration(seconds: 5), () {
           //   data.getLocation(context, city);
@@ -360,9 +399,7 @@ class _MenuHomeState extends State<MenuHome> {
                 ),
               ),
             ),
-            body: data.prayerSchedule == null ||
-                    thistime == null ||
-                    endtime == null
+            body: data.prayerSchedule == null || thistime == null
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
@@ -379,12 +416,10 @@ class _MenuHomeState extends State<MenuHome> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                endtime == null
-                                    ? SizedBox()
-                                    : Text(
-                                        _timeString!,
-                                        style: TextStyles.timeToday,
-                                      ),
+                                Text(
+                                  _timeString!,
+                                  style: TextStyles.timeToday,
+                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -396,27 +431,56 @@ class _MenuHomeState extends State<MenuHome> {
                                       : "${data.prayertime!.data!.timings!.maghrib}",
                                   style: TextStyles.prayerIncoming,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '- ',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    thistime! >= endtime!
-                                        ? CountdownTimer(
-                                            textStyle:
+                                data.prayertime == null ||
+                                        dzuhurtime == null ||
+                                        endtime == null ||
+                                        isyatime == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '- ',
+                                            style:
                                                 TextStyle(color: Colors.white),
-                                            endTime: endtime,
-                                            // controller: controller,
+                                          ),
+                                          thistime! >= subuhtime!
+                                              ? CountdownTimer(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.white),
+                                                  endTime: subuhtime,
+                                                  // controller: controller,
+                                                )
+                                              : thistime! >= isyatime!
+                                                  ? CountdownTimer(
+                                                      textStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      endTime: isyatime,
+                                                      // controller: controller,
+                                                    )
+                                                  : thistime! >= endtime!
+                                                      ? CountdownTimer(
+                                                          textStyle: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                          endTime: endtime,
+                                                          // controller: controller,
+                                                        )
+                                                      : CountdownTimer(
+                                                          textStyle: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                          endTime: dzuhurtime,
+                                                          // controller: controller,
+                                                        ),
+                                          Text(
+                                            ' Lagi',
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           )
-                                        : SizedBox(),
-                                    Text(
-                                      ' Lagi',
-                                      style: TextStyle(color: Colors.white),
-                                    )
-                                  ],
-                                ),
+                                        ],
+                                      ),
                                 Text(
                                   'Maghrib',
                                   style: GoogleFonts.nunitoSans(
