@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -388,6 +389,7 @@ class _MenuHomeState extends State<MenuHome> {
                                       await SharedPreferences.getInstance();
                                   prefs.remove('maghrib');
                                   SystemNavigator.pop();
+                                  exit(0);
                                 },
                               ),
                             ],
@@ -773,6 +775,7 @@ class _MenuHomeState extends State<MenuHome> {
     Fluttertoast.showToast(
         msg: '${data.addressLine}',
         gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
         toastLength: Toast.LENGTH_LONG);
     Future.delayed(
       Duration(seconds: 1),
