@@ -157,7 +157,7 @@ class MenuRepo extends ChangeNotifier {
       var isya = '${data.data!.timings!.isha}';
       var subuh = '${data.data!.timings!.fajr}';
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('dubuh', subuh);
+      prefs.setString('subuh', subuh);
       prefs.setString('maghrib', magrib);
       prefs.setString('isya', isya);
       prefs.setString('dzuhur', dzuhur);
