@@ -25,7 +25,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MenuHome(),
+            builder: (context) => MenuView(),
           ));
     });
   }

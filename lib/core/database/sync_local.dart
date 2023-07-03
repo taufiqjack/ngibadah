@@ -16,7 +16,7 @@ class SyncLocal {
   final formatTime = new DateFormat('yyyy/MM/dd');
 
   Future getSurahLocal() async {
-    response = await dio.get(BaseUrl.surah);
+    response = await dio.get(SURAH);
     return response!.data.map((surah) {
       print('add $surah');
       LocalDb.sql.insertSurah(SurahModelNova.fromJson(surah));
@@ -33,7 +33,7 @@ class SyncLocal {
   // }
 
   Future getDoa() async {
-    response = await dio.get('${BaseUrl.doa}');
+    response = await dio.get('$DOA');
     return response!.data.map((doa) {
       print('doa $doa');
 
@@ -42,7 +42,7 @@ class SyncLocal {
   }
 
   Future getHadis() async {
-    response = await dio.get(BaseUrl.hadis);
+    response = await dio.get(HADIS);
     return response!.data['data'].map((hadis) {
       print('hadis $hadis');
 
@@ -51,7 +51,7 @@ class SyncLocal {
   }
 
   Future getHadisBukhari() async {
-    response = await dio.get('${BaseUrl.hadis}/bukhari?range=1-100');
+    response = await dio.get('$HADIS/bukhari?range=1-100');
     return response!.data['data']['hadiths'].map((hadisdetail) {
       print('hadis detail : $hadisdetail');
 
@@ -60,8 +60,7 @@ class SyncLocal {
   }
 
   Future getJadwal() async {
-    response =
-        await dio.get('${BaseUrl.shollu}' + '/${formatTime.format(now)}');
+    response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
     var parse = response!.data['data']['jadwal'];
     // print('jadwal $jadwal');
 
@@ -69,8 +68,7 @@ class SyncLocal {
   }
 
   Future getLoc() async {
-    response =
-        await dio.get('${BaseUrl.shollu}' + '/${formatTime.format(now)}');
+    response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
     var parsing = response!.data['data'];
     print(parsing);
 

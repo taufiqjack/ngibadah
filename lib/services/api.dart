@@ -1,13 +1,14 @@
-class BaseUrl {
-  static String today = 'https://api.pray.zone/v2/times/today.json?city=sleman';
-  static String shollu = 'https://api.myquran.com/v1/sholat/jadwal/1301';
-  static String listQuran = 'https://equran.id/api/surat/';
-  static String readQuran = 'https://quran-api-id.vercel.app/surahs/';
-  static String surah = 'https://api.npoint.io/99c279bb173a6e28359c/data/';
-  static String doa = 'https://doa-doa-api-ahmadramadhan.fly.dev/api/';
-  static String hadis = 'https://api.hadith.gading.dev/books/';
-  static String searchCity = 'https://api.myquran.com/v1/sholat/kota/cari';
-  static String timestamp =
-      'http://api.aladhan.com/v1/currentTimestamp?zone=Asia/Jakarta';
-  static String praytoday = 'http://api.aladhan.com/v1/timings/';
-}
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+String SHOLLU = '${dotenv.env['SHOLLU']}';
+String TODAY = '${dotenv.env['TODAY']}';
+String LIST_QURAN = '${dotenv.env['LIST_QURAN']}';
+String READ_QURAN = '${dotenv.env['READ_QURAN']}';
+String SURAH = '${dotenv.env['SURAH']}';
+String DOA = '${dotenv.env['DOA']}';
+String HADIS = '${dotenv.env['HADIS']}';
+String SEARCH = '${dotenv.env['SEARCH_CITY']}';
+String TIMESTAMP = '${dotenv.env['TIMESTAMP']}';
+String PRAY_TODAY = '${dotenv.env['PRAY_TODAY']}';

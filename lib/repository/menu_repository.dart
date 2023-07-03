@@ -21,8 +21,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<PrayerScheduleModel?> getDashboard(BuildContext context) async {
     try {
-      response =
-          await dio.get('${BaseUrl.shollu}' + '/${formatTime.format(now)}');
+      response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
       notifyListeners();
       final parsed = response!.data;
       final data = PrayerScheduleModel.fromJson(parsed);
@@ -36,7 +35,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<List<SurahModel>?> getSurah(BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.listQuran}');
+      response = await dio.get('$LIST_QURAN');
       notifyListeners();
       Iterable data = response!.data;
       List<SurahModel> listdata =
@@ -49,7 +48,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<ReadSurahModel?> getDetailSurah(int id, BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.readQuran}' + '/$id');
+      response = await dio.get('$READ_QURAN' + '/$id');
       notifyListeners();
       final parser = response!.data;
       final data = ReadSurahModel.fromJson(parser);
@@ -61,7 +60,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<HadisModel?> getHadis(BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.hadis}');
+      response = await dio.get('$HADIS');
       notifyListeners();
       final parsed = response!.data;
       final data = HadisModel.fromJson(parsed);
@@ -74,7 +73,7 @@ class MenuRepo extends ChangeNotifier {
   Future<HadisDetailModel?> getHadisDetail(
       BuildContext context, String id) async {
     try {
-      response = await dio.get('${BaseUrl.hadis}$id?range=1-100');
+      response = await dio.get('$HADIS$id?range=1-100');
       notifyListeners();
       final parsed = response!.data;
       // print('details : ${parsed['data']['hadiths']}');
@@ -89,7 +88,7 @@ class MenuRepo extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
-      response = await dio.get('${BaseUrl.searchCity}/$city');
+      response = await dio.get('$SEARCH/$city');
       notifyListeners();
       print('data ${response!.data}');
       if (response!.data.containsKey('error')) {
@@ -109,7 +108,7 @@ class MenuRepo extends ChangeNotifier {
 
   Future<DoaModel?> getDoa(BuildContext context) async {
     try {
-      response = await dio.get('${BaseUrl.doa}' + '/all');
+      response = await dio.get('$DOA' + '/all');
       notifyListeners();
       final parsed = response!.data;
       final data = DoaModel.fromJson(parsed);
@@ -122,7 +121,7 @@ class MenuRepo extends ChangeNotifier {
   Future getTimestamp(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
-      response = await dio.get(BaseUrl.timestamp);
+      response = await dio.get(TIMESTAMP);
       notifyListeners();
       final parser = response!.data;
       print('timestamp : $parser');
@@ -142,8 +141,8 @@ class MenuRepo extends ChangeNotifier {
     String timings = prefs.getString('timings') ?? '';
 
     try {
-      response = await dio.get(
-          '${BaseUrl.praytoday}$timings?latitude=$latitude&longitude=$longitude');
+      response = await dio
+          .get('$PRAY_TODAY$timings?latitude=$latitude&longitude=$longitude');
       notifyListeners();
       final parser = response!.data;
       final map = response!.data;

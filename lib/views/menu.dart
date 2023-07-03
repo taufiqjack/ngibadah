@@ -26,18 +26,18 @@ import 'package:intl/intl.dart';
 import 'package:monggo_sholat/widgets/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MenuHome extends StatefulWidget {
+class MenuView extends StatefulWidget {
   final String? texttime;
-  MenuHome({
+  MenuView({
     Key? key,
     this.texttime,
   }) : super(key: key);
 
   @override
-  _MenuHomeState createState() => _MenuHomeState();
+  _MenuViewState createState() => _MenuViewState();
 }
 
-class _MenuHomeState extends State<MenuHome> {
+class _MenuViewState extends State<MenuView> {
   Map? data;
   List? result;
   List? dateTime;
@@ -455,16 +455,16 @@ class _MenuHomeState extends State<MenuHome> {
                                         style: TextStyles.prayerIncoming,
                                       )
                                     : Text(
-                                        thistime! <= subuhtime! ||
+                                        isyatime! >= subuhtime! &&
                                                 thistime! >= subuhtime!
                                             ? "${data.prayertime!.data!.timings!.fajr}"
-                                            : thistime! >= isyatime!
-                                                ? '${data.prayertime!.data!.timings!.isha}'
-                                                : thistime! >= endtime!
-                                                    ? '${data.prayertime!.data!.timings!.maghrib}'
-                                                    : thistime! >= ashartime!
-                                                        ? '${data.prayertime!.data!.timings!.asr}'
-                                                        : "${data.prayertime!.data!.timings!.dhuhr}",
+                                            : thistime! <= dzuhurtime!
+                                                ? '${data.prayertime!.data!.timings!.dhuhr}'
+                                                : thistime! <= ashartime!
+                                                    ? '${data.prayertime!.data!.timings!.asr}'
+                                                    : thistime! <= endtime!
+                                                        ? '${data.prayertime!.data!.timings!.maghrib}'
+                                                        : "${data.prayertime!.data!.timings!.isha}",
                                         style: TextStyles.prayerIncoming,
                                       ),
                                 data.prayertime == null ||
@@ -483,7 +483,7 @@ class _MenuHomeState extends State<MenuHome> {
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
-                                          thistime! <= subuhtime! ||
+                                          isyatime! >= subuhtime! &&
                                                   thistime! >= subuhtime!
                                               ? CountdownTimer(
                                                   textStyle: TextStyle(
@@ -491,36 +491,34 @@ class _MenuHomeState extends State<MenuHome> {
                                                   endTime: subuhtime,
                                                   // controller: controller,
                                                 )
-                                              : thistime! >= isyatime!
+                                              : thistime! <= dzuhurtime!
                                                   ? CountdownTimer(
                                                       textStyle: TextStyle(
                                                           color: Colors.white),
-                                                      endTime: isyatime,
+                                                      endTime: dzuhurtime,
                                                       // controller: controller,
                                                     )
-                                                  : thistime! >= endtime!
+                                                  : thistime! <= ashartime!
                                                       ? CountdownTimer(
                                                           textStyle: TextStyle(
                                                               color:
                                                                   Colors.white),
-                                                          endTime: endtime,
+                                                          endTime: ashartime,
                                                           // controller: controller,
                                                         )
-                                                      : thistime! >= ashartime!
+                                                      : thistime! <= endtime!
                                                           ? CountdownTimer(
                                                               textStyle: TextStyle(
                                                                   color: Colors
                                                                       .white),
-                                                              endTime:
-                                                                  ashartime,
+                                                              endTime: endtime,
                                                               // controller: controller,
                                                             )
                                                           : CountdownTimer(
                                                               textStyle: TextStyle(
                                                                   color: Colors
                                                                       .white),
-                                                              endTime:
-                                                                  dzuhurtime,
+                                                              endTime: isyatime,
                                                               // controller: controller,
                                                             ),
                                           Text(
@@ -542,16 +540,16 @@ class _MenuHomeState extends State<MenuHome> {
                                             fontSize: 14, color: Colors.white),
                                       )
                                     : Text(
-                                        thistime! <= subuhtime! ||
+                                        isyatime! >= subuhtime! &&
                                                 thistime! >= subuhtime!
                                             ? 'Shubuh'
-                                            : thistime! >= isyatime!
-                                                ? 'Isya'
-                                                : thistime! >= endtime!
-                                                    ? 'Magrib'
-                                                    : thistime! >= ashartime!
-                                                        ? "'Ashar"
-                                                        : 'Dzuhur',
+                                            : thistime! >= dzuhurtime!
+                                                ? 'Dzuhur'
+                                                : thistime! >= ashartime!
+                                                    ? "'Ashar"
+                                                    : thistime! >= endtime!
+                                                        ? "Magrib"
+                                                        : "'Isya",
                                         style: GoogleFonts.nunitoSans(
                                             fontSize: 14, color: Colors.white),
                                       ),
@@ -802,7 +800,11 @@ class _MenuHomeState extends State<MenuHome> {
 
   clearSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('subuh');
     prefs.remove('maghrib');
+    prefs.remove('isya');
+    prefs.remove('dzuhur');
+    prefs.remove('asar');
   }
 
   clearCity() async {
@@ -848,7 +850,7 @@ class _MenuHomeState extends State<MenuHome> {
       Duration(seconds: 1),
       () => Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => MenuHome()),
+          MaterialPageRoute(builder: (context) => MenuView()),
           (Route<dynamic> route) => false),
     );
   }
