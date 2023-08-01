@@ -17,5 +17,7 @@ terdapat juga fitur :
 |-----------|--------|--------|
 | <img src='assets/screenshoot/quran_detail.png' width='200'> | <img src='assets/screenshoot/hadis_detail.png' width='200'> | <img src='assets/screenshoot/doa_detail.png' width='200'> |
 
+# Environment
 
+https://pastebin.com/WbwAsLiT
 
