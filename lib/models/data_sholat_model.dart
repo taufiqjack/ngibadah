@@ -1,5 +1,5 @@
 class DataSholatModel {
-  String? id;
+  int? id;
   String? lokasi;
   String? daerah;
 

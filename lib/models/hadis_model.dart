@@ -26,7 +26,6 @@ class Data with _$Data {
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 }
 
-
 // class HadisModel {
 //   int? code;
 //   String? message;

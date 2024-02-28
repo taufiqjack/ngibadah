@@ -7,6 +7,7 @@ import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
+import 'package:monggo_sholat/models/shollu_model/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/surah/surah_model.dart';
 import 'package:monggo_sholat/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,12 +20,12 @@ class MenuRepo extends ChangeNotifier {
   DateTime now = DateTime.now();
   final formatTime = new DateFormat('yyyy/MM/dd');
 
-  Future<PrayerScheduleModel?> getDashboard(BuildContext context) async {
+  Future<SholluModel?> getDashboard(BuildContext context) async {
     try {
       response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
       notifyListeners();
       final parsed = response!.data;
-      final data = PrayerScheduleModel.fromJson(parsed);
+      final data = SholluModel.fromJson(parsed);
       print('respon : $parsed');
       print('jadwal ${parsed['data']['jadwal']}');
       print(formatTime.format(now));

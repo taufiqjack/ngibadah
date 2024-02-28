@@ -8,6 +8,7 @@ import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
 import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
+import 'package:monggo_sholat/models/shollu_model/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/surah/surah_model.dart';
 import 'package:monggo_sholat/repository/menu_repository.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -15,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends BaseViewModel {
   MenuRepo menuRepo = locator<MenuRepo>();
-  PrayerScheduleModel? prayerSchedule;
+  SholluModel? prayerSchedule;
   List<SurahModel>? surah;
   ReadSurahModel? surahDetail;
   HadisModel? hadis;
