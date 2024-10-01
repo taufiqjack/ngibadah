@@ -1,11 +1,11 @@
 ## Ngibadah App
 
-Aplikasi Waktu Sholat berdasarkan Geolocation
-terdapat juga fitur :
+Aplikasi Waktu Sholat (Prayer Time App) berdasarkan Geolocation
+Features :
 
-- Al Qur'an & Terjemah
-- Hadis Shahih dan Terjemah
-- Doa Sehari - hari
+- Holy Qur'an & Indonesian Translate
+- Hadish Shahih & Indonesian Translate
+- Daily Prayer
 
 # Screenshoot
 | Home      | Qur'an Page     | Hadis Page | Doa Page | 
