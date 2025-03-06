@@ -17,7 +17,6 @@ dependencies:
   tanggal_indonesia:
   google_fonts:
   geolocator:
-  intl:
   arabic_numbers:
   assets_audio_player:
     git:
@@ -28,7 +27,7 @@ dependencies:
   get_it: ^8.0.3
   flutter_countdown_timer: ^4.1.0
   shared_preferences: ^2.0.13
-  location: ^8.0.0
+  location: ^6.0.0
   flutter_geocoder:
     git: https://github.com/taufiqjack/flutter_geocoder
 
@@ -52,6 +51,9 @@ dependencies:
   flutter_bloc: ^9.1.0
   flutter_dotenv: ^5.1.0
   geocoding: ^3.0.0
+  easy_localization: ^3.0.7+1
+  alice: ^0.4.2
+  awesome_dialog: ^3.2.1
 
 dev_dependencies:
   flutter_test:
@@ -71,4 +73,5 @@ flutter:
   assets:
     - assets/images/
     - assets/screenshoot/
+    - assets/translations/
     - .env

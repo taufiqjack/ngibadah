@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
 import 'package:monggo_sholat/models/prayer_time_model.dart';
-import 'package:monggo_sholat/models/prayer_today.dart';
 import 'package:monggo_sholat/models/read_surah_model.dart';
 import 'package:monggo_sholat/models/shollu_model/jadwal_sholat_model.dart';
 import 'package:monggo_sholat/models/surah/surah_model.dart';
