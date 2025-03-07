@@ -52,3 +52,21 @@ class RestConfigSurahv2 {
     return _dio;
   }
 }
+
+class RestConfigHadis {
+  static BaseOptions options() => BaseOptions(
+        baseUrl: '${dotenv.env[HADISLIST]}',
+        sendTimeout: const Duration(hours: 24),
+        connectTimeout: const Duration(milliseconds: 100000),
+        receiveTimeout: const Duration(milliseconds: 100000),
+        followRedirects: false,
+        validateStatus: (status) => true,
+      );
+  final Dio _dio;
+
+  RestConfigHadis(this._dio);
+
+  Dio dio() {
+    return _dio;
+  }
+}

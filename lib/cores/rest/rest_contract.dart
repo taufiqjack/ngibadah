@@ -9,17 +9,22 @@ class RestContract {
   late RestConfig _restConfig;
   late RestConfigSurah restConfigSurah;
   late RestConfigSurahv2 restConfigSurahv2;
+  late RestConfigHadis restConfigHadis;
   late Dio _dio;
   late Dio dioSurah;
   late Dio dioSurahv2;
+  late Dio dioHadis;
 
   RestContract() {
     _restConfig = _getIt.get<RestConfig>();
     restConfigSurah = _getIt.get<RestConfigSurah>();
     restConfigSurahv2 = _getIt.get<RestConfigSurahv2>();
+    restConfigHadis = _getIt.get<RestConfigHadis>();
     _dio = _restConfig.dio();
     dioSurah = restConfigSurah.dio();
     dioSurahv2 = restConfigSurahv2.dio();
+    dioSurahv2 = restConfigSurahv2.dio();
+    dioHadis = restConfigSurahv2.dio();
   }
 
   Future<Response> getPrayerSchedule() async {
@@ -29,14 +34,20 @@ class RestContract {
   }
 
   Future<Response> getSurah() async {
-    return await _dio.get(
+    return await dioSurah.get(
       '$SURAH$surah',
     );
   }
 
   Future<Response> getDetailSurah(id) async {
-    return await _dio.get(
-      '$READQURAN/$detailSurah/$id}',
-    );
+    return await dioSurahv2.get('/$id');
+  }
+
+  Future<Response> getHadis() async {
+    return await dioHadis.get('$hadis');
+  }
+
+  Future<Response> getHadisDetail(id) async {
+    return await dioHadis.get('$id?range=1-100');
   }
 }

@@ -7,16 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:flutter_geocoder/geocoder.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijriyah_indonesia/hijriyah_indonesia.dart';
-import 'package:location/location.dart';
 import 'package:monggo_sholat/core/constants/constants.dart';
 import 'package:monggo_sholat/core/database/db.dart';
-import 'package:monggo_sholat/core/database/main_storage.dart';
 import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
 import 'package:monggo_sholat/cores/component/toast.dart';
@@ -251,7 +247,7 @@ class _MenuViewState extends State<MenuView> {
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          city = '${prefs.getString('city')}';
+          city = '${logg.getString(CITY)}';
           latitude = '${prefs.getString('latitude')}';
           longitude = '${prefs.getString('longitude')}';
 
@@ -312,7 +308,7 @@ class _MenuViewState extends State<MenuView> {
                   child: InkWell(
                     onTap: () async {
                       clearCity();
-                      print('cek ${surahDataBox.get(QURAN)}');
+                      // print('cek ${surahDataBox.get(QURAN)}');
                       setState(() {
                         // getLocation(data);
                         getGeoLocation(data, context);
@@ -814,7 +810,7 @@ class _MenuViewState extends State<MenuView> {
 
   clearCity() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('city');
+    logg.remove(CITY);
   }
 
   getGeoLocation(HomeViewModel get, BuildContext context) async {
@@ -840,11 +836,12 @@ class _MenuViewState extends State<MenuView> {
         position.longitude,
       );
       print(placemarks[0]);
-      prefs.setString(
-          'city',
-          placemarks[0].subLocality.toString() +
-              ', ' +
-              placemarks[0].locality.toString());
+      logg.setString(
+          CITY,
+          placemarks[0].locality.toString().isEmpty
+              ? placemarks[0].subLocality.toString()
+              : placemarks[0].subLocality.toString() +
+                  ', ${placemarks[0].locality.toString().split('Kecamatan').last}');
 
       toast(
         context,

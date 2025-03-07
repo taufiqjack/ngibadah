@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'hadis_model.dart';
 
 // **************************************************************************
@@ -10,7 +8,7 @@ part of 'hadis_model.dart';
 
 _$_HadisModel _$$_HadisModelFromJson(Map<String, dynamic> json) =>
     _$_HadisModel(
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
@@ -29,7 +27,7 @@ Map<String, dynamic> _$$_HadisModelToJson(_$_HadisModel instance) =>
 _$_Data _$$_DataFromJson(Map<String, dynamic> json) => _$_Data(
       name: json['name'] as String?,
       id: json['id'] as String?,
-      available: json['available'] as int?,
+      available: (json['available'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$_DataToJson(_$_Data instance) => <String, dynamic>{

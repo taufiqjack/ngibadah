@@ -5,13 +5,16 @@ const String HADIS = 'hadis_';
 const String DOA = 'doa_';
 const String MESSAGE = 'message';
 const String STATUSCODE = 'statuscode';
+const String CITY = 'city';
 
 const SHOLLU = 'DOMAN_SHOLLU';
 const SURAH = 'LIST_SURAH';
 const READQURAN = 'QURAN';
+const HADISLIST = 'HADIS_LIST';
 
 const schedule = '/sholat/jadwal/1301';
 const surah = '/api/surat/';
 const detailSurah = '/surahs/';
+const hadis = '/books/';
 
 late SharedPreferences logg;

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'surah_model.dart';
 
 // **************************************************************************
@@ -69,10 +67,10 @@ class SurahModelAdapter extends TypeAdapter<SurahModel> {
 
 _$_SurahModel _$$_SurahModelFromJson(Map<String, dynamic> json) =>
     _$_SurahModel(
-      nomor: json['nomor'] as int?,
+      nomor: (json['nomor'] as num?)?.toInt(),
       nama: json['nama'] as String?,
       namaLatin: json['nama_latin'] as String?,
-      jumlahAyat: json['jumlah_ayat'] as int?,
+      jumlahAyat: (json['jumlah_ayat'] as num?)?.toInt(),
       tempatTurun: json['tempat_turun'] as String?,
       arti: json['arti'] as String?,
       deskripsi: json['deskripsi'] as String?,
