@@ -152,6 +152,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(this);
   }
 
+  String toHHMMSS() {
+    return DateFormat('HH:mm:ss', 'id_ID').format(this);
+  }
+
   String toIndonesiaDatetime() {
     return DateFormat('dd MMMM yyyy | HH:mm', 'id_ID').format(this);
   }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:monggo_sholat/cores/extensions/date_exstension.dart';
 import 'package:monggo_sholat/models/doa_model.dart';
 import 'package:monggo_sholat/models/hadis_detail_model.dart';
 import 'package:monggo_sholat/models/hadis_model.dart';
@@ -16,18 +16,15 @@ import '../core/database/db.dart';
 class MenuRepo extends ChangeNotifier {
   Response? response;
   Dio dio = Dio();
-  DateTime now = DateTime.now();
-  final formatTime = new DateFormat('yyyy/MM/dd');
 
   Future<SholluModel?> getDashboard(BuildContext context) async {
     try {
-      response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
+      response = await dio.get('$SHOLLU' + '/${getToday().toYYYYMMDD()}');
       notifyListeners();
       final parsed = response!.data;
       final data = SholluModel.fromJson(parsed);
       print('respon : $parsed');
       print('jadwal ${parsed['data']['jadwal']}');
-      print(formatTime.format(now));
       return data;
     } catch (e) {}
     return null;

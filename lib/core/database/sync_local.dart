@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
 import 'package:monggo_sholat/core/database/db.dart';
+import 'package:monggo_sholat/cores/extensions/date_exstension.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/models/doa_list_model.dart';
 import 'package:monggo_sholat/models/hadis_details_model.dart';
@@ -12,8 +12,6 @@ import 'package:monggo_sholat/services/api.dart';
 class SyncLocal {
   Dio dio = Dio();
   Response? response;
-  DateTime now = DateTime.now();
-  final formatTime = new DateFormat('yyyy/MM/dd');
 
   Future getSurahLocal() async {
     response = await dio.get(SURAH);
@@ -60,7 +58,7 @@ class SyncLocal {
   }
 
   Future getJadwal() async {
-    response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
+    response = await dio.get('$SHOLLU' + '/${getToday().toYYYYMMDD()}');
     var parse = response!.data['data']['jadwal'];
     // print('jadwal $jadwal');
 
@@ -68,7 +66,7 @@ class SyncLocal {
   }
 
   Future getLoc() async {
-    response = await dio.get('$SHOLLU' + '/${formatTime.format(now)}');
+    response = await dio.get('$SHOLLU' + '/${getToday().toYYYYMMDD()}');
     var parsing = response!.data['data'];
     print(parsing);
 

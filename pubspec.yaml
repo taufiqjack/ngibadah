@@ -3,7 +3,7 @@ description: Ngibadah apps
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+2
+version: 1.0.1+2
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -16,7 +16,7 @@ dependencies:
   dio:
   tanggal_indonesia:
   google_fonts:
-  geolocator:
+  geolocator: ^12.0.0
   arabic_numbers:
   assets_audio_player:
     git:
@@ -27,7 +27,7 @@ dependencies:
   get_it: ^8.0.3
   flutter_countdown_timer: ^4.1.0
   shared_preferences: ^2.0.13
-  location: ^6.0.0
+  location: ^7.0.0
   flutter_geocoder:
     git: https://github.com/taufiqjack/flutter_geocoder
 

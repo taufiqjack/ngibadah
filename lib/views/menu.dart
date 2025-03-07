@@ -9,15 +9,18 @@ import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_geocoder/geocoder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijriyah_indonesia/hijriyah_indonesia.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
 import 'package:monggo_sholat/core/constants/constants.dart';
 import 'package:monggo_sholat/core/database/db.dart';
 import 'package:monggo_sholat/core/database/main_storage.dart';
 import 'package:monggo_sholat/core/routes/state_route.dart';
 import 'package:monggo_sholat/core/viewmodel/home_viewmodel.dart';
+import 'package:monggo_sholat/cores/component/toast.dart';
+import 'package:monggo_sholat/cores/extensions/date_exstension.dart';
 import 'package:monggo_sholat/models/data_sholat_model.dart';
 import 'package:monggo_sholat/views/base_view.dart';
 import 'package:monggo_sholat/views/doa_view.dart';
@@ -25,6 +28,8 @@ import 'package:monggo_sholat/views/hadish.dart';
 import 'package:monggo_sholat/views/quran.dart';
 import 'package:monggo_sholat/widgets/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:geolocator_platform_interface/src/enums/location_accuracy.dart'
+    as geo;
 
 class MenuView extends StatefulWidget {
   final String? texttime;
@@ -183,7 +188,7 @@ class _MenuViewState extends State<MenuView> {
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return DateFormat('HH:mm:ss').format(dateTime);
+    return dateTime.toHHMMSS();
   }
 
   void toggleNotif1() {
@@ -243,7 +248,6 @@ class _MenuViewState extends State<MenuView> {
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting('id_ID');
     return BaseView<HomeViewModel>(
         onModelReady: (data) async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -310,7 +314,8 @@ class _MenuViewState extends State<MenuView> {
                       clearCity();
                       print('cek ${surahDataBox.get(QURAN)}');
                       setState(() {
-                        getLocation(data);
+                        // getLocation(data);
+                        getGeoLocation(data, context);
                       });
                       data.getTimestamp(context);
                     },
@@ -812,7 +817,51 @@ class _MenuViewState extends State<MenuView> {
     prefs.remove('city');
   }
 
-  getLocation(HomeViewModel get) async {
+  getGeoLocation(HomeViewModel get, BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Position? position;
+    LocationPermission permission;
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return toast(context, 'Location permissions are denied');
+      }
+    }
+    position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: geo.LocationAccuracy.high);
+    prefs.setString('latitude', position.latitude.toString());
+    prefs.setString('longitude', position.longitude.toString());
+
+    get.getPrayerTime(latitude!, longitude!, context);
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+      print(placemarks[0]);
+      prefs.setString(
+          'city',
+          placemarks[0].subLocality.toString() +
+              ', ' +
+              placemarks[0].locality.toString());
+
+      toast(
+        context,
+        '${placemarks[0].street}',
+      );
+    } catch (err) {}
+
+    Future.delayed(
+      Duration(milliseconds: 500),
+      () => Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => MenuView()),
+          (Route<dynamic> route) => false),
+    );
+  }
+
+  /* getLocation(HomeViewModel get) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LocationData? myLocation;
     String? error;
@@ -853,6 +902,6 @@ class _MenuViewState extends State<MenuView> {
           MaterialPageRoute(builder: (context) => MenuView()),
           (Route<dynamic> route) => false),
     );
-  }
+  } */
   // var address = Geocoder.local.findAddressesFromCoordinates();
 }

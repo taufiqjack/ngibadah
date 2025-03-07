@@ -10,7 +10,7 @@ import 'package:monggo_sholat/locator.dart';
 import 'package:monggo_sholat/views/splash_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   await EasyLocalization.ensureInitialized();
