@@ -41,8 +41,6 @@ dependencies:
   path_provider: ^2.0.9
   change_app_package_name: ^1.1.0
   hijriyah_indonesia: ^0.1.2
-  hive: ^2.2.3
-  hive_generator: ^2.0.0
   flutter_bloc: ^9.1.0
   flutter_dotenv: ^5.1.0
   geocoding: ^3.0.0
@@ -50,7 +48,12 @@ dependencies:
   alice: ^0.4.2
   awesome_dialog: ^3.2.1
   json_annotation: ^4.9.0
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^2.4.4
+  hive: ^2.2.3
+  freezed: ^2.5.7
+  hive_generator: ^2.0.1
+  skeleton_text: ^3.0.1
+  curved_progress_bar: ^1.0.3
 
   
 
@@ -60,7 +63,6 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_lints: ^4.0.0
   build_runner: ^2.4.13
-  freezed: ^3.0.0-0.0.dev
   json_serializable: ^6.9.0
 
 flutter_icons:

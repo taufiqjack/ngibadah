@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monggo_sholat/core/database/sync_local.dart';
+import 'package:monggo_sholat/features/pages/dashboard/view/dashboard_view.dart';
 import 'package:monggo_sholat/views/menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -65,8 +65,8 @@ class SurahModelAdapter extends TypeAdapter<SurahModel> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SurahModel _$$_SurahModelFromJson(Map<String, dynamic> json) =>
-    _$_SurahModel(
+_$SurahModelImpl _$$SurahModelImplFromJson(Map<String, dynamic> json) =>
+    _$SurahModelImpl(
       nomor: (json['nomor'] as num?)?.toInt(),
       nama: json['nama'] as String?,
       namaLatin: json['nama_latin'] as String?,
@@ -77,7 +77,7 @@ _$_SurahModel _$$_SurahModelFromJson(Map<String, dynamic> json) =>
       audio: json['audio'] as String?,
     );
 
-Map<String, dynamic> _$$_SurahModelToJson(_$_SurahModel instance) =>
+Map<String, dynamic> _$$SurahModelImplToJson(_$SurahModelImpl instance) =>
     <String, dynamic>{
       'nomor': instance.nomor,
       'nama': instance.nama,

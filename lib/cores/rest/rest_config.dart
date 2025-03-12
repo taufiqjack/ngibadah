@@ -70,3 +70,39 @@ class RestConfigHadis {
     return _dio;
   }
 }
+
+class RestConfigAdhan {
+  static BaseOptions options() => BaseOptions(
+        baseUrl: '${dotenv.env[ADHAN]}',
+        sendTimeout: const Duration(hours: 24),
+        connectTimeout: const Duration(milliseconds: 100000),
+        receiveTimeout: const Duration(milliseconds: 100000),
+        followRedirects: false,
+        validateStatus: (status) => true,
+      );
+  final Dio _dio;
+
+  RestConfigAdhan(this._dio);
+
+  Dio dio() {
+    return _dio;
+  }
+}
+
+class RestConfigDoa {
+  static BaseOptions options() => BaseOptions(
+        baseUrl: '${dotenv.env[DOAA]}',
+        sendTimeout: const Duration(hours: 24),
+        connectTimeout: const Duration(milliseconds: 100000),
+        receiveTimeout: const Duration(milliseconds: 100000),
+        followRedirects: false,
+        validateStatus: (status) => true,
+      );
+  final Dio _dio;
+
+  RestConfigDoa(this._dio);
+
+  Dio dio() {
+    return _dio;
+  }
+}

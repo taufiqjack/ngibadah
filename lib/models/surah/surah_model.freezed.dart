@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'surah_model.dart';
 
@@ -12,7 +12,7 @@ part of 'surah_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SurahModel _$SurahModelFromJson(Map<String, dynamic> json) {
   return _SurahModel.fromJson(json);
@@ -40,8 +40,12 @@ mixin _$SurahModel {
   @HiveField(7)
   String? get audio => throw _privateConstructorUsedError;
 
+  /// Serializes this SurahModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SurahModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SurahModelCopyWith<SurahModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -73,6 +77,8 @@ class _$SurahModelCopyWithImpl<$Res, $Val extends SurahModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SurahModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,11 +129,11 @@ class _$SurahModelCopyWithImpl<$Res, $Val extends SurahModel>
 }
 
 /// @nodoc
-abstract class _$$_SurahModelCopyWith<$Res>
+abstract class _$$SurahModelImplCopyWith<$Res>
     implements $SurahModelCopyWith<$Res> {
-  factory _$$_SurahModelCopyWith(
-          _$_SurahModel value, $Res Function(_$_SurahModel) then) =
-      __$$_SurahModelCopyWithImpl<$Res>;
+  factory _$$SurahModelImplCopyWith(
+          _$SurahModelImpl value, $Res Function(_$SurahModelImpl) then) =
+      __$$SurahModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,13 +148,15 @@ abstract class _$$_SurahModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SurahModelCopyWithImpl<$Res>
-    extends _$SurahModelCopyWithImpl<$Res, _$_SurahModel>
-    implements _$$_SurahModelCopyWith<$Res> {
-  __$$_SurahModelCopyWithImpl(
-      _$_SurahModel _value, $Res Function(_$_SurahModel) _then)
+class __$$SurahModelImplCopyWithImpl<$Res>
+    extends _$SurahModelCopyWithImpl<$Res, _$SurahModelImpl>
+    implements _$$SurahModelImplCopyWith<$Res> {
+  __$$SurahModelImplCopyWithImpl(
+      _$SurahModelImpl _value, $Res Function(_$SurahModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SurahModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,7 +169,7 @@ class __$$_SurahModelCopyWithImpl<$Res>
     Object? deskripsi = freezed,
     Object? audio = freezed,
   }) {
-    return _then(_$_SurahModel(
+    return _then(_$SurahModelImpl(
       nomor: freezed == nomor
           ? _value.nomor
           : nomor // ignore: cast_nullable_to_non_nullable
@@ -200,8 +208,8 @@ class __$$_SurahModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SurahModel implements _SurahModel {
-  const _$_SurahModel(
+class _$SurahModelImpl implements _SurahModel {
+  const _$SurahModelImpl(
       {@HiveField(0) this.nomor,
       @HiveField(1) this.nama,
       @HiveField(2) @JsonKey(name: 'nama_latin') this.namaLatin,
@@ -211,8 +219,8 @@ class _$_SurahModel implements _SurahModel {
       @HiveField(6) this.deskripsi,
       @HiveField(7) this.audio});
 
-  factory _$_SurahModel.fromJson(Map<String, dynamic> json) =>
-      _$$_SurahModelFromJson(json);
+  factory _$SurahModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SurahModelImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -248,10 +256,10 @@ class _$_SurahModel implements _SurahModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SurahModel &&
+            other is _$SurahModelImpl &&
             (identical(other.nomor, nomor) || other.nomor == nomor) &&
             (identical(other.nama, nama) || other.nama == nama) &&
             (identical(other.namaLatin, namaLatin) ||
@@ -266,20 +274,22 @@ class _$_SurahModel implements _SurahModel {
             (identical(other.audio, audio) || other.audio == audio));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, nomor, nama, namaLatin,
       jumlahAyat, tempatTurun, arti, deskripsi, audio);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SurahModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SurahModelCopyWith<_$_SurahModel> get copyWith =>
-      __$$_SurahModelCopyWithImpl<_$_SurahModel>(this, _$identity);
+  _$$SurahModelImplCopyWith<_$SurahModelImpl> get copyWith =>
+      __$$SurahModelImplCopyWithImpl<_$SurahModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SurahModelToJson(
+    return _$$SurahModelImplToJson(
       this,
     );
   }
@@ -294,10 +304,10 @@ abstract class _SurahModel implements SurahModel {
       @HiveField(4) @JsonKey(name: 'tempat_turun') final String? tempatTurun,
       @HiveField(5) final String? arti,
       @HiveField(6) final String? deskripsi,
-      @HiveField(7) final String? audio}) = _$_SurahModel;
+      @HiveField(7) final String? audio}) = _$SurahModelImpl;
 
   factory _SurahModel.fromJson(Map<String, dynamic> json) =
-      _$_SurahModel.fromJson;
+      _$SurahModelImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -326,8 +336,11 @@ abstract class _SurahModel implements SurahModel {
   @override
   @HiveField(7)
   String? get audio;
+
+  /// Create a copy of SurahModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_SurahModelCopyWith<_$_SurahModel> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SurahModelImplCopyWith<_$SurahModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

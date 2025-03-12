@@ -6,8 +6,8 @@ part of 'hadis_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_HadisModel _$$_HadisModelFromJson(Map<String, dynamic> json) =>
-    _$_HadisModel(
+_$HadisModelImpl _$$HadisModelImplFromJson(Map<String, dynamic> json) =>
+    _$HadisModelImpl(
       code: (json['code'] as num?)?.toInt(),
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
@@ -16,7 +16,7 @@ _$_HadisModel _$$_HadisModelFromJson(Map<String, dynamic> json) =>
       error: json['error'] as bool?,
     );
 
-Map<String, dynamic> _$$_HadisModelToJson(_$_HadisModel instance) =>
+Map<String, dynamic> _$$HadisModelImplToJson(_$HadisModelImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'message': instance.message,
@@ -24,13 +24,14 @@ Map<String, dynamic> _$$_HadisModelToJson(_$_HadisModel instance) =>
       'error': instance.error,
     };
 
-_$_Data _$$_DataFromJson(Map<String, dynamic> json) => _$_Data(
+_$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
       name: json['name'] as String?,
       id: json['id'] as String?,
       available: (json['available'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_DataToJson(_$_Data instance) => <String, dynamic>{
+Map<String, dynamic> _$$DataImplToJson(_$DataImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
       'available': instance.available,

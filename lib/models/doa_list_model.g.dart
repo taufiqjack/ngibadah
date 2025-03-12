@@ -6,8 +6,8 @@ part of 'doa_list_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListDoaModel _$$_ListDoaModelFromJson(Map<String, dynamic> json) =>
-    _$_ListDoaModel(
+_$ListDoaModelImpl _$$ListDoaModelImplFromJson(Map<String, dynamic> json) =>
+    _$ListDoaModelImpl(
       id: json['id'] as String?,
       doa: json['doa'] as String?,
       ayat: json['ayat'] as String?,
@@ -15,7 +15,7 @@ _$_ListDoaModel _$$_ListDoaModelFromJson(Map<String, dynamic> json) =>
       artinya: json['artinya'] as String?,
     );
 
-Map<String, dynamic> _$$_ListDoaModelToJson(_$_ListDoaModel instance) =>
+Map<String, dynamic> _$$ListDoaModelImplToJson(_$ListDoaModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'doa': instance.doa,

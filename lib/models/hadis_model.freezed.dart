@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'hadis_model.dart';
 
@@ -12,7 +12,7 @@ part of 'hadis_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 HadisModel _$HadisModelFromJson(Map<String, dynamic> json) {
   return _HadisModel.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$HadisModel {
   List<Data>? get data => throw _privateConstructorUsedError;
   bool? get error => throw _privateConstructorUsedError;
 
+  /// Serializes this HadisModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HadisModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HadisModelCopyWith<HadisModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$HadisModelCopyWithImpl<$Res, $Val extends HadisModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HadisModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,24 +86,26 @@ class _$HadisModelCopyWithImpl<$Res, $Val extends HadisModel>
 }
 
 /// @nodoc
-abstract class _$$_HadisModelCopyWith<$Res>
+abstract class _$$HadisModelImplCopyWith<$Res>
     implements $HadisModelCopyWith<$Res> {
-  factory _$$_HadisModelCopyWith(
-          _$_HadisModel value, $Res Function(_$_HadisModel) then) =
-      __$$_HadisModelCopyWithImpl<$Res>;
+  factory _$$HadisModelImplCopyWith(
+          _$HadisModelImpl value, $Res Function(_$HadisModelImpl) then) =
+      __$$HadisModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? code, String? message, List<Data>? data, bool? error});
 }
 
 /// @nodoc
-class __$$_HadisModelCopyWithImpl<$Res>
-    extends _$HadisModelCopyWithImpl<$Res, _$_HadisModel>
-    implements _$$_HadisModelCopyWith<$Res> {
-  __$$_HadisModelCopyWithImpl(
-      _$_HadisModel _value, $Res Function(_$_HadisModel) _then)
+class __$$HadisModelImplCopyWithImpl<$Res>
+    extends _$HadisModelCopyWithImpl<$Res, _$HadisModelImpl>
+    implements _$$HadisModelImplCopyWith<$Res> {
+  __$$HadisModelImplCopyWithImpl(
+      _$HadisModelImpl _value, $Res Function(_$HadisModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HadisModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,7 +114,7 @@ class __$$_HadisModelCopyWithImpl<$Res>
     Object? data = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_HadisModel(
+    return _then(_$HadisModelImpl(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -129,13 +137,13 @@ class __$$_HadisModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_HadisModel implements _HadisModel {
-  const _$_HadisModel(
+class _$HadisModelImpl implements _HadisModel {
+  const _$HadisModelImpl(
       {this.code, this.message, final List<Data>? data, this.error})
       : _data = data;
 
-  factory _$_HadisModel.fromJson(Map<String, dynamic> json) =>
-      _$$_HadisModelFromJson(json);
+  factory _$HadisModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HadisModelImplFromJson(json);
 
   @override
   final int? code;
@@ -146,6 +154,7 @@ class _$_HadisModel implements _HadisModel {
   List<Data>? get data {
     final value = _data;
     if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -159,30 +168,32 @@ class _$_HadisModel implements _HadisModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HadisModel &&
+            other is _$HadisModelImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.error, error) || other.error == error));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, message,
       const DeepCollectionEquality().hash(_data), error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HadisModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HadisModelCopyWith<_$_HadisModel> get copyWith =>
-      __$$_HadisModelCopyWithImpl<_$_HadisModel>(this, _$identity);
+  _$$HadisModelImplCopyWith<_$HadisModelImpl> get copyWith =>
+      __$$HadisModelImplCopyWithImpl<_$HadisModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HadisModelToJson(
+    return _$$HadisModelImplToJson(
       this,
     );
   }
@@ -193,10 +204,10 @@ abstract class _HadisModel implements HadisModel {
       {final int? code,
       final String? message,
       final List<Data>? data,
-      final bool? error}) = _$_HadisModel;
+      final bool? error}) = _$HadisModelImpl;
 
   factory _HadisModel.fromJson(Map<String, dynamic> json) =
-      _$_HadisModel.fromJson;
+      _$HadisModelImpl.fromJson;
 
   @override
   int? get code;
@@ -206,9 +217,12 @@ abstract class _HadisModel implements HadisModel {
   List<Data>? get data;
   @override
   bool? get error;
+
+  /// Create a copy of HadisModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_HadisModelCopyWith<_$_HadisModel> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$HadisModelImplCopyWith<_$HadisModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -222,8 +236,12 @@ mixin _$Data {
   String? get id => throw _privateConstructorUsedError;
   int? get available => throw _privateConstructorUsedError;
 
+  /// Serializes this Data to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -245,6 +263,8 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -270,20 +290,24 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
 }
 
 /// @nodoc
-abstract class _$$_DataCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$$_DataCopyWith(_$_Data value, $Res Function(_$_Data) then) =
-      __$$_DataCopyWithImpl<$Res>;
+abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
+  factory _$$DataImplCopyWith(
+          _$DataImpl value, $Res Function(_$DataImpl) then) =
+      __$$DataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? id, int? available});
 }
 
 /// @nodoc
-class __$$_DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res, _$_Data>
-    implements _$$_DataCopyWith<$Res> {
-  __$$_DataCopyWithImpl(_$_Data _value, $Res Function(_$_Data) _then)
+class __$$DataImplCopyWithImpl<$Res>
+    extends _$DataCopyWithImpl<$Res, _$DataImpl>
+    implements _$$DataImplCopyWith<$Res> {
+  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -291,7 +315,7 @@ class __$$_DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res, _$_Data>
     Object? id = freezed,
     Object? available = freezed,
   }) {
-    return _then(_$_Data(
+    return _then(_$DataImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -310,10 +334,11 @@ class __$$_DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res, _$_Data>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Data implements _Data {
-  const _$_Data({this.name, this.id, this.available});
+class _$DataImpl implements _Data {
+  const _$DataImpl({this.name, this.id, this.available});
 
-  factory _$_Data.fromJson(Map<String, dynamic> json) => _$$_DataFromJson(json);
+  factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataImplFromJson(json);
 
   @override
   final String? name;
@@ -328,29 +353,31 @@ class _$_Data implements _Data {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Data &&
+            other is _$DataImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.available, available) ||
                 other.available == available));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, id, available);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataCopyWith<_$_Data> get copyWith =>
-      __$$_DataCopyWithImpl<_$_Data>(this, _$identity);
+  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataToJson(
+    return _$$DataImplToJson(
       this,
     );
   }
@@ -358,9 +385,11 @@ class _$_Data implements _Data {
 
 abstract class _Data implements Data {
   const factory _Data(
-      {final String? name, final String? id, final int? available}) = _$_Data;
+      {final String? name,
+      final String? id,
+      final int? available}) = _$DataImpl;
 
-  factory _Data.fromJson(Map<String, dynamic> json) = _$_Data.fromJson;
+  factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
 
   @override
   String? get name;
@@ -368,7 +397,11 @@ abstract class _Data implements Data {
   String? get id;
   @override
   int? get available;
+
+  /// Create a copy of Data
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_DataCopyWith<_$_Data> get copyWith => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

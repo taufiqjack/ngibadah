@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:monggo_sholat/core/constants/constants.dart';
 import 'package:monggo_sholat/core/database/hive_stuff.dart';
 import 'package:monggo_sholat/core/routes/state_route.dart';
+import 'package:monggo_sholat/cores/rest/injection.dart';
 import 'package:monggo_sholat/locator.dart';
 import 'package:monggo_sholat/views/splash_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,8 @@ void main() async {
   setupLocator();
   await EasyLocalization.ensureInitialized();
   await HiveStuff.init();
+  Injection.init();
+
   await dotenv.load(fileName: '.env');
   logg = await SharedPreferences.getInstance();
   runApp(

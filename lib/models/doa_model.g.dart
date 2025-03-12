@@ -6,7 +6,8 @@ part of 'doa_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DoaModel _$$_DoaModelFromJson(Map<String, dynamic> json) => _$_DoaModel(
+_$DoaModelImpl _$$DoaModelImplFromJson(Map<String, dynamic> json) =>
+    _$DoaModelImpl(
       id: json['id'] as String?,
       doa: json['doa'] as String?,
       ayat: json['ayat'] as String?,
@@ -14,7 +15,7 @@ _$_DoaModel _$$_DoaModelFromJson(Map<String, dynamic> json) => _$_DoaModel(
       artinya: json['artinya'] as String?,
     );
 
-Map<String, dynamic> _$$_DoaModelToJson(_$_DoaModel instance) =>
+Map<String, dynamic> _$$DoaModelImplToJson(_$DoaModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'doa': instance.doa,
