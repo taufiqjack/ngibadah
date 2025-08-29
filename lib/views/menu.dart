@@ -558,7 +558,7 @@ class _MenuViewState extends State<MenuView> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '${DateFormat("EEEE, d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${Hijriyah.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()).toLocal()).toFormat("dd MMMM yyyy")} H',
+                                  '${DateFormat("d MMMM yyyy", "id_ID").format(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()))} / ${Hijriyah.fromDate(DateTime.parse(data.prayerSchedule!.data!.jadwal!.date.toString()).toLocal(), isPasaran: true).fullDate()} H',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 14, color: Colors.white),

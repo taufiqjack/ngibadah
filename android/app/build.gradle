@@ -36,7 +36,7 @@ def keystoreProperties = new Properties()
 
 android {
     namespace = "com.rencanggunung.ngibadah"
-    compileSdkVersion 35
+    compileSdkVersion 36
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -55,8 +55,8 @@ android {
 
     defaultConfig {
         applicationId "com.rencanggunung.ngibadah"
-        minSdkVersion 22
-        targetSdkVersion 35
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -86,6 +86,6 @@ flutter {
 
 dependencies {
     implementation ('com.google.android.exoplayer:exoplayer:2.19.0')
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
     implementation("com.google.android.material:material:1.12.0")
 }

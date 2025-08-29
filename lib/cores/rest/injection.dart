@@ -1,4 +1,6 @@
 import 'package:alice/alice.dart';
+import 'package:alice/model/alice_configuration.dart';
+import 'package:alice_dio/alice_dio_adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -25,8 +27,11 @@ class Injection {
   late Dio dioAdhan;
   late Dio dioDoa;
   Alice alice = Alice(
+      configuration: AliceConfiguration(
     showNotification: true,
-  );
+  ));
+
+  AliceDioAdapter aliceDioAdapter = AliceDioAdapter();
 
   Injection.init() {
     _initDependencies();
@@ -35,6 +40,7 @@ class Injection {
   Future _initDependencies() async {
     if (!kIsWeb) {
       locator.registerSingleton<Alice>(alice);
+      alice.addAdapter(aliceDioAdapter);
     }
 
     _dio = Dio(RestConfig.options());
@@ -46,37 +52,37 @@ class Injection {
     List<Interceptor> interceptors = [];
     if (kDebugMode) {
       _dio.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,
         ));
       dioSurah.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,
         ));
       dioSurahv2.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,
         ));
       dioHadis.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,
         ));
       dioAdhan.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,
         ));
       dioDoa.interceptors
-        ..add(alice.getDioInterceptor())
+        ..add(aliceDioAdapter)
         ..add(LogInterceptor(
           requestBody: true,
           responseBody: true,

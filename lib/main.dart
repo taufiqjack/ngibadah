@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hijriyah_indonesia/hijriyah_indonesia.dart';
 import 'package:monggo_sholat/core/constants/constants.dart';
 import 'package:monggo_sholat/core/database/hive_stuff.dart';
 import 'package:monggo_sholat/core/routes/state_route.dart';
@@ -17,6 +18,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await HiveStuff.init();
   Injection.init();
+  Hijriyah.setLocal('id');
 
   await dotenv.load(fileName: '.env');
   logg = await SharedPreferences.getInstance();

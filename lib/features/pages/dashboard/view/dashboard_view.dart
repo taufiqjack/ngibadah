@@ -385,7 +385,7 @@ class DashboardView extends StatefulWidget {
                                       height: 5,
                                     ),
                                     Text(
-                                      '${(DateTime.parse(prayer.data!.jadwal!.date.toString()).toDaysIndonesiaFormat())} / ${Hijriyah.fromDate(DateTime.parse(prayer.data!.jadwal!.date.toString()).toLocal()).toFormat("dd MMMM yyyy")} H',
+                                      '${(DateTime.parse(prayer.data!.jadwal!.date.toString()).toDaysIndonesiaFormat())} / ${Hijriyah.fromDate(DateTime.parse(prayer.data!.jadwal!.date.toString()).toLocal(), isPasaran: true).fullDate()} H',
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 14, color: Colors.white),
